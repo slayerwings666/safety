@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>[삼성메디슨] 공사작업허가서 및 작업계획서 통합 시스템 (v5)</title>
-  <!-- 사내망 호환 디자인(Tailwind CSS) 및 엑셀 생성(SheetJS) 라이브러리 -->
+  <title>[삼성메디슨] 공사작업허가서 및 작업계획서 통합 시스템 (v5+v4)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <style>
@@ -20,15 +19,15 @@
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-2">
       <div>
         <h1 class="text-2xl md:text-3xl font-bold flex items-center gap-2">
-          🦺 [삼성메디슨] 안전보건관리 시스템 (작업계획서 통합본 v5)
+          🦺 [삼성메디슨] 안전보건관리 시스템 (통합본 v5 + v4 상세 작업계획서)
         </h1>
         <p class="text-blue-200 text-sm mt-1">
-          공사작업 허가서 · 안전작업절차(SOP) · 작업지휘자 지정서 · 비상연락망 · 체크리스트 · TBM 및 위험작업 계획서 통합 생성
+          v5 기본서류(허가서·SOP·지정서·비상연락망·체크리스트·TBM) + v4 위험작업별 상세 작업계획서(7종) 통합 생성
         </p>
       </div>
       <div class="text-xs bg-blue-800 px-3 py-2 rounded-lg border border-blue-700">
-        <div>• 기본 작성서류: 허가서, SOP, 지정서, 비상연락망, 점검표, TBM</div>
-        <div>• 위험작업 포함 시: 해당 작업계획서 시트 자동 추가</div>
+        <div>• 기본 6종 시트 자동 연동 생성</div>
+        <div>• 체크한 위험작업(v4 양식) 시트 개별 생성</div>
       </div>
     </div>
   </header>
@@ -37,15 +36,13 @@
 
     <!-- STEP 1. 공사작업 허가서 기본정보 (1~11번 연동 항목) -->
     <section class="card p-6">
-      <div class="border-b pb-3 mb-4 flex justify-between items-center">
-        <div>
-          <h2 class="text-lg font-bold text-blue-900">
-            1. [Sheet 1] 공사작업 허가서 - 기본정보 입력 (①~⑪ 전체 시트 자동 연동)
-          </h2>
-          <p class="text-xs text-slate-500 mt-0.5">
-            ※ 아래 ①~⑪ 항목을 입력하시면 SOP, 작업지휘자 지정서, 안전점검 체크리스트 등 하위 시트에 자동으로 반영됩니다.
-          </p>
-        </div>
+      <div class="border-b pb-3 mb-4">
+        <h2 class="text-lg font-bold text-blue-900">
+          1. [Sheet 1] 공사작업 허가서 - 기본정보 입력 (①~⑪ 전체 시트 자동 연동)
+        </h2>
+        <p class="text-xs text-slate-500 mt-0.5">
+          ※ 아래 ①~⑪ 항목을 입력하시면 SOP, 작업지휘자 지정서, 체크리스트 및 각 위험작업 계획서 상단에 자동으로 반영됩니다.
+        </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
@@ -101,54 +98,52 @@
           <input type="number" id="f11_workers" value="3" min="1" class="w-full border rounded-lg p-2.5">
         </div>
       </div>
-
-      <!-- 공사작업허가 절차 요약 안내 (v5 반영) -->
-      <div class="mt-5 bg-slate-50 p-4 rounded-lg border text-xs text-slate-600 space-y-1">
-        <div class="font-bold text-slate-800 mb-1">■ 공사작업허가 절차 (통합본 v5 기준)</div>
-        <div>1️⃣ <strong>허가서·SOP 작성:</strong> 기본 작성서류(허가서, 안전작업절차서, 작업지휘자 지정서) 및 위험작업 계획서 작성 후 공사 전 담당자에게 제출</div>
-        <div>2️⃣ <strong>신청 및 승인:</strong> 담당자는 Knox로 결재 상신 (합의: EHS지원 / 승인: 발주부서 부서장) ※ 최대 7일까지 가능, 추가 작업 시 재신청</div>
-        <div>3️⃣ <strong>작업 전 안전점검·TBM:</strong> 서류 현장 비치, 작업 전 작업지휘자(또는 안전관리자) 주관 사전 안전점검과 TBM 실시</div>
-        <div>4️⃣ <strong>순회점검 실시:</strong> 발주 담당자와 계약업체는 작업기간 동안 일일 순회점검 실시 후 결과 기록·서명 (1부씩 보관)</div>
-        <div>5️⃣ <strong>공사 종료:</strong> 계약업체는 공사 종료 후 불씨 확인 등 현장 안전점검 및 정리정돈 실시</div>
-      </div>
     </section>
 
-    <!-- STEP 2. 위험작업 분류 체크 (작업계획서 별도작성) -->
+    <!-- STEP 2. 위험작업별 계획서 시트 선택 (v4 시트 7종 + 밀폐/석면) -->
     <section class="card p-6">
       <h2 class="text-lg font-bold text-blue-900 border-b pb-3 mb-2">
-        2. 위험작업 분류 체크 (해당 시 하단 작업계획서 자동 활성화)
+        2. 위험작업 분류 및 별도 작성할 작업계획서 선택 (v4 양식 시트 연동)
       </h2>
       <p class="text-xs text-slate-500 mb-4">
-        ※ 『공사작업 허가서』 표지의 7대 위험작업 분류와 법정 필수 작업계획서 항목입니다. 체크하신 항목은 엑셀 시트로 자동 생성됩니다.
+        ※ 체크하신 작업계획서는 하단에 상세 입력창이 열리며, 엑셀 다운로드 시 『통합본 v4』의 개별 시트 양식 그대로 생성됩니다.
       </p>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
         <label class="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-blue-50">
-          <input type="checkbox" class="risk-chk w-4 h-4" value="equip" onchange="toggleSections()">
-          <span class="font-medium">🚜 중장비 작업 (크레인, 사다리차, 스카이, 지게차, 굴착기 등)</span>
-        </label>
-        <label class="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-blue-50">
-          <input type="checkbox" class="risk-chk w-4 h-4" value="high" onchange="toggleSections()">
-          <span class="font-medium">🪜 고소작업 (천정작업, 외부로프작업, 비계상부, 고소작업대 등)</span>
-        </label>
-        <label class="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-blue-50">
-          <input type="checkbox" class="risk-chk w-4 h-4" value="confined" onchange="toggleSections()">
-          <span class="font-medium">😷 밀폐공간작업 (정화조/집수조 내부, 물탱크 청소 작업 등)</span>
+          <input type="checkbox" class="risk-chk w-4 h-4" value="heavy" onchange="toggleSections()">
+          <span class="font-medium">📦 [v4 시트7] 화물자동차 중량물 취급</span>
         </label>
         <label class="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-blue-50">
           <input type="checkbox" class="risk-chk w-4 h-4" value="elec" onchange="toggleSections()">
-          <span class="font-medium">⚡ 전기취급 및 전기시설 내 작업 (변전실 작업, 고압설비 작업)</span>
+          <span class="font-medium">⚡ [v4 시트8] 전기작업계획서</span>
         </label>
         <label class="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-blue-50">
-          <input type="checkbox" class="risk-chk w-4 h-4" value="heavy" onchange="toggleSections()">
-          <span class="font-medium">⚙️ 설비작업 및 중량물 취급 (압력용기, 냉각탑 설치/철거, 중량물 상하차·운반)</span>
+          <input type="checkbox" class="risk-chk w-4 h-4" value="forklift" onchange="toggleSections()">
+          <span class="font-medium">🚜 [v4 시트9] 지게차 작업계획서</span>
         </label>
         <label class="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-blue-50">
-          <input type="checkbox" class="risk-chk w-4 h-4" value="demo" onchange="toggleSections()">
-          <span class="font-medium">🏗️ 석면해체 작업 / 건축물·구축물 해체 / 지반 굴착작업 (사전조사 必)</span>
-        </label>
-        <label class="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-blue-50 md:col-span-2">
           <input type="checkbox" class="risk-chk w-4 h-4" value="fire" checked onchange="toggleSections()">
-          <span class="font-medium">🔥 화기작업 (용접, 그라인더/고속절단기 등을 사용한 절단작업)</span>
+          <span class="font-medium">🔥 [v4 시트10] 화기/절단 작업 허가서</span>
+        </label>
+        <label class="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-blue-50">
+          <input type="checkbox" class="risk-chk w-4 h-4" value="crane" onchange="toggleSections()">
+          <span class="font-medium">🏗️ [v4 시트11] 크레인 작업계획서</span>
+        </label>
+        <label class="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-blue-50">
+          <input type="checkbox" class="risk-chk w-4 h-4" value="awp" onchange="toggleSections()">
+          <span class="font-medium">🚡 [v4 시트12] 고소작업대 작업계획서</span>
+        </label>
+        <label class="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-blue-50">
+          <input type="checkbox" class="risk-chk w-4 h-4" value="ladder" onchange="toggleSections()">
+          <span class="font-medium">🪜 [v4 시트13] 천정·사다리 작업계획서</span>
+        </label>
+        <label class="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-blue-50">
+          <input type="checkbox" class="risk-chk w-4 h-4" value="confined" onchange="toggleSections()">
+          <span class="font-medium">😷 [표지분류] 밀폐공간 보건작업 계획서</span>
+        </label>
+        <label class="flex items-center gap-2 p-3 border rounded-lg cursor-pointer hover:bg-blue-50">
+          <input type="checkbox" class="risk-chk w-4 h-4" value="asbestos" onchange="toggleSections()">
+          <span class="font-medium">🧱 [표지분류] 석면·건축물 해체 작업계획서</span>
         </label>
       </div>
     </section>
@@ -217,28 +212,6 @@
           </tbody>
         </table>
       </div>
-
-      <!-- 위험등급 별 현장 안전관리 차등화 기준 안내 (v5 반영) -->
-      <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-        <div class="p-3 bg-red-50 border border-red-200 rounded-lg">
-          <div class="font-bold text-red-800 mb-1">🔴 A등급 기준</div>
-          <div>• <strong>착수조건:</strong> EHS 작업허가(PTW) 필수 및 방호조치 현장 확인</div>
-          <div>• <strong>현장통제:</strong> 전담 감시인·작업지휘자 상주 및 발주부서 입회</div>
-          <div>• <strong>점검주기:</strong> 일 2회(오전/오후) 집중 순회점검</div>
-        </div>
-        <div class="p-3 bg-amber-50 border border-amber-200 rounded-lg">
-          <div class="font-bold text-amber-800 mb-1">🟡 B등급 기준</div>
-          <div>• <strong>착수조건:</strong> 발주부서 관리감독자 사전 검토 및 구획 통제 확인</div>
-          <div>• <strong>현장통제:</strong> 신호수·유도원 배치 및 혼재 작업 동선 분리</div>
-          <div>• <strong>점검주기:</strong> 일 1회 정기 순회점검 실시</div>
-        </div>
-        <div class="p-3 bg-emerald-50 border border-emerald-200 rounded-lg">
-          <div class="font-bold text-emerald-800 mb-1">🟢 C등급 기준</div>
-          <div>• <strong>착수조건:</strong> 작업 전 자율 TBM 및 기본 개인보호구 확인</div>
-          <div>• <strong>현장통제:</strong> 안전작업절차(SOP) 준수 및 안전통로 확보</div>
-          <div>• <strong>점검주기:</strong> TBM 기록 확인 및 수시(주 1~2회) 샘플링 점검</div>
-        </div>
-      </div>
     </section>
 
     <!-- STEP 4. [Sheet 3 & 4] 작업지휘자 지정서 및 비상연락망 -->
@@ -248,21 +221,30 @@
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
         <div class="p-4 bg-slate-50 rounded-lg border space-y-3">
-          <div class="font-bold text-slate-800 border-b pb-1">■ 작업지휘자 지정 (법 제39조)</div>
+          <div class="font-bold text-slate-800 border-b pb-1">■ 작업지휘자·안전관계자 지정</div>
           <div>
             <label class="block text-xs font-semibold mb-1">작업지휘자 소속/부서</label>
             <input type="text" id="leader_dept" placeholder="예: 공사팀 / 설비팀" class="w-full border rounded p-2 bg-white">
           </div>
-          <div>
-            <label class="block text-xs font-semibold mb-1">작업지휘자 성명 / 연락처 *</label>
-            <div class="grid grid-cols-2 gap-2">
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs font-semibold mb-1">작업지휘자 성명 *</label>
               <input type="text" id="leader_name" placeholder="성명" class="w-full border rounded p-2 bg-white">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold mb-1">작업지휘자 연락처 *</label>
               <input type="text" id="leader_phone" placeholder="010-0000-0000" class="w-full border rounded p-2 bg-white">
             </div>
           </div>
-          <div>
-            <label class="block text-xs font-semibold mb-1">관리감독자 성명</label>
-            <input type="text" id="supervisor_name" placeholder="관리감독자 성명" class="w-full border rounded p-2 bg-white">
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs font-semibold mb-1">관리감독자 성명</label>
+              <input type="text" id="supervisor_name" placeholder="성명" class="w-full border rounded p-2 bg-white">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold mb-1">유도자 / 신호수 성명</label>
+              <input type="text" id="signal_name" placeholder="성명" class="w-full border rounded p-2 bg-white">
+            </div>
           </div>
         </div>
 
@@ -286,10 +268,10 @@
             <input type="text" id="em_sub_work_tel" placeholder="공사담당 연락처" class="border rounded p-2 bg-white text-xs">
             <input type="text" id="em_sub_safe" placeholder="수급 안전담당 성명" class="border rounded p-2 bg-white text-xs">
             <input type="text" id="em_sub_safe_tel" placeholder="안전담당 연락처" class="border rounded p-2 bg-white text-xs">
-            <input type="text" id="em_gen_ chief" placeholder="시공사 현장소장(해당시)" class="border rounded p-2 bg-white text-xs">
+            <input type="text" id="em_gen_chief" placeholder="시공사 현장소장(해당시)" class="border rounded p-2 bg-white text-xs">
             <input type="text" id="em_gen_chief_tel" placeholder="시공사 소장 연락처" class="border rounded p-2 bg-white text-xs">
           </div>
-          <p class="text-[11px] text-slate-500">※ 외부 의료기관(홍천아산병원, 강원대병원, 원주의료원) 및 소방서(홍천군소방서, 119양덕원센터)는 시트에 기본 포함됩니다.</p>
+          <p class="text-[11px] text-slate-500">※ 외부 의료기관(홍천아산병원, 강원대병원, 원주의료원) 및 소방서는 시트에 자동 입력됩니다.</p>
         </div>
       </div>
     </section>
@@ -300,11 +282,10 @@
         5. [Sheet 5 · 6] 작업 전 안전점검 체크리스트 및 TBM (Tool Box Meeting)
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-        <!-- 체크리스트 요약 -->
         <div class="space-y-3">
-          <div class="font-bold text-slate-800">■ 작업 전 안전점검 체크리스트 (13개 항목 일괄 확인)</div>
+          <div class="font-bold text-slate-800">■ 작업 전 안전점검 체크리스트 (13개 항목 확인)</div>
           <div class="p-3 bg-slate-50 rounded border text-xs space-y-1.5">
-            <label class="flex items-center gap-2"><input type="checkbox" id="chk_all_good" checked> 일반 안전 사항 (1~9번: 안전교육, 보호구, SOP비치, MSDS, 공도구, 구획, 법적교육 등) 모두 <strong>[양호]</strong> 체크</label>
+            <label class="flex items-center gap-2"><input type="checkbox" id="chk_all_good" checked> 일반 안전 사항 (1~9번: 안전교육, 보호구, SOP비치, MSDS, 공도구, 구획 등) 모두 <strong>[양호]</strong> 체크</label>
             <label class="flex items-center gap-2"><input type="checkbox" id="chk_proc_good" checked> 주요 공정별 안전 사항 (1~4번: 주변통제, 일일점검표 게시, 관리감독, 정리정돈) 모두 <strong>[양호]</strong> 체크</label>
           </div>
           <div>
@@ -323,7 +304,6 @@
           </div>
         </div>
 
-        <!-- TBM 입력 -->
         <div class="space-y-3">
           <div class="font-bold text-slate-800">■ 작업 전 안전점검 회의 (TBM) 중점사항</div>
           <div class="grid grid-cols-2 gap-2 text-xs">
@@ -332,7 +312,7 @@
               <input type="text" id="tbm_time" value="08:00 ~ 08:20" class="w-full border rounded p-2">
             </div>
             <div>
-              <label class="block font-semibold mb-1">TBM 리더 직책 / 성명</label>
+              <label class="block font-semibold mb-1">TBM 리더 직책</label>
               <input type="text" id="tbm_leader_role" value="현장소장(작업지휘자)" class="w-full border rounded p-2">
             </div>
           </div>
@@ -354,182 +334,290 @@
       </div>
     </section>
 
-    <!-- STEP 6. 위험작업별 상세 작업계획서 (기존 유지) -->
+    <!-- STEP 6. 『통합본 v4』 기반 위험작업별 상세 작업계획서 입력란 -->
     <section class="space-y-4">
-      <h2 class="text-lg font-bold text-blue-900 px-1">6. 위험작업별 법정 작업계획서 작성 (2번에서 체크한 항목만 표시됨)</h2>
+      <h2 class="text-lg font-bold text-blue-900 px-1">
+        6. 위험작업별 상세 작업계획서 작성 (『통합본 v4』 시트 양식 100% 반영)
+      </h2>
 
-      <!-- 화기작업 -->
-      <div id="sec_fire" class="card p-6 border-l-4 border-l-red-500">
-        <h3 class="font-bold text-red-700 mb-4">🔥 [위험작업 계획서] 화기/절단 작업 허가서 및 화재감시자 지정서</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+      <!-- [v4 시트7] 화물자동차 중량물 취급 작업계획서 -->
+      <div id="sec_heavy" class="card p-6 border-l-4 border-l-emerald-600 hidden">
+        <h3 class="font-bold text-emerald-800 mb-3">📦 [v4 시트7] 화물자동차 중량물 취급 작업계획서 (규칙 제38조)</h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
           <div>
-            <label class="block font-semibold mb-1">화재감시자 지정 성명 (법 제241조의2) *</label>
-            <input type="text" id="fire_watcher" placeholder="작업자 외 전담 화재감시자 성명" class="w-full border rounded p-2">
+            <label class="block font-semibold mb-1">화물차 장비명(모델명)</label>
+            <input type="text" id="hv_truck_model" value="5톤 카고트럭" class="w-full border rounded p-2">
           </div>
           <div>
-            <label class="block font-semibold mb-1">사용 화기/절단 장비</label>
-            <input type="text" id="fire_equip" value="그라인더/고속절단기, 전기용접기" class="w-full border rounded p-2">
+            <label class="block font-semibold mb-1">차량 총중량 / 적재함 용량</label>
+            <input type="text" id="hv_truck_cap" value="총중량 11톤 / 적재 5톤" class="w-full border rounded p-2">
           </div>
-          <div class="md:col-span-2 space-y-1.5 text-xs pt-1">
-            <label class="flex items-center gap-2"><input type="checkbox" id="fire_c1" checked> 가연물 10m 이상 이격 및 불티 비산 방지 조치 (불연재 및 <strong>불티비산방지포/방화포</strong> 비치)</label>
-            <label class="flex items-center gap-2"><input type="checkbox" id="fire_c2" checked> 소화기(3개) 비치, 그라인더 안전커버 부착, 전기용접기 <strong>자동전격방지기</strong> 및 가스 역화방지기 부착 확인</label>
-            <label class="flex items-center gap-2"><input type="checkbox" id="fire_c3" checked> 화기취급 작업 종료 후에도 <strong>30분 이상 현장 잔불 여부 확인</strong> 서약</label>
+          <div>
+            <label class="block font-semibold mb-1">보험 여부 / 검사 유효기간</label>
+            <input type="text" id="hv_truck_ins" value="종합보험 가입 / 유효기간 내" class="w-full border rounded p-2">
           </div>
-        </div>
-      </div>
+          <div>
+            <label class="block font-semibold mb-1">적재함 크기</label>
+            <input type="text" id="hv_truck_size" value="6.2m × 2.3m" class="w-full border rounded p-2">
+          </div>
 
-      <!-- 중장비 작업 -->
-      <div id="sec_equip" class="card p-6 border-l-4 border-l-indigo-500 hidden">
-        <h3 class="font-bold text-indigo-700 mb-4">🚜 [위험작업 계획서] 중장비(지게차·크레인·건설기계) 작업계획서 (규칙 제38조)</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
           <div>
-            <label class="block font-semibold mb-1">장비 종류 및 모델/등록번호</label>
-            <input type="text" id="equip_spec" placeholder="예: 3톤 지게차 / 25톤 크레인" class="w-full border rounded p-2">
+            <label class="block font-semibold mb-1">중량물 품명</label>
+            <input type="text" id="hv_item_name" value="공조설비 및 자재 박스" class="w-full border rounded p-2">
           </div>
           <div>
-            <label class="block font-semibold mb-1">운전원 성명(면허) 및 유도자(신호수)</label>
-            <input type="text" id="equip_driver" placeholder="예: 운전원 김철수 / 신호수 이영희" class="w-full border rounded p-2">
-          </div>
-          <div>
-            <label class="block font-semibold mb-1">취급 화물(양중물) 종류 및 최대중량(ton)</label>
-            <input type="text" id="equip_cargo" placeholder="예: 공조설비 박스 (1.5 ton)" class="w-full border rounded p-2">
-          </div>
-          <div class="md:col-span-3">
-            <label class="block font-semibold mb-1">[사전조사] 지형·지반 상태(경사도/요철), 운행경로 통제 및 주요 안전장치(과부하방지·권과방지·아웃트리거·후방카메라) 점검 결과</label>
-            <input type="text" id="equip_survey" value="콘크리트 평탄 지반(침하·경사 없음), 이동동선 라바콘 구획 및 신호수 배치, 과부하/권과방지장치 및 후방경보기 정상 작동 확인" class="w-full border rounded p-2">
-          </div>
-        </div>
-      </div>
-
-      <!-- 고소작업 -->
-      <div id="sec_high" class="card p-6 border-l-4 border-l-amber-500 hidden">
-        <h3 class="font-bold text-amber-700 mb-4">🪜 [위험작업 계획서] 고소작업(고소작업대·비계·천정/사다리) 작업계획서</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-          <div>
-            <label class="block font-semibold mb-1">고소작업 장비 구분</label>
-            <select id="high_equip" class="w-full border rounded p-2">
-              <option>고소작업대 (시저형 / 굴절형)</option>
-              <option>이동식 비계 (BT비계) / 강관비계</option>
-              <option>안전작업발판 사다리 (말비계)</option>
-              <option>A형 사다리 (협소공간 예외허가)</option>
+            <label class="block font-semibold mb-1">중량물 형상</label>
+            <select id="hv_item_shape" class="w-full border rounded p-2">
+              <option value="직육면체">■ 직육면체</option>
+              <option value="원형">■ 원형</option>
+              <option value="포장박스">■ 포장박스</option>
+              <option value="다발/묶음">■ 다발/묶음</option>
+              <option value="기타">■ 기타</option>
             </select>
           </div>
           <div>
-            <label class="block font-semibold mb-1">최고 작업 높이 (m)</label>
-            <input type="number" id="high_height" value="3.0" step="0.5" class="w-full border rounded p-2">
+            <label class="block font-semibold mb-1">규격: 가로×세로×높이(cm)</label>
+            <input type="text" id="hv_item_dim" value="가로 120 × 세로 100 × 높이 110" class="w-full border rounded p-2">
           </div>
           <div>
-            <label class="block font-semibold mb-1">[사전조사] 작업지형 및 바닥 상태</label>
-            <input type="text" id="high_floor" value="견고한 콘크리트 바닥 (경사·요철 없음)" class="w-full border rounded p-2">
-          </div>
-          <div class="md:col-span-3 space-y-1.5 text-xs pt-1">
-            <label class="flex items-center gap-2"><input type="checkbox" id="high_c1" checked> 안전모·안전화·안전대 착용 및 2m 이상 안전고리 체결 (1.2m 이상 2인 1조 작업, 최상단 디딤대 사용금지)</label>
-            <label class="flex items-center gap-2"><input type="checkbox" id="high_c2" checked> 전도방지 아웃트리거 상시 확장 / 과상승방지장치·비상하강장치 점검 및 작업반경 내 라바콘 구획 통제</label>
+            <label class="block font-semibold mb-1">중량물 하중 (kg) / 상하차 기구</label>
+            <input type="text" id="hv_item_weight" value="350kg / 전동대차·핸드카" class="w-full border rounded p-2">
           </div>
         </div>
+        <p class="text-[11px] text-slate-500 mt-2">※ 시트 생성 시 v4 양식의 5대 위험(추락·낙하·전도·협착·붕괴) 안전대책 표와 6대 사전 점검항목(양호/불량)이 자동으로 포함됩니다.</p>
       </div>
 
-      <!-- 설비 및 중량물 작업 -->
-      <div id="sec_heavy" class="card p-6 border-l-4 border-l-emerald-500 hidden">
-        <h3 class="font-bold text-emerald-700 mb-4">⚙️ [위험작업 계획서] 설비 설치·철거 및 화물자동차 중량물 취급 작업계획서 (규칙 제38조)</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-          <div>
-            <label class="block font-semibold mb-1">중량물/설비 품명 및 규격(가로×세로×높이)</label>
-            <input type="text" id="heavy_item" placeholder="예: 냉각탑 팬 모터 (120×100×110cm)" class="w-full border rounded p-2">
-          </div>
-          <div>
-            <label class="block font-semibold mb-1">중량물 하중 (kg)</label>
-            <input type="number" id="heavy_weight" value="250" class="w-full border rounded p-2">
-          </div>
-          <div>
-            <label class="block font-semibold mb-1">상하차 및 운반기구</label>
-            <input type="text" id="heavy_tool" value="화물차, 핸드카/전동대차, 체인블록" class="w-full border rounded p-2">
-          </div>
-          <div class="md:col-span-3">
-            <label class="block font-semibold mb-1">[사전조사] 5대 위험(추락·낙하·전도·협착·붕괴) 안전대책 및 운반경로 확보 상태</label>
-            <input type="text" id="heavy_route" value="카고 위 추락방지 조치, 적재물 로프 결속(낙하·붕괴 방지), 도크레벨러 단차 제거 및 차량 고임목 설치, 안전통로 확보" class="w-full border rounded p-2">
-          </div>
-        </div>
-      </div>
-
-      <!-- 전기작업 -->
+      <!-- [v4 시트8] 전기작업계획서 -->
       <div id="sec_elec" class="card p-6 border-l-4 border-l-yellow-500 hidden">
-        <h3 class="font-bold text-yellow-700 mb-4">⚡ [위험작업 계획서] 전기작업계획서 (규칙 제38조 - 50V / 250VA 초과)</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+        <h3 class="font-bold text-yellow-800 mb-3">⚡ [v4 시트8] 전기작업계획서 (규칙 제38조 - 50V / 250VA 초과)</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
           <div>
-            <label class="block font-semibold mb-1">공사범위 및 취급 전압</label>
-            <input type="text" id="elec_target" placeholder="예: 변전실/분전반 AC 380V 전원 작업" class="w-full border rounded p-2">
+            <label class="block font-semibold mb-1">작업목적 및 공사범위</label>
+            <input type="text" id="el_scope" value="분전반 전원 차단 및 설비 전원 케이블 결선" class="w-full border rounded p-2">
           </div>
           <div>
-            <label class="block font-semibold mb-1">지급 절연보호구 및 측정장비</label>
-            <input type="text" id="elec_ppe" value="절연안전모(ABE), 절연장갑, 절연화, 검전기, 멀티테스터기" class="w-full border rounded p-2">
+            <label class="block font-semibold mb-1">전기 작업자 성명 및 자격</label>
+            <input type="text" id="el_workers" value="홍길동(전기기사), 김철수(전기기능사)" class="w-full border rounded p-2">
           </div>
           <div>
-            <label class="block font-semibold mb-1">첨부 도면 확인</label>
-            <input type="text" id="elec_doc" value="전기단선도/결선도 및 정전작업 계획표 사전 확인" class="w-full border rounded p-2">
+            <label class="block font-semibold mb-1">안전보건교육 (교육자 / 교육내용)</label>
+            <input type="text" id="el_edu" value="작업지휘자 / 정전절차(LOTO) 및 감전예방 교육" class="w-full border rounded p-2">
           </div>
-          <div class="md:col-span-3">
-            <label class="block font-semibold mb-1">전로차단(LOTO), 잔류전하 방전, 무전압 검전 및 전원 재투입 안전절차</label>
-            <input type="text" id="elec_loto" value="전원 차단 후 잠금장치(LOTO) 및 꼬리표 부착 → 잔류전하 방전 → 검전기로 무전압 확인 후 작업 착수 (관계자 외 출입금지)" class="w-full border rounded p-2">
+          <div>
+            <label class="block font-semibold mb-1">측정장비 / 활선기구 / 방호구</label>
+            <input type="text" id="el_equip" value="검전기, 멀티테스터기 / 절연드라이버 / 절연시트·LOTO 자물쇠" class="w-full border rounded p-2">
+          </div>
+          <div class="md:col-span-2">
+            <label class="block font-semibold mb-1">현장 통제 및 안전조치 계획 (전로차단·검전·재투입 절차)</label>
+            <input type="text" id="el_control" value="전원 차단 후 잠금장치(LOTO)·꼬리표 부착 → 잔류전하 방전 → 검전기 무전압 확인 후 작업, 관계자 외 출입금지 표지 부착" class="w-full border rounded p-2">
           </div>
         </div>
       </div>
 
-      <!-- 밀폐공간 작업 -->
-      <div id="sec_confined" class="card p-6 border-l-4 border-l-purple-500 hidden">
-        <h3 class="font-bold text-purple-700 mb-4">😷 [위험작업 계획서] 밀폐공간 보건작업 프로그램 및 산소·유해가스 농도 측정표 (규칙 제619조)</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+      <!-- [v4 시트9] 지게차 작업계획서 -->
+      <div id="sec_forklift" class="card p-6 border-l-4 border-l-indigo-600 hidden">
+        <h3 class="font-bold text-indigo-800 mb-3">🚜 [v4 시트9] 지게차 작업계획서 및 일일 안전점검표 (규칙 제38조)</h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+          <div>
+            <label class="block font-semibold mb-1">작업면적(너비) / 지형 종류</label>
+            <input type="text" id="fk_area" value="10 × 15m / 콘크리트 평지" class="w-full border rounded p-2">
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">경사도 / 요철부 유무</label>
+            <input type="text" id="fk_slope" value="경사도: 없음 / 요철부: 없음" class="w-full border rounded p-2">
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">건설기계명 / 제조사·모델 / 규격</label>
+            <input type="text" id="fk_model" value="지게차 / 두산 D30S / 3톤" class="w-full border rounded p-2">
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">등록번호 / 운전원(자격)</label>
+            <input type="text" id="fk_driver" value="강원04가1234 / 김운전(지게차운전기능사)" class="w-full border rounded p-2">
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">화물 종류</label>
+            <input type="text" id="fk_cargo_type" value="신규 반입 설비 박스" class="w-full border rounded p-2">
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">화물 규격(m) / 최대 중량(ton)</label>
+            <input type="text" id="fk_cargo_spec" value="1.2 × 1.0 × 1.5m / 0.8톤" class="w-full border rounded p-2">
+          </div>
+          <div class="md:col-span-2">
+            <label class="block font-semibold mb-1">주 작업내용 (이동 동선)</label>
+            <input type="text" id="fk_work_desc" value="외부 하역장에서 설비 박스를 하차하여 본관 1층 반입구까지 안전 운반" class="w-full border rounded p-2">
+          </div>
+        </div>
+        <p class="text-[11px] text-slate-500 mt-2">※ 시트 생성 시 v4 양식의 안전대책 체크란 및 『지게차 일일 안전점검표(11대 항목 + 운행중 관리사항 4항목)』가 함께 생성됩니다.</p>
+      </div>
+
+      <!-- [v4 시트10] 화기/절단 작업 허가서 및 화재감시자 지정서 -->
+      <div id="sec_fire" class="card p-6 border-l-4 border-l-red-600">
+        <h3 class="font-bold text-red-700 mb-3">🔥 [v4 시트10] 화기/절단 작업 허가서 및 화재감시자 지정서 (시행령 제43조 / 규칙 제241조의2)</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+          <div>
+            <label class="block font-semibold mb-1">화기/절단작업 감독자 성명 *</label>
+            <input type="text" id="fr_supervisor" placeholder="미입력 시 작업지휘자 자동기입" class="w-full border rounded p-2">
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">화재 감시자 지정 (직책 / 성명) *</label>
+            <input type="text" id="fr_watcher" placeholder="예: 안전담당 / 이감시" class="w-full border rounded p-2">
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">소화기 비치 수량 / 이격거리</label>
+            <input type="text" id="fr_ext" value="소화기 3개 비치 / 가연물 10m 이상 이격" class="w-full border rounded p-2">
+          </div>
+        </div>
+        <div class="mt-2 p-2.5 bg-red-50 rounded border border-red-200 text-xs space-y-1">
+          <label class="flex items-center gap-2"><input type="checkbox" id="fr_all_ok" checked> <strong>[v4 15개 점검항목 일괄 양호 확인]</strong> 공통(가연물 10m 이격, 불티비산방지포 비치, 소화기 3개, 전선피복, 문어발 금지) + 절단(보안경·방진마스크, 그라인더 날/안전커버) + 용접(자동전격방지기, 역화방지기, 가스호스, 보안면) 및 작업 후 30분 잔불 확인 서약</label>
+        </div>
+      </div>
+
+      <!-- [v4 시트11] 크레인 작업계획서 -->
+      <div id="sec_crane" class="card p-6 border-l-4 border-l-blue-600 hidden">
+        <h3 class="font-bold text-blue-800 mb-3">🏗️ [v4 시트11] 크레인 작업계획서 및 양중능력 평가·일일점검표 (규칙 제38조)</h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+          <div>
+            <label class="block font-semibold mb-1">크레인 종류 및 모델(규격)</label>
+            <input type="text" id="cr_model" value="하이드로 크레인 (25톤)" class="w-full border rounded p-2">
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">등록번호 / 운전원(자격)</label>
+            <input type="text" id="cr_driver" value="강원06나5678 / 박크레인(기중기운전기능사)" class="w-full border rounded p-2">
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">양중물 종류 및 규격(D×H×W)</label>
+            <input type="text" id="cr_item" value="옥상 냉각탑 설비 (2.0×2.2×1.8m)" class="w-full border rounded p-2">
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">양중물(적재물) 중량 (Ton)</label>
+            <input type="number" id="cr_item_ton" value="2.5" step="0.1" class="w-full border rounded p-2">
+          </div>
+
+          <div>
+            <label class="block font-semibold mb-1">줄걸이 종류 및 규격(Ø×L)</label>
+            <input type="text" id="cr_sling_spec" value="라운드 슬링 (Ø 50mm × L 6m)" class="w-full border rounded p-2">
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">줄걸이 파단하중(Ton) / 줄걸이 수(개)</label>
+            <div class="grid grid-cols-2 gap-1">
+              <input type="number" id="cr_brk_ton" value="20" class="w-full border rounded p-2" title="파단하중(Ton)">
+              <input type="number" id="cr_sling_cnt" value="4" class="w-full border rounded p-2" title="줄걸이 수(개)">
+            </div>
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">양중거리(m) / 붐길이(m)</label>
+            <input type="text" id="cr_boom" value="양중거리 12m / 붐길이 24m" class="w-full border rounded p-2">
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">제원표상 정격하중(Ton) ※안전율 85% 자동계산</label>
+            <input type="number" id="cr_cap_ton" value="6.0" step="0.5" class="w-full border rounded p-2">
+          </div>
+        </div>
+        <p class="text-[11px] text-slate-500 mt-2">※ 시트 생성 시 줄걸이 안전하중 계산식(오류 수정 완료), Crane Action Plan(안전율 85% 적합 판정), 크레인 일일 안전점검표(12항목)가 자동 작성됩니다.</p>
+      </div>
+
+      <!-- [v4 시트12] 고소작업대 작업계획서 -->
+      <div id="sec_awp" class="card p-6 border-l-4 border-l-amber-500 hidden">
+        <h3 class="font-bold text-amber-800 mb-3">🚡 [v4 시트12] 고소작업대 작업계획서 (규칙 제38조)</h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
+          <div>
+            <label class="block font-semibold mb-1">장비 종류 (시저형 / 굴절형)</label>
+            <select id="awp_type" class="w-full border rounded p-2">
+              <option value="■시저형 □굴절형">시저형 (수직형 리프트)</option>
+              <option value="□시저형 ■굴절형">굴절형 (스카이/붐리프트)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">제조사/모델 및 안전인증 유효기간</label>
+            <input type="text" id="awp_model" value="렌탈 시저리프트 (SKIP-100) / 인증 유효" class="w-full border rounded p-2">
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">탑승 인원 / 적재물 종류·최대적재중량</label>
+            <input type="text" id="awp_load" value="2명 / 배관자재 및 공구 (최대 250kg)" class="w-full border rounded p-2">
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">작업대 전면 난간대 해체 여부</label>
+            <select id="awp_rail" class="w-full border rounded p-2">
+              <option value="□해체 ■미해체">미해체 (원칙 준수)</option>
+              <option value="■해체 □미해체">해체 (추락방지대책 별도 수립)</option>
+            </select>
+          </div>
+        </div>
+        <p class="text-[11px] text-slate-500 mt-2">※ 시트 생성 시 과상승방지장치, 비상정지장치, 비상하강장치, 풋스위치, 아웃트리거/차륜 점검 등 v4 안전대책이 모두 반영됩니다.</p>
+      </div>
+
+      <!-- [v4 시트13] 천정·사다리 작업계획서 -->
+      <div id="sec_ladder" class="card p-6 border-l-4 border-l-orange-500 hidden">
+        <h3 class="font-bold text-orange-800 mb-3">🪜 [v4 시트13] 천정·사다리 작업계획서 (규칙 제24조 준용)</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+          <div>
+            <label class="block font-semibold mb-1">사용 사다리 구분</label>
+            <select id="ld_type" class="w-full border rounded p-2">
+              <option value="안전발판사다리(말비계)">일반: 안전작업발판 사다리 (말비계)</option>
+              <option value="A형사다리(협소공간 예외허가)">천정/협소: A형 사다리 (예외 허가)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">① 발디딤 최고 작업 높이 (m)</label>
+            <input type="number" id="ld_height" value="1.8" step="0.1" class="w-full border rounded p-2">
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">작업지형 및 장소 / 공도구 승인필증</label>
+            <input type="text" id="ld_place" value="견고한 바닥 (천정/기계실) / 승인필증: 有" class="w-full border rounded p-2">
+          </div>
+        </div>
+        <p class="text-[11px] text-slate-500 mt-2">※ 1.2m 이상 2인 1조 및 최상단·그 하단 디딤대 미사용, 2m 이상 안전고리 체결, 전도방지 아웃트리거 상시 확장 기준이 시트에 반영됩니다.</p>
+      </div>
+
+      <!-- [표지 분류] 밀폐공간 보건작업 계획서 -->
+      <div id="sec_confined" class="card p-6 border-l-4 border-l-purple-600 hidden">
+        <h3 class="font-bold text-purple-800 mb-3">😷 [표지분류] 밀폐공간 보건작업 프로그램 및 농도 측정표 (규칙 제619조)</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
           <div>
             <label class="block font-semibold mb-1">밀폐공간 작업장소</label>
-            <input type="text" id="conf_place" placeholder="예: 정화조 / 집수조 / 물탱크 내부" class="w-full border rounded p-2">
+            <input type="text" id="cf_place" value="정화조 / 집수조 / 물탱크 내부" class="w-full border rounded p-2">
           </div>
           <div>
             <label class="block font-semibold mb-1">외부 상주 감시인 성명 *</label>
-            <input type="text" id="conf_watcher" placeholder="예: 박감시 (외부 상주 및 무전 연락)" class="w-full border rounded p-2">
+            <input type="text" id="cf_watcher" placeholder="예: 박감시 (외부 상주)" class="w-full border rounded p-2">
           </div>
           <div>
             <label class="block font-semibold mb-1">작업 전 산소·유해가스 농도 측정 결과</label>
-            <input type="text" id="conf_gas" value="O2: 20.9%, CO: 0ppm, H2S: 0ppm, LEL: 0% (적합)" class="w-full border rounded p-2">
-          </div>
-          <div class="md:col-span-3">
-            <label class="block font-semibold mb-1">환기설비 가동, 호흡보호구(송기마스크)·삼각대 비치 및 출입인원 계수 계획</label>
-            <input type="text" id="conf_safety" value="작업 전·중 급배기 환기팬 상시 가동, 비상용 송기마스크 및 삼각대/구명줄 현장 비치, 출입 전·후 인원 계수 실시" class="w-full border rounded p-2">
+            <input type="text" id="cf_gas" value="O2: 20.9%, CO: 0ppm, H2S: 0ppm (적합)" class="w-full border rounded p-2">
           </div>
         </div>
       </div>
 
-      <!-- 석면/해체/굴착 작업 -->
-      <div id="sec_demo" class="card p-6 border-l-4 border-l-stone-500 hidden">
-        <h3 class="font-bold text-stone-700 mb-4">🏗️ [위험작업 계획서] 석면해체 / 건축물·구축물 해체 / 지반 굴착(2m 이상) 작업계획서</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+      <!-- [표지 분류] 석면·건축물 해체 작업계획서 -->
+      <div id="sec_asbestos" class="card p-6 border-l-4 border-l-stone-600 hidden">
+        <h3 class="font-bold text-stone-800 mb-3">🧱 [표지분류] 석면해체 / 건축물·구축물 해체 작업계획서 (규칙 제38조·제489조)</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
           <div>
-            <label class="block font-semibold mb-1">해체 대상 구조물 또는 굴착 규모(깊이 m)</label>
-            <input type="text" id="demo_target" placeholder="예: 내부 가벽/천장 텍스 해체 또는 배관 매설 굴착(2.2m)" class="w-full border rounded p-2">
+            <label class="block font-semibold mb-1">해체 대상 건축물/설비 및 석면 사전조사 결과</label>
+            <input type="text" id="as_target" value="내부 벽체/천장 텍스 해체 (석면 사전조사 완료)" class="w-full border rounded p-2">
           </div>
           <div>
-            <label class="block font-semibold mb-1">[사전조사] 석면 사전조사 결과, 지하 매설물 유무 및 붕괴·분진 방지 대책</label>
-            <input type="text" id="demo_survey" value="석면 사전조사 완료(무석면 또는 습윤화·음압 밀폐 보양), 전력·가스선 차단 확인, 상부→하부 순차 해체 및 지지대 설치" class="w-full border rounded p-2">
+            <label class="block font-semibold mb-1">해체 순서, 습윤화·분진 날림 방지 및 붕괴 예방 대책</label>
+            <input type="text" id="as_method" value="전력·배관 차단 확인 후 상부→하부 순차 해체, 보양 비닐 및 습윤화 조치, 전용 폐기물 밀봉 반출" class="w-full border rounded p-2">
           </div>
         </div>
       </div>
     </section>
 
-    <!-- STEP 7. 통합본 v5 엑셀 다운로드 버튼 -->
+    <!-- STEP 7. 통합본 엑셀 다운로드 버튼 -->
     <div class="pt-4">
-      <button type="button" onclick="downloadExcelV5()" class="w-full bg-blue-800 hover:bg-blue-900 text-white font-bold py-4 rounded-xl shadow-lg text-lg transition flex items-center justify-center gap-2">
-        📥 [작업계획서 통합본 v5] 전체 시트 엑셀 파일(.xlsx) 생성 및 다운로드
+      <button type="button" onclick="downloadExcelIntegrated()" class="w-full bg-blue-800 hover:bg-blue-900 text-white font-bold py-4 rounded-xl shadow-lg text-lg transition flex items-center justify-center gap-2">
+        📥 [v5 기본서류 + v4 위험작업 계획서] 통합 엑셀 파일(.xlsx) 생성 및 다운로드
       </button>
     </div>
 
   </main>
 
   <script>
-    // 오늘 날짜 자동 세팅
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('f2_req_date').value = today;
     document.getElementById('f8_period').value = `${today} ~ ${today}`;
 
-    // 체크박스 선택에 따라 위험작업 계획서 섹션 표시/숨김
     function toggleSections() {
       document.querySelectorAll('.risk-chk').forEach(chk => {
         const sec = document.getElementById('sec_' + chk.value);
@@ -537,7 +625,6 @@
       });
     }
 
-    // SOP(위험성평가) 행 추가
     function addSopRow() {
       const tbody = document.getElementById('sop_tbody');
       const idx = tbody.rows.length + 1;
@@ -554,9 +641,7 @@
       tbody.appendChild(tr);
     }
 
-    // 통합본 v5 양식 그대로 엑셀(.xlsx) 생성
-    function downloadExcelV5() {
-      // 1~11번 기본정보 수집
+    function downloadExcelIntegrated() {
       const v1_site = document.getElementById('f1_site').value;
       const v2_date = document.getElementById('f2_req_date').value;
       const v3_dept = document.getElementById('f3_dept').value.trim();
@@ -578,17 +663,20 @@
       const leaderPhone = document.getElementById('leader_phone').value.trim();
       const leaderDept = document.getElementById('leader_dept').value.trim() || v5_comp;
       const superName = document.getElementById('supervisor_name').value.trim() || v6_cmgr;
+      const signalName = document.getElementById('signal_name').value.trim() || "신호수 배치";
+      const safeMgrName = document.getElementById('em_sub_safe').value.trim() || leaderName;
 
-      const checkedRisks = Array.from(document.querySelectorAll('.risk-chk:checked')).map(c => c.value);
-      const ckMark = (val) => checkedRisks.includes(val) ? "■" : "□";
+      const checked = Array.from(document.querySelectorAll('.risk-chk:checked')).map(c => c.value);
+      const hasEquip = checked.includes('forklift') || checked.includes('crane');
+      const hasHigh  = checked.includes('awp') || checked.includes('ladder');
 
       const wb = XLSX.utils.book_new();
       const [yyyy, mm, dd] = v2_date.split('-');
 
       // =========================================================
-      // Sheet 1: 공사작업_허가서 (통합본 v5 양식 100% 반영)
+      // 1~6. 기본 시트 6종 (통합본 v5 양식 그대로 유지)
       // =========================================================
-      const ws1Data = [
+      const ws1 = XLSX.utils.aoa_to_sheet([
         ["[삼성메디슨] 공사작업 허가서", "", "", ""],
         [],
         ["■ 기본정보", "", "", ""],
@@ -598,13 +686,13 @@
         ["공사명", v7_proj, "", ""],
         [
           "위험작업 분류\n■ 체크\n(작업계획서 별도작성)",
-          `${ckMark('equip')} 중장비 작업 (크레인, 사다리차, 스카이, 지게차 등)\n` +
-          `${ckMark('high')} 고소작업 (천정작업, 외부로프작업, 비계상부 등)\n` +
-          `${ckMark('confined')} 밀폐공간작업 (정화조/집수조 내부, 물탱크 청소 작업 등)\n` +
-          `${ckMark('elec')} 전기취급 및 전기시설 내 작업 (변전실 작업, 고압설비 작업)\n` +
-          `${ckMark('heavy')} 설비작업 (압력용기, 냉각탑 등 설치/철거작업 및 중량물 취급)\n` +
-          `${ckMark('demo')} 석면해체 작업 / 건축물·구축물 해체 / 지반굴착 (사전조사 必)\n` +
-          `${ckMark('fire')} 화기작업 (용접, 그라인더/고속절단기 등을 사용한 절단작업)`,
+          `${hasEquip ? '■' : '□'} 중장비 작업 (크레인, 사다리차, 스카이, 지게차 등)\n` +
+          `${hasHigh ? '■' : '□'} 고소작업 (천정작업, 외부로프작업, 비계상부 등)\n` +
+          `${checked.includes('confined') ? '■' : '□'} 밀폐공간작업 (정화조/집수조 내부, 물탱크 청소 작업 등)\n` +
+          `${checked.includes('elec') ? '■' : '□'} 전기취급 및 전기시설 내 작업 (변전실 작업, 고압설비 작업)\n` +
+          `${checked.includes('heavy') ? '■' : '□'} 설비작업 (압력용기, 냉각탑 등 설치/철거작업 및 중량물 취급)\n` +
+          `${checked.includes('asbestos') ? '■' : '□'} 석면해체 작업 (석면함유 건축물 해체작업/사전조사 必)\n` +
+          `${checked.includes('fire') ? '■' : '□'} 화기작업 (용접, 그라인더/고속절단기 등을 사용한 절단작업)`,
           "", ""
         ],
         ["공사기간", v8_peri, "공사장소", v9_loc],
@@ -616,22 +704,16 @@
         ["작업 전 안전점검, TBM", "- 계약업체는 공사작업허가서 및 서류 현장 비치\n- 작업 전 작업지휘자(또는 안전관리자) 주관 사전 안전점검과 TBM 실시", "", ""],
         ["순회점검실시", "- 발주 담당자와 계약업체는 작업기간 동안 일일 순회점검 실시\n- 순회점검 실시 후 결과 기록 및 서명, 1부씩 보관", "", ""],
         ["공사 종료,\n현장 안전점검 및 정리정돈", "- 계약업체는 공사종료 후 불씨 확인 등 현장 안전점검 및 정리정돈", "", ""]
-      ];
-      const ws1 = XLSX.utils.aoa_to_sheet(ws1Data);
+      ]);
       ws1['!cols'] = [{wch: 24}, {wch: 55}, {wch: 16}, {wch: 28}];
       XLSX.utils.book_append_sheet(wb, ws1, "공사작업_허가서");
 
-      // =========================================================
-      // Sheet 2: 안전작업절차_(SOP) (통합본 v5 양식 반영)
-      // =========================================================
       const sopGrade = document.getElementById('sop_grade').value;
       const sopRows = [];
       document.querySelectorAll('#sop_tbody tr').forEach(tr => {
-        const inps = tr.querySelectorAll('input');
-        sopRows.push(Array.from(inps).map(i => i.value));
+        sopRows.push(Array.from(tr.querySelectorAll('input')).map(i => i.value));
       });
-
-      const ws2Data = [
+      const ws2 = XLSX.utils.aoa_to_sheet([
         ["[삼성메디슨] 안전작업 절차(SOP) 및 위험성 평가", "", "", "", "", "", ""],
         [],
         ["■ 공사명", v7_proj, "", "", "", "", ""],
@@ -645,17 +727,12 @@
         ["※ 위험등급 별 현장 안전관리 및 점검 차등화 기준 (예시)", "", "", "", "", "", ""],
         ["A등급", "[착수조건 - 합동 사전점검]: EHS 부서 작업허가(PTW) 필수 및 설비적 방호조치 현장 확인 후 착수 승인\n[현장통제 - 전담자 상주]: 전담 감시인·작업지휘자 상시 배치 및 고위험 공정 시 발주부서 감독자 현장 입회\n[점검주기 - 일 2회 점검]: 오전/오후 집중 순회점검 실시 (계획 미준수·방호 해체 시 즉시 작업중지)", "", "", "", "", ""],
         ["B등급", "[착수조건 - 주관부서 확인]: 발주부서 관리감독자 사전 검토 및 작업 구획 통제(라바콘·표지판) 설치 확인\n[현장통제 - 간섭 통제]: 신호수·유도원 현장 배치 및 주변 혼재 작업과의 시간·동선 분리 통제\n[점검주기 - 일 1회 점검]: 일 1회 정기 순회점검 실시 (신호수 배치, SOP 준수, 보호구 착용 중점 확인)", "", "", "", "", ""],
-        ["C등급", "[착수조건 - 자율TBM]: 작업 전 TBM을 통한 위험요인 전파 및 기본 개인보호구 착용 확인 후 착수\n[현장통제 - 표준 준수]: 안전작업절차(SOP) 준수 및 작업장 주변 정리정돈·안전통로 상시 확보\n[점검주기 - 수시 점검]: TBM 기록 확인 및 수시(주 1~2회) 샘플링 점검 *작업 변경 시 즉시 재평가", "", "", "", "", ""],
-        ["※ 비 고", "", "", "", "", "", ""]
-      ];
-      const ws2 = XLSX.utils.aoa_to_sheet(ws2Data);
+        ["C등급", "[착수조건 - 자율TBM]: 작업 전 TBM을 통한 위험요인 전파 및 기본 개인보호구 착용 확인 후 착수\n[현장통제 - 표준 준수]: 안전작업절차(SOP) 준수 및 작업장 주변 정리정돈·안전통로 상시 확보\n[점검주기 - 수시 점검]: TBM 기록 확인 및 수시(주 1~2회) 샘플링 점검 *작업 변경 시 즉시 재평가", "", "", "", "", ""]
+      ]);
       ws2['!cols'] = [{wch: 20}, {wch: 32}, {wch: 10}, {wch: 14}, {wch: 32}, {wch: 10}, {wch: 38}];
       XLSX.utils.book_append_sheet(wb, ws2, "안전작업절차_(SOP)");
 
-      // =========================================================
-      // Sheet 3: 작업지휘자_지정서 (통합본 v5 양식 반영)
-      // =========================================================
-      const ws3Data = [
+      const ws3 = XLSX.utils.aoa_to_sheet([
         ["[삼성메디슨] 작업지휘자 지정서", "", ""],
         [],
         ["공사명", v7_proj, ""],
@@ -669,15 +746,11 @@
         [],
         ["작업지휘자 :", `${leaderName}   (인)`, ""],
         ["관리감독자 :", `${superName}   (인)`, ""]
-      ];
-      const ws3 = XLSX.utils.aoa_to_sheet(ws3Data);
+      ]);
       ws3['!cols'] = [{wch: 22}, {wch: 45}, {wch: 15}];
       XLSX.utils.book_append_sheet(wb, ws3, "작업지휘자_지정서");
 
-      // =========================================================
-      // Sheet 4: 비상연락망 (통합본 v5 양식 반영)
-      // =========================================================
-      const ws4Data = [
+      const ws4 = XLSX.utils.aoa_to_sheet([
         ["[삼성메디슨] 비상연락망", "", "", ""],
         [],
         ["■ 공사 관계자 비상연락망", "", "", ""],
@@ -688,10 +761,8 @@
         ["삼성메디슨 (발주처)", "방재 담당자", document.getElementById('em_med_fire').value, document.getElementById('em_med_fire_tel').value],
         ["수급업체 (공사업체)", "현장 소장 (작업 지휘자)", leaderName, leaderPhone],
         ["수급업체 (공사업체)", "공사 담당", document.getElementById('em_sub_work').value, document.getElementById('em_sub_work_tel').value],
-        ["수급업체 (공사업체)", "안전 담당자", document.getElementById('em_sub_safe').value, document.getElementById('em_sub_safe_tel').value],
-        ["종합 건설사 • 시공사", "현장 소장", document.getElementById('em_gen_ chief').value, document.getElementById('em_gen_chief_tel').value],
-        ["종합 건설사 • 시공사", "공사 팀장 / 담당", "", ""],
-        ["종합 건설사 • 시공사", "안전 팀장", "", ""],
+        ["수급업체 (공사업체)", "안전 담당자", safeMgrName, document.getElementById('em_sub_safe_tel').value],
+        ["종합 건설사 • 시공사", "현장 소장", document.getElementById('em_gen_chief').value, document.getElementById('em_gen_chief_tel').value],
         [],
         ["■ 외부 의료기관 및 관할 소방서", "", "", ""],
         ["지역", "구분", "기관명", "연락처"],
@@ -700,19 +771,14 @@
         ["원주", "의료기관", "원주의료원", "033-760-4500"],
         ["홍천", "소방서", "홍천군소방서", "033-439-2119"],
         ["홍천", "소방서", "119양덕원소방센터", "033-432-0119"]
-      ];
-      const ws4 = XLSX.utils.aoa_to_sheet(ws4Data);
+      ]);
       ws4['!cols'] = [{wch: 22}, {wch: 24}, {wch: 22}, {wch: 22}];
       XLSX.utils.book_append_sheet(wb, ws4, "비상연락망");
 
-      // =========================================================
-      // Sheet 5: 안전점검_체크리스트 (통합본 v5 양식 반영)
-      // =========================================================
       const gMark = document.getElementById('chk_all_good').checked ? "√" : "";
       const pMark = document.getElementById('chk_proc_good').checked ? "√" : "";
       const inspName = document.getElementById('chk_inspector').value.trim() || leaderName;
-
-      const ws5Data = [
+      const ws5 = XLSX.utils.aoa_to_sheet([
         ["[삼성메디슨] 작업 전 안전점검 (Check List)", "", "", "", ""],
         [],
         ["업체명", "작업장소", "작업내용", "작업시간", ""],
@@ -735,21 +801,16 @@
         ["일일 위험요소 발굴∙제거 현황", document.getElementById('chk_free_note').value, "", "", ""],
         [],
         ["점검 실명제", `점검시간 : ${document.getElementById('chk_time').value}`, `점검자 성명 : ${inspName}`, "서명 : (인)", ""]
-      ];
-      const ws5 = XLSX.utils.aoa_to_sheet(ws5Data);
+      ]);
       ws5['!cols'] = [{wch: 24}, {wch: 48}, {wch: 10}, {wch: 10}, {wch: 10}];
       XLSX.utils.book_append_sheet(wb, ws5, "안전점검_체크리스트");
 
-      // =========================================================
-      // Sheet 6: 작업_전_안전점검_회의(TBM) (통합본 v5 양식 반영)
-      // =========================================================
       const tbmTime = document.getElementById('tbm_time').value;
       const tbmRole = document.getElementById('tbm_leader_role').value;
       const tbmKeyRisk = document.getElementById('tbm_key_risk').value;
       const tbmKeyMeas = document.getElementById('tbm_key_measure').value;
       const attList = document.getElementById('tbm_attendees').value.split(',').map(s => s.trim()).filter(Boolean);
-
-      const ws6Data = [
+      const ws6 = XLSX.utils.aoa_to_sheet([
         ["[삼성메디슨] 작업 전 안전점검 회의(Tool Box Meeting)", "", "", ""],
         [],
         ["TBM 일시", `${yyyy}년 ${mm}월 ${dd}일  ${tbmTime}  (작업날짜와 동일함 : ■ 예, □ 아니오)`, "", ""],
@@ -771,102 +832,351 @@
         ["■ 작업 전 일일 안전점검 시행 결과 (※ 작업자의 TBM 내용 숙지 여부 중점체크)", "", "", ""],
         ["전 작업자 안전보호구 착용 및 TBM 중점 위험요인·안전대책 숙지 상태 양호", "", "", ""],
         [],
-        ["■ 참석자 명단 (※ 작업계획서 내용 근로자 주지 확인 겸용)", "", "", ""],
+        ["■ 참석자 명단", "", "", ""],
         ["이름", "서명", "이름", "서명"],
         [attList[0] || leaderName, "(서명)", attList[1] || "", attList[1] ? "(서명)" : ""],
         [attList[2] || "", attList[2] ? "(서명)" : "", attList[3] || "", attList[3] ? "(서명)" : ""]
-      ];
-      const ws6 = XLSX.utils.aoa_to_sheet(ws6Data);
+      ]);
       ws6['!cols'] = [{wch: 24}, {wch: 32}, {wch: 32}, {wch: 24}];
       XLSX.utils.book_append_sheet(wb, ws6, "작업_전_안전점검_회의(TBM)");
 
       // =========================================================
-      // 위험작업별 별도 작업계획서 시트 유지 및 자동 생성
+      // 7. [v4 시트7] 작업계획서 - 화물자동차 중량물 취급
       // =========================================================
-      const appendRiskPlan = (sheetTitle, headerTitle, rows) => {
-        const wsData = [
-          [headerTitle, "", ""],
+      if (checked.includes('heavy')) {
+        const wsHeavy = XLSX.utils.aoa_to_sheet([
+          ["화물자동차 중량물 취급 작업계획서 (산업안전보건기준에 관한 규칙 제38조)", "", "", ""],
+          ["화물자동차(트럭 등)를 이용해 화물을 상∙하차 작업 또는 운반, 하역장비(지게차, 크레인 등)와 함께 작업을 수행하는 협력회사에서는 산업안전보건기준에 관한 규칙 제38조에 따라 중량물 취급 작업계획서 작성 의무를 이행하여 주시기 바랍니다.", "", "", ""],
+          [],
+          ["□ 작업 개요", "", "", ""],
+          ["작업내용", v7_proj, "", ""],
+          ["업체명", v5_comp, "작성일", v2_date],
+          ["작업기간", v8_peri, "작업시간", v10_tim],
+          ["작업장소", v9_loc, "작업인원", `${v11_wrk}명`],
+          [],
+          ["□ 화물자동차 및 중량물 제원", "", "", ""],
+          ["장비명(모델명)", document.getElementById('hv_truck_model').value, "총중량 / 적재용량", document.getElementById('hv_truck_cap').value],
+          ["보험여부 / 검사유효기간", document.getElementById('hv_truck_ins').value, "적재함 크기", document.getElementById('hv_truck_size').value],
+          ["중량물 품명", document.getElementById('hv_item_name').value, "형상", document.getElementById('hv_item_shape').value],
+          ["규격 (가로×세로×높이 cm)", document.getElementById('hv_item_dim').value, "하중 / 상하차 운반기구", document.getElementById('hv_item_weight').value],
+          [],
+          ["□ 중량물 취급 작업 시 안전대책 (추락, 낙하, 전도, 협착, 붕괴)", "", "", ""],
+          ["유형", "위험 요인", "안전 대책", "비고"],
+          ["추락", "∙ 카고형 화물자동차 위에서 중량물 적재/운반/하역 중 작업자 추락 위험\n∙ 화물자동차와 도크레벨러 사이 단차로 발 걸려 넘어지거나 추락", "∙ 카고형 화물자동차 위에서 작업 금지 (불가피 시 안전대 체결 및 안전모 착용)\n∙ 도크레벨러 도킹 시 높이 단차가 발생하지 않도록 설치/조정", "양호"],
+          ["낙하", "∙ 적재/들기/운반 시 낙하에 따른 발 찍힘 위험\n∙ 카고형 화물자동차 적재 후 고정 미흡 상태로 운행 중 적재물 낙하", "∙ 취급 한계 중량 준수 (남성 20kg, 여성 12kg) 및 안전화 착용\n∙ 적재 후 로프 등으로 견고히 결속 고정 및 적재함 측면/후면 벽면 고정", "양호"],
+          ["전도", "∙ 다단 적재 및 운반 시 중량물 전도 위험\n∙ 적재함 바닥과 도크레벨러 사이 이격 공간에 대차 바퀴 끼임 전도", "∙ (인력) 1단 들기 원칙(다단 시 60cm 이하) / (기구) 적재높이 150cm 이하(초과 시 래핑 고정)\n∙ 도크레벨러 이격 없도록 설치 및 작업 종료 시까지 차량 운행금지/고임목 설치", "양호"],
+          ["협착", "∙ 경사면 주차 트럭이 갑자기 움직이면서 운전원·보행자 부딪힘/협착\n∙ 중량물 운반 시 시야 가림 및 통로 미확보로 충돌/협착", "∙ 주정차 시 시동 꺼짐, 주차브레이크 확인 및 고임목 설치\n∙ 안전통로 확보 및 150cm 이상 적재 시 당기기 작업으로 전방 시야 확보", "양호"],
+          ["붕괴", "∙ 편하중 적재 또는 결속 불량으로 인한 상하차 중 화물 무너짐(붕괴)", "∙ 중량물 중심을 낮추어 균등 적재하고 해체 전 적재 상태 안정성 사전 확인", "양호"],
+          [],
+          ["□ 사전 안전점검 항목", "", "양호", "불량"],
+          ["안전대책", "추락, 낙하, 전도, 협착, 붕괴의 위험요인을 파악하고 안전대책을 세웠는가?", "○", ""],
+          ["보호구", "중량물 취급 작업자 보호구(필수: 안전화 / 추락·낙하 우려 시: 안전모) 착용여부 확인", "○", ""],
+          ["중량물 취급방법", "운반물 정보 및 취급방법, 작업 순서 등을 작업자가 숙지하고 있는가?", "○", ""],
+          ["중량물 취급방법", "운반물 형상 및 중량에 적합한 운반 기구를 사용하고 그 상태는 적정한가?", "○", ""],
+          ["운반경로 상태", "운반이 용이하도록 통로는 안전하게 확보되었으며 이동 통로 주변에 타 작업자가 없는가?", "○", ""],
+          [],
+          [`작성자 : 협력회사 담당자  ${leaderName} (인)`, "", `검토자 : 협력회사 사업주/소장  ${v6_cmgr} (인)`, ""]
+        ]);
+        wsHeavy['!cols'] = [{wch: 22}, {wch: 48}, {wch: 48}, {wch: 14}];
+        XLSX.utils.book_append_sheet(wb, wsHeavy, "작업계획서-화물차중량물");
+      }
+
+      // =========================================================
+      // 8. [v4 시트8] 작업계획서 - 전기
+      // =========================================================
+      if (checked.includes('elec')) {
+        const wsElec = XLSX.utils.aoa_to_sheet([
+          ["전기작업계획서 (산업안전보건기준에 관한 규칙 제38조)", "", "", ""],
+          ["1. 작업(공사) 개요  * 해당 전압이 50볼트를 넘거나 전기에너지가 250볼트암페어를 넘는 경우의 전기작업", "", "", ""],
+          ["공사명", v7_proj, "공사기간", v8_peri],
+          ["발주처", `삼성메디슨 (${v1_site} ${v3_dept})`, "공사업체", v5_comp],
+          ["작업목적 및 공사범위", document.getElementById('el_scope').value, "작업자 성명(자격)", document.getElementById('el_workers').value],
+          [],
+          ["2. 안전보건교육 및 보호구 지급 계획 등", "", "", ""],
+          ["교육일자 / 장소", `${v2_date} / ${v9_loc}`, "교육자 / 인원 / 내용", `${document.getElementById('el_edu').value} (${v11_wrk}명)`],
+          ["지급 보호구", "■ 절연안전모(ABE)  ■ 안전화  □ 절연장화  ■ 안전대  ■ 보안경  ■ 절연장갑  □ 방진마스크", "", ""],
+          ["사용 장비 (측정/활선/방호구)", document.getElementById('el_equip').value, "", ""],
+          [],
+          ["3. 작업순서 및 안전작업 방법", "", "", ""],
+          ["작업순서 및 작업내용", "위험요소", "안전작업방법", "비고"],
+          ["1) 사전 도면 확인 및 전원 차단(LOTO)", "타 작업자 오조작에 의한 통전 감전", "단선도 확인 후 차단기 OFF, 잠금장치(LOTO) 및 점검중 표지판 부착", "작업지휘자 확인"],
+          ["2) 잔류전하 방전 및 검전", "콘덴서 등 잔류전하 감전 및 아크 화상", "접지봉으로 잔류전하 방전 후 특고압/저압 검전기로 무전압 확인", "절연장갑 착용"],
+          ["3) 본 전기 설비/배선 작업 및 재투입", "절연파괴, 단락 및 통전 시 스파크", "절연공구 사용, 공구/이물질 제거 및 작업자 대피 확인 후 전원 재투입", "2인 1조"],
+          [],
+          ["4. 현장 통제 및 안전조치 계획", document.getElementById('el_control').value, "", ""],
+          [],
+          ["5. 첨부 자료 확인", "■ 전기단선도/결선도  ■ 기기 사양서  ■ 공사계획표(정전작업 계획)  ■ 위험성평가표  ■ 비상시 대응조직체계", "", ""]
+        ]);
+        wsElec['!cols'] = [{wch: 28}, {wch: 36}, {wch: 48}, {wch: 18}];
+        XLSX.utils.book_append_sheet(wb, wsElec, "작업계획서-전기");
+      }
+
+      // =========================================================
+      // 9. [v4 시트9] 작업계획서 - 지게차 (일일 안전점검표 포함)
+      // =========================================================
+      if (checked.includes('forklift')) {
+        const wsFk = XLSX.utils.aoa_to_sheet([
+          ["지게차 작업계획서 (산업안전보건기준에 관한 규칙 제38조)", "", "", ""],
+          [],
+          ["1. 작업 개요", "", "", ""],
+          ["현장명", v7_proj, "협력사명", v5_comp],
+          ["작성일자", v2_date, "작업지휘자", `${leaderName} (서명)`],
+          ["작업일정", v8_peri, "안전관리자", `${safeMgrName} (서명)`],
+          ["작업장소", v9_loc, "관리감독자", `${superName} (서명)`],
+          ["유도/신호수", signalName, "관리책임자", `${v6_cmgr} (서명)`],
+          [],
+          ["2. 작업 위치(운반경로) 및 도로 통제구역 표시", "", "", ""],
+          ["면적(너비) / 지형 종류", document.getElementById('fk_area').value, "경사도 / 요철부", document.getElementById('fk_slope').value],
+          ["첨부서류 확인", "■ 장비제원표   ■ 장비보험증명서   ■ 운전원 면허증 사본", "", ""],
+          [],
+          ["3. 건설기계의 제원", "", "", ""],
+          ["건설기계명 / 제조사·모델 / 규격", document.getElementById('fk_model').value, "등록번호 / 운전원(자격)", document.getElementById('fk_driver').value],
+          ["검사 유효기간 / 보험 유효기간", "유효기간 내 (사전 확인 완료)", "사용기간", v8_peri],
+          [],
+          ["4. 화물의 제원 (*중량이 가장 큰 화물 기준)", "", "", ""],
+          ["화물의 종류", document.getElementById('fk_cargo_type').value, "화물 규격(m) / 중량(ton)", document.getElementById('fk_cargo_spec').value],
+          ["주 작업내용", document.getElementById('fk_work_desc').value, "", ""],
+          [],
+          ["5. 안전대책 (추락/낙하/붕괴/전도/협착 등 예방대책)", "", "", ""],
+          ["공통/기타", "■안전모 및 안전화 착용  ■작업구역 통제  ■안전담당자 배치  ■유도원/감시자 배치  ■작업지휘자 배치", "", ""],
+          ["추락/낙하", "■중량물(양중물) 고정조치  ■장비 점검유무 확인(유압장치, 포크 고정핀, 헤드가드, 백레스트)", "", ""],
+          ["붕괴/전도", "■지반 상태 확인  ■이동구간 바닥 요철 제거  ■중량물 구름방지 조치  ■단부 인근 자재적재 금지  ■휠/타이어·너트 확인", "", ""],
+          ["협착/충돌", "■협착/타격 방지장갑 착용  ■유도로프 설치  ■작업자 안전통로 확보  ■후방카메라·후사경·후진경보음 확인", "", ""],
+          [],
+          ["□ 지게차 일일 안전점검표 (*점검결과: ○ 양호, △ 조정, □ 교환, × 폐기, - 해당무)", "", "", ""],
+          ["번호", "점검 항목", "점검 결과", "비고"],
+          ["1", "후방카메라, 알림음, 충돌방지장치, 마스트 최대올림표시, 협착 방지봉 등 안전장치 상태", "○", ""],
+          ["2", "휠/타이어 및 브레이크(페달, 작동) 성능의 이상유무", "○", ""],
+          ["3", "조향핸들 및 작업장치 정상작동 여부", "○", ""],
+          ["4", "유압 및 리프트 장치 기능의 이상유무", "○", ""],
+          ["5", "배터리 충전상태 및 터미널 연결상태 유무 (배터리 타입)", "○", ""],
+          ["6", "각종 등(램프) 기능의 이상유무", "○", ""],
+          ["7", "후진경보기 기능의 이상유무", "○", ""],
+          ["8", "전조등, 후미등, 경광등 기능의 이상유무", "○", ""],
+          ["9", "대형 후사경, 백미러, 룸미러 부착상태", "○", ""],
+          ["10", "포크오일 적정유무", "○", ""],
+          ["11", "유압호스 및 실린더 연결부 누유 여부", "○", ""],
+          ["운행중 관리", "∙ 차량 이탈 시 전원 OFF 및 키 제거 후 이탈 확인\n∙ 지게차 사용자 안전화 착용상태 확인\n∙ 운행 중 운전석 안전벨트 착용 확인\n∙ 신호수 또는 유도원 배치 상태로 작업 진행 必", "○", ""],
+          [`운전원 : (서명)`, `관리감독자 : ${superName} (서명)`, `안전관리자 : ${safeMgrName} (서명)`, ""]
+        ]);
+        wsFk['!cols'] = [{wch: 24}, {wch: 52}, {wch: 26}, {wch: 24}];
+        XLSX.utils.book_append_sheet(wb, wsFk, "작업계획서-지게차");
+      }
+
+      // =========================================================
+      // 10. [v4 시트10] 작업계획서 - 화기, 절단작업 (화재감시자 지정서 포함)
+      // =========================================================
+      if (checked.includes('fire')) {
+        const frSup = document.getElementById('fr_supervisor').value.trim() || leaderName;
+        const frWat = document.getElementById('fr_watcher').value.trim() || safeMgrName;
+        const fOk = document.getElementById('fr_all_ok').checked ? "○ (양호)" : "점검요망";
+
+        const wsFire = XLSX.utils.aoa_to_sheet([
+          ["화기/절단 작업 허가서 (산업안전보건법 시행령 제43조)", "", "", ""],
+          [],
+          ["1. 작업 개요", "", "", ""],
+          ["작업명", v7_proj, "작업부서(업체)", `${v3_dept} (${v5_comp})`],
+          ["작업장소 ①", v9_loc, "작업시간 ①", `${v8_peri} (${v10_tim})`],
+          ["작업자", `외 ${v11_wrk}명`, "관리 책임자", `${frSup} (서명)`],
+          [],
+          ["2. 점검 항목 및 결과", "", "주관부서 점검", "EHS 확인"],
+          ["공통 1", `가연물이나 인화물질이 ( 10 )m 이상 이격 되어 있는가? (${document.getElementById('fr_ext').value})`, fOk, ""],
+          ["공통 2", "불티 비산 방지 조치는 되어 있는가? (불연재 및 불티비산방지포/방화포 비치)", fOk, ""],
+          ["공통 3", "소화기( 3 개)는 작업장소 주변에 비치되어 있는가?", fOk, ""],
+          ["공통 4", "기기 전선 및 리드선의 피복이 노후 및 벗겨진 곳은 없는가?", fOk, ""],
+          ["공통 5", "잔디밭/외부 화기 작업 시 주변 물 분무 조치는 되어 있는가?", fOk, ""],
+          ["공통 6", "멀티탭이나 리드선은 문어발식 사용을 금지하고 있는가?", fOk, ""],
+          ["절단작업 1", "보안경, 안전화, 방진마스크는 착용하였는가?", fOk, ""],
+          ["절단작업 2", "그라인더 날은 견고히 고정되어 있는가?", fOk, ""],
+          ["절단작업 3", "그라인더 날은 균열이나 이빠짐이 없는가?", fOk, ""],
+          ["절단작업 4", "안전커버 및 벨트 덮개가 견고하게 부착되었는가?", fOk, ""],
+          ["용접작업 1", "전기용접기에 자동전격방지기는 부착되어 있는가?", fOk, ""],
+          ["용접작업 2", "접지, 홀더, 1차 전원선의 피복이 노후되거나 파손된 곳은 없는가?", fOk, ""],
+          ["용접작업 3", "아세틸렌/가스 용기에 역화 방지기 및 감압기는 부착되어 있는가?", fOk, ""],
+          ["용접작업 4", "가스 호스 노후상태 및 연결부 체결상태는 확인하였는가?", fOk, ""],
+          ["용접작업 5", "보안면 및 용접용 장갑은 착용하고 작업을 하는가?", fOk, ""],
+          [],
+          ["3. 준수사항", "", "", ""],
+          ["준수사항", "1) 화기작업 시간은 원칙적으로 08:00 ~ 17:00까지 (근무시간 내) 가능함\n2) 반드시 작업자 외 1명 이상 화기/절단작업 감독자를 지정하여 작업 및 공사를 감독하도록 함\n3) 작업장소 이동 및 작업시간 연장 시 EHS그룹 및 발주부서 담당자에게 반드시 변경 허가를 맡을 것\n4) 화기/절단작업 감독자는 작업 중 자리를 이탈하지 말고 작업 종료 후 불씨가 남아있는지 확인할 것\n5) 감독자는 작업 종료 후 정리정돈을 실시하고 EHS그룹으로 연락하여 작업종료를 알린다.", "", ""],
+          ["서약 및 허가", `화기/절단작업 감독자 : ${frSup} (서명)`, "EHS그룹 허가자 : (서명)", `${v2_date}`],
+          [],
+          ["======================================================================", "", "", ""],
+          ["화재 감시자 지정서 (산업안전보건기준에 관한 규칙 제241조의2)", "", "", ""],
+          ["공사업체", v5_comp, "직책 / 성명", frWat],
+          ["지정 문구", "위 사람을 산업안전보건기준에 관한 규칙 제241조의2(화재감시자)에 의거 화재 예방 업무를 수행하기 위하여 화재 감시자로 지정합니다.", "", ""],
+          ["□ 화재 감시자 업무", "1. 화재위험장소의 화재 위험을 감시하고, 화재 발생시 사업장 내 근로자의 대피 유도\n2. 즉시 사용 가능 소화 설비를 갖추고 그 사용법 숙지와 초기 화재 진압 능력 구비\n3. 화재발생시 근로자 대피를 위한 비상구 확보\n4. 인근의 소화설비 위치 확인\n5. 비상경보설비를 작동할 수 있도록 상시 유지 및 점검 (소화전 발신기 등)\n6. 용접 ∙ 용단작업 등 화기취급 작업 후에도 30분 이상 현장 잔불 여부 확인", "", ""],
+          [`지정일자 : ${yyyy}년 ${mm}월 ${dd}일`, `공사업체 : ${v5_comp}`, `현장소장 : ${v6_cmgr} (서명)`, ""]
+        ]);
+        wsFire['!cols'] = [{wch: 20}, {wch: 62}, {wch: 22}, {wch: 18}];
+        XLSX.utils.book_append_sheet(wb, wsFire, "작업계획서-화기,절단작업");
+      }
+
+      // =========================================================
+      // 11. [v4 시트11] 작업계획서 - 크레인 (줄걸이 안전하중 + Action Plan + 일일점검표)
+      // =========================================================
+      if (checked.includes('crane')) {
+        const cargoTon = parseFloat(document.getElementById('cr_item_ton').value) || 0;
+        const brkTon   = parseFloat(document.getElementById('cr_brk_ton').value) || 0;
+        const slingCnt = parseFloat(document.getElementById('cr_sling_cnt').value) || 1;
+        const capTon   = parseFloat(document.getElementById('cr_cap_ton').value) || 0;
+
+        // 안전하중 계산 (안전율 6 기준) 및 장비 양중능력 85% 계산
+        const safeSlingTon = ((brkTon * slingCnt) / 6).toFixed(2);
+        const rated85Ton   = (capTon * 0.85).toFixed(2);
+        const slingEval    = parseFloat(safeSlingTon) > cargoTon ? "적합 (안전하중 이내)" : "부적합 (줄걸이 보강 필요)";
+        const craneEval    = parseFloat(rated85Ton) > cargoTon ? "적합 (정격하중 85% 이내)" : "부적합 (장비규격 상향 필요)";
+
+        const wsCr = XLSX.utils.aoa_to_sheet([
+          ["크레인 작업계획서 (산업안전보건기준에 관한 규칙 제38조)", "", "", ""],
+          [],
+          ["1. 작업 개요", "", "", ""],
+          ["현장명", v7_proj, "협력사명", v5_comp],
+          ["작성일자", v2_date, "작업지휘자", `${leaderName} (서명)`],
+          ["작업일정", v8_peri, "안전관리자", `${safeMgrName} (서명)`],
+          ["작업장소", v9_loc, "관리감독자", `${superName} (서명)`],
+          ["유도/신호수", signalName, "관리책임자", `${v6_cmgr} (서명)`],
+          [],
+          ["2. 작업 위치 및 도로 통제구역 표시 / 3. 건설기계의 제원", "", "", ""],
+          ["지형 종류 / 경사·요철", "콘크리트 평지 / 경사 없음 / 요철 없음", "첨부서류", "장비제원표, 보험증명서, 운전원 면허증 사본"],
+          ["건설기계명 / 규격", document.getElementById('cr_model').value, "등록번호 / 운전원", document.getElementById('cr_driver').value],
+          [],
+          ["4. 양중물의 제원 및 줄걸이 안전하중 검토", "", "", ""],
+          ["양중물 종류 및 규격", document.getElementById('cr_item').value, "적재물(양중물) 중량", `${cargoTon} Ton`],
+          ["줄걸이 종류 및 규격", document.getElementById('cr_sling_spec').value, "파단하중 × 줄걸이 수", `${brkTon} Ton × ${slingCnt} 줄`],
+          ["줄걸이 안전하중 (안전율 6 적용)", `${safeSlingTon} Ton`, "검토 (양중물 중량 < 안전하중)", slingEval],
+          [],
+          ["5. 안전대책 (추락/낙하/붕괴/전도/협착 등 예방대책)", "", "", ""],
+          ["공통/추락/낙하", "■안전모·안전화 착용 ■작업구역 통제 ■유도원·작업지휘자 배치 ■중량물 고정조치 ■과부하방지·권과방지·와이어로프 점검", "", ""],
+          ["붕괴/전도/협착", "■지반 상태 확인 ■아웃트리거 최대확장 및 수평도 확인 ■유도로프 설치 ■작업자 안전통로 확보 ■후방카메라·경보음 확인", "", ""],
+          [],
+          ["□ Crane Action Plan (양중 능력 평가)", "", "", ""],
+          ["① 장비제원 (양중거리 / 붐길이)", document.getElementById('cr_boom').value, "제원표상 정격하중", `${capTon} Ton`],
+          ["▶ 양중 능력 평가 (안전율 85% 적용)", `${capTon} Ton × 0.85 = ${rated85Ton} Ton > 양중물 ${cargoTon} Ton`, "최종 판정", craneEval],
+          [],
+          ["□ 크레인 일일 안전점검표 (하이드로 / 카고크레인 기준)", "", "", ""],
+          ["번호", "점검 항목", "점검 방법 (기준)", "점검 결과"],
+          ["1", "과부하방지장치", "작동 시 경보음과 함께 권상 및 하중이 증가하는 동작이 차단될 것", "○"],
+          ["2", "권과방지장치", "훅이 최상부에 도달하기 전에 경보음과 함께 작동이 정지될 것", "○"],
+          ["3", "훅 및 시브 (훅 해지장치)", "훅 해지장치는 탈락 등의 이상이 없고 훅, 시브(도르래)는 회전이 원활할 것", "○"],
+          ["4", "브레이크 및 클러치", "브레이크, 클러치 및 조정장치 등은 기능이 정상일 것", "○"],
+          ["5", "아웃트리거", "수평 유지하여 최대확장을 하고 받침은 2단 초과 사용을 금지할 것", "○"],
+          ["6", "아웃트리거 확장 핀", "완전히 인출한 위치에서 확실히 고정될 것", "○"],
+          ["7", "카운터 웨이트 / 선회장치", "임의개조가 없으며 제원표와 무게가 일치하고 선회장치 고정핀이 정상일 것", "○"],
+          ["8", "유압장치 및 실린더", "유압모터ㆍ실린더ㆍ배관 등에 누유 및 손상, 마모 등이 없을 것", "○"],
+          ["9", "등화류 / 비상정지장치", "전조ㆍ후미ㆍ경광등 및 적색 수동복귀형 비상정지장치 정상작동 될 것", "○"],
+          ["10", "와이어로프 상태", "와이어로프는 소선파단, 마모, 킹크 등의 이상이 없이 양호할 것", "○"],
+          ["11", "와이어로프 이탈방지", "드럼에서 단말까지 이탈의 우려 없이 제조사의 기준을 준수하여 설치될 것", "○"],
+          ["12", "소켓 및 단말처리", "웻지 소켓 규격 등 와이어로프 단말처리 방법은 기준에 맞을 것", "○"],
+          [`점검자 : (서명)`, `관리감독자 : ${superName} (서명)`, `안전관리자 : ${safeMgrName} (서명)`, ""]
+        ]);
+        wsCr['!cols'] = [{wch: 26}, {wch: 52}, {wch: 28}, {wch: 22}];
+        XLSX.utils.book_append_sheet(wb, wsCr, "작업계획서-크레인");
+      }
+
+      // =========================================================
+      // 12. [v4 시트12] 작업계획서 - 고소작업대
+      // =========================================================
+      if (checked.includes('awp')) {
+        const wsAwp = XLSX.utils.aoa_to_sheet([
+          ["[ 고소작업대 ] 작업계획서 (산업안전보건기준에 관한 규칙 제38조)", "", "", ""],
+          [],
+          ["□ 작업개요", "", "", ""],
+          ["현장명", v7_proj, "협력사명", v5_comp],
+          ["작성일자", v2_date, "작업지휘자", `${leaderName} (인)`],
+          ["작업일정", v8_peri, "관리감독자", `${superName} (인)`],
+          ["작업장소", v9_loc, "안전관리자", `${safeMgrName} (인)`],
+          ["유도자(신호수)", signalName, "사업장 구분", v1_site],
+          [],
+          ["□ 작업 위치 및 도로 통제구역 표시", "", "", ""],
+          ["지형 종류", "■콘크리트  □아스팔트  □흙  □잔디", "경사도 / 요철부", "경사도: ■없음  /  요철부: ■없음"],
+          [],
+          ["□ 건설기계의 제원", "", "", ""],
+          ["제조사/모델 및 인증유효기간", document.getElementById('awp_model').value, "종류", document.getElementById('awp_type').value],
+          ["사용기간", v8_peri, "운전원", leaderName],
+          [],
+          ["□ 탑승 및 적재 제원", "", "", ""],
+          ["탑승 인원 / 적재물 제원", document.getElementById('awp_load').value, "작업대 전면 난간대 해체", document.getElementById('awp_rail').value],
+          [],
+          ["□ 안전대책 (추락/낙하/붕괴/전도/협착 등 예방대책)", "", "", ""],
+          ["공통/기타", "■안전모 및 안전화 착용   ■작업구역 통제   ■안전담당자 배치   ■유도원/감시자 배치   ■작업지휘자 배치", "", ""],
+          ["추락/낙하", "■생명줄 걸이시설 설치   ■안전대 착용   ■안전난간대 설치   ■중량물 고정조치   ■장비 점검(트랙, 차륜, 타이어)", "", ""],
+          ["붕괴/전도", "■지반상태 확인   ■이동구간 바닥요철 제거   ■중량물 구름방지 조치   ■단부 인근 자재적재 금지", "", ""],
+          ["협착/충돌", "■협착/타격 방지장갑 착용   ■작업자 안전통로 확보   ■유도로프 설치   ■장비 점검(과상승방지장치, 비상정지장치, 비상하강장치, 풋스위치)", "", ""]
+        ]);
+        wsAwp['!cols'] = [{wch: 26}, {wch: 48}, {wch: 24}, {wch: 28}];
+        XLSX.utils.book_append_sheet(wb, wsAwp, "작업계획서-고소작업대");
+      }
+
+      // =========================================================
+      // 13. [v4 시트13] 작업계획서 - 천정, 사다리
+      // =========================================================
+      if (checked.includes('ladder')) {
+        const wsLd = XLSX.utils.aoa_to_sheet([
+          ["사다리 작업계획서 [산업안전보건기준에 관한 규칙 제24조 사다리식 통로 구조 준용]", "", "", ""],
+          ["※ 사내 건설공사용 사다리는 안전작업발판 사다리(말비계) 사용을 원칙으로 하나, 공간이 협소하여 안전작업발판사다리 및 B/T비계 등 사용이 불가한 장소의 작업인 경우 작업계획서를 작성 후 사용을 허가함", "", "", ""],
+          [],
+          ["1. 작업개요", "", "", ""],
+          ["공사명", v7_proj, "작성일자", v2_date],
+          ["작업일정", v8_peri, "작업지휘자", `${leaderName} (인)`],
+          ["작업장소", v9_loc, "관리감독자", `${superName} (인)`],
+          ["작업내용", `${v7_proj} (${document.getElementById('ld_type').value})`, "안전관리자", `${safeMgrName} (인)`],
+          [
+            "작업 계획",
+            `① 발디딤의 최고 작업 높이는 약 ( ${document.getElementById('ld_height').value} ) m\n` +
+            "② 발디딤 높이 1.2m 이상 시 2인 1조 작업 및 최상단과 그 하단 디딤대 사용금지 / 발디딤 높이 2m 이상 시 안전고리 체결 必\n" +
+            "③ 전도방지용 아웃트리거 상시 확장 후 작업\n" +
+            "④ 비계 등 가설작업발판 위, 경사부위 및 바닥요철, 미끄럼장소, 단부 등은 작업 불가 (EHS그룹 별도협의)",
+            "", ""
+          ],
+          [],
+          ["2. 위험성 검토 및 안전 조치", "", "", ""],
+          ["작업지형 및 장소", `■견고한 바닥에서 사용 (${document.getElementById('ld_place').value})`, "", ""],
+          ["개인 보호구 의무 착용", "■안전모   ■안전화   ■안전대   ■안전장갑   □보안경   □보호복   □활선경보기", "", ""],
+          ["추락방지조치", "■최상단 + 그 하단 디딤대 미사용   ■2인 1조 작업   ■안전고리 체결", "", ""],
+          ["전도방지조치", "■사다리 벌어짐 방지 조치   ■아웃트리거 확장 사용   □사다리 상단을 구조체에 고정", "", ""],
+          ["기타안전조치", "■작업반경 內 라바콘 구획 및 통제   ■최대사용하중 범위 내 사용", "", ""],
+          ["사다리 점검 공도구 승인", "A형 사다리 공도구 사용승인 필증 : ■ 有   □ 無 (현장확인발급)", "", ""]
+        ]);
+        wsLd['!cols'] = [{wch: 24}, {wch: 62}, {wch: 18}, {wch: 22}];
+        XLSX.utils.book_append_sheet(wb, wsLd, "작업계획서-천정,사다리");
+      }
+
+      // =========================================================
+      // 14. [표지분류] 밀폐공간 / 석면해체 시트 (선택 시 추가)
+      // =========================================================
+      if (checked.includes('confined')) {
+        const wsCf = XLSX.utils.aoa_to_sheet([
+          ["밀폐공간 보건작업 프로그램 및 산소·유해가스 농도 측정표 (규칙 제619조)", "", ""],
           [],
           ["공사명", v7_proj, `공사업체명: ${v5_comp}`],
-          ["작업장소", v9_loc, `작업일시: ${v8_peri} (${v10_tim})`],
-          ["작업지휘자(법 제39조)", `${leaderName} (서명)`, `관리감독자: ${superName} (서명)`],
+          ["밀폐공간 작업장소", document.getElementById('cf_place').value, `작업일시: ${v8_peri}`],
+          ["작업지휘자", `${leaderName} (서명)`, `외부 상주 감시인: ${document.getElementById('cf_watcher').value || safeMgrName}`],
           [],
-          ["구분 / 점검항목", "법정 사전조사 및 작업계획 상세 내용", "확인"],
-          ...rows,
+          ["점검 구분", "세부 측정 및 안전조치 내용", "결과"],
+          ["작업 전 산소·유해가스 측정", `${document.getElementById('cf_gas').value} (적정기준: O2 18~23.5%, CO<30ppm, H2S<10ppm)`, "적합"],
+          ["환기설비 가동", "작업 전 및 작업 중 급·배기 환기팬 상시 가동", "양호"],
+          ["비상 구출기구 및 호흡보호구", "송기마스크(또는 공기호흡기), 삼각대, 구명줄, 무전기 현장 비치 및 출입인원 계수", "양호"]
+        ]);
+        wsCf['!cols'] = [{wch: 26}, {wch: 58}, {wch: 16}];
+        XLSX.utils.book_append_sheet(wb, wsCf, "작업계획서-밀폐공간");
+      }
+
+      if (checked.includes('asbestos')) {
+        const wsAs = XLSX.utils.aoa_to_sheet([
+          ["석면해체·건축물 해체 작업계획서 (규칙 제38조·제489조)", "", ""],
           [],
-          ["[근로자 주지 확인 (규칙 제38조 제2항)]", "본 작업계획서의 사전조사 결과, 작업방법 및 위험예방대책을 작업 전 근로자에게 교육·주지시켰음을 확인합니다.", "확인완료 (인)"]
-        ];
-        const ws = XLSX.utils.aoa_to_sheet(wsData);
-        ws['!cols'] = [{wch: 28}, {wch: 58}, {wch: 16}];
-        XLSX.utils.book_append_sheet(wb, ws, sheetTitle);
-      };
-
-      if (checkedRisks.includes('fire')) {
-        appendRiskPlan("작업계획서_화기절단", "[삼성메디슨] 화기/절단 작업 허가서 및 화재감시자 지정서", [
-          ["화재감시자 지정 (규칙 제241조의2)", `지정 성명: ${document.getElementById('fire_watcher').value || leaderName} (업무: 화재위험 감시, 소화설비 확보, 비상대피 유도)`, "지정완료"],
-          ["사용 화기/절단 장비", document.getElementById('fire_equip').value, "점검완료"],
-          ["공통 안전조치 1", "가연물·인화물질 10m 이상 이격 및 불티 비산 방지 조치 (불연재 및 불티비산방지포/방화포 비치)", document.getElementById('fire_c1').checked ? "양호" : "미흡"],
-          ["공통 안전조치 2", "소화기(3개) 주변 비치, 전선 피복 손상 확인, 문어발식 콘센트 사용 금지", document.getElementById('fire_c2').checked ? "양호" : "미흡"],
-          ["절단/용접 전용 안전조치", "그라인더 안전커버 고정, 전기용접기 자동전격방지기 부착, 가스 역화방지기 부착, 보안면·용접장갑 착용", "양호"],
-          ["작업 종료 후 잔불 감시", "용접·용단 등 화기취급 작업 종료 후에도 30분 이상 현장 잔불 여부 철저 확인", document.getElementById('fire_c3').checked ? "서약함" : "미서약"]
+          ["공사명", v7_proj, `공사업체명: ${v5_comp}`],
+          ["작업장소", v9_loc, `작업지휘자: ${leaderName} (서명)`],
+          [],
+          ["구분", "사전조사 및 해체 작업계획 내용", "확인"],
+          ["해체 대상 및 석면 사전조사", document.getElementById('as_target').value, "확인완료"],
+          ["해체 방법·순서 및 분진방지", document.getElementById('as_method').value, "적합"]
         ]);
+        wsAs['!cols'] = [{wch: 26}, {wch: 58}, {wch: 16}];
+        XLSX.utils.book_append_sheet(wb, wsAs, "작업계획서-석면,해체");
       }
 
-      if (checkedRisks.includes('equip')) {
-        appendRiskPlan("작업계획서_중장비", "[삼성메디슨] 중장비(지게차·크레인·건설기계) 작업계획서 (규칙 제38조)", [
-          ["장비 제원 및 등록정보", document.getElementById('equip_spec').value, "확인"],
-          ["운전원 자격 및 유도자 배치", document.getElementById('equip_driver').value, "배치완료"],
-          ["취급 화물(양중물) 제원", document.getElementById('equip_cargo').value, "확인"],
-          ["[사전조사] 지형·지반 및 안전대책", document.getElementById('equip_survey').value, "적합"],
-          ["일일 안전점검 필수 항목", "과부하방지장치, 권과방지장치, 훅 해지장치, 아웃트리거 최대확장, 브레이크/타이어, 후방카메라·경보음 정상 작동", "양호"]
-        ]);
-      }
-
-      if (checkedRisks.includes('high')) {
-        appendRiskPlan("작업계획서_고소사다리", "[삼성메디슨] 고소작업(고소작업대·비계·천정/사다리) 작업계획서", [
-          ["사용 고소장비 구분", document.getElementById('high_equip').value, "확인"],
-          ["최고 작업 높이 (m)", `${document.getElementById('high_height').value} m`, "확인"],
-          ["[사전조사] 작업지형 및 바닥상태", document.getElementById('high_floor').value, "적합"],
-          ["추락방지 조치", "안전모·안전화·안전대 착용 및 2m 이상 안전고리 체결, 1.2m 이상 2인 1조 작업, 최상단 디딤대 사용 금지", document.getElementById('high_c1').checked ? "양호" : "미흡"],
-          ["전도·협착 방지 조치", "전도방지 아웃트리거 상시 확장, 과상승방지장치·비상정지장치 점검, 작업반경 라바콘 통제", document.getElementById('high_c2').checked ? "양호" : "미흡"]
-        ]);
-      }
-
-      if (checkedRisks.includes('heavy')) {
-        appendRiskPlan("작업계획서_설비중량물", "[삼성메디슨] 설비 설치·철거 및 화물자동차 중량물 취급 작업계획서 (규칙 제38조)", [
-          ["중량물/설비 품명 및 규격", document.getElementById('heavy_item').value, "확인"],
-          ["취급 중량 (kg)", `${document.getElementById('heavy_weight').value} kg`, "확인"],
-          ["사용 상하차·운반기구", document.getElementById('heavy_tool').value, "점검완료"],
-          ["[사전조사] 5대 위험 예방대책", document.getElementById('heavy_route').value, "적합"]
-        ]);
-      }
-
-      if (checkedRisks.includes('elec')) {
-        appendRiskPlan("작업계획서_전기", "[삼성메디슨] 전기작업계획서 (규칙 제38조 - 50V/250VA 초과)", [
-          ["공사범위 및 취급 전압", document.getElementById('elec_target').value, "확인"],
-          ["절연보호구 및 측정장비", document.getElementById('elec_ppe').value, "지급완료"],
-          ["첨부 설비자료 확인", document.getElementById('elec_doc').value, "확인완료"],
-          ["전로차단(LOTO) 및 안전요령", document.getElementById('elec_loto').value, "적합"]
-        ]);
-      }
-
-      if (checkedRisks.includes('confined')) {
-        appendRiskPlan("작업계획서_밀폐공간", "[삼성메디슨] 밀폐공간 보건작업 프로그램 및 농도 측정표 (규칙 제619조)", [
-          ["밀폐공간 명칭", document.getElementById('conf_place').value, "확인"],
-          ["외부 상주 감시인 지정", document.getElementById('conf_watcher').value, "배치완료"],
-          ["[사전 측정] 산소·유해가스 농도", document.getElementById('conf_gas').value, "적합"],
-          ["환기 및 비상 구출장비 계획", document.getElementById('conf_safety').value, "비치완료"]
-        ]);
-      }
-
-      if (checkedRisks.includes('demo')) {
-        appendRiskPlan("작업계획서_석면해체굴착", "[삼성메디슨] 석면해체 / 건축물·구축물 해체 / 지반 굴착 작업계획서", [
-          ["해체 구조물 / 굴착 규모", document.getElementById('demo_target').value, "확인"],
-          ["[사전조사] 석면·매설물 및 붕괴방지", document.getElementById('demo_survey').value, "적합"]
-        ]);
-      }
-
-      const fileName = `[삼성메디슨_작업계획서통합본v5]_${v5_comp}_${v7_proj}_${v2_date}.xlsx`;
+      const fileName = `[삼성메디슨_작업계획서통합본]_${v5_comp}_${v7_proj}_${v2_date}.xlsx`;
       XLSX.writeFile(wb, fileName);
     }
   </script>

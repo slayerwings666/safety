@@ -22,12 +22,12 @@
           🦺 [삼성메디슨] 안전보건관리 시스템 (통합본 v5 + v4 상세 작업계획서)
         </h1>
         <p class="text-blue-200 text-sm mt-1">
-          v5 기본서류(허가서·SOP·지정서·비상연락망·체크리스트·TBM) + v4 위험작업별 상세 작업계획서(7종) 통합 생성
+          v5 기본서류(허가서·SOP·지정서·비상연락망) + 현장 출력용(체크리스트·TBM) + v4 위험작업별 상세 작업계획서(7종)
         </p>
       </div>
       <div class="text-xs bg-blue-800 px-3 py-2 rounded-lg border border-blue-700">
-        <div>• 기본 6종 시트 자동 연동 생성</div>
-        <div>• 체크한 위험작업(v4 양식) 시트 개별 생성</div>
+        <div>• 기본서류 및 위험작업 계획서 엑셀 자동 생성</div>
+        <div>• 체크리스트 및 TBM은 양식 출력 후 수기 작성·제출</div>
       </div>
     </div>
   </header>
@@ -41,7 +41,7 @@
           1. [Sheet 1] 공사작업 허가서 - 기본정보 입력 (①~⑪ 전체 시트 자동 연동)
         </h2>
         <p class="text-xs text-slate-500 mt-0.5">
-          ※ 아래 ①~⑪ 항목을 입력하시면 SOP, 작업지휘자 지정서, 체크리스트 및 각 위험작업 계획서 상단에 자동으로 반영됩니다.
+          ※ 아래 ①~⑪ 항목을 입력하시면 SOP, 작업지휘자 지정서, 체크리스트 양식 및 각 위험작업 계획서 상단에 자동으로 반영됩니다.
         </p>
       </div>
 
@@ -276,60 +276,34 @@
       </div>
     </section>
 
-    <!-- STEP 5. [Sheet 5 & 6] 작업 전 안전점검 체크리스트 및 TBM 회의 -->
-    <section class="card p-6">
-      <h2 class="text-lg font-bold text-blue-900 border-b pb-3 mb-4">
-        5. [Sheet 5 · 6] 작업 전 안전점검 체크리스트 및 TBM (Tool Box Meeting)
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-        <div class="space-y-3">
-          <div class="font-bold text-slate-800">■ 작업 전 안전점검 체크리스트 (13개 항목 확인)</div>
-          <div class="p-3 bg-slate-50 rounded border text-xs space-y-1.5">
-            <label class="flex items-center gap-2"><input type="checkbox" id="chk_all_good" checked> 일반 안전 사항 (1~9번: 안전교육, 보호구, SOP비치, MSDS, 공도구, 구획 등) 모두 <strong>[양호]</strong> 체크</label>
-            <label class="flex items-center gap-2"><input type="checkbox" id="chk_proc_good" checked> 주요 공정별 안전 사항 (1~4번: 주변통제, 일일점검표 게시, 관리감독, 정리정돈) 모두 <strong>[양호]</strong> 체크</label>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold mb-1">일일 위험요소 발굴·제거 현황 (자율 기술)</label>
-            <input type="text" id="chk_free_note" value="작업 전 전동공구 접지 상태 및 작업구획 라바콘 설치 완료" class="w-full border rounded p-2 text-xs">
-          </div>
-          <div class="grid grid-cols-2 gap-2">
-            <div>
-              <label class="block text-xs font-semibold mb-1">점검 시간</label>
-              <input type="text" id="chk_time" value="07:50" class="w-full border rounded p-2 text-xs">
-            </div>
-            <div>
-              <label class="block text-xs font-semibold mb-1">점검자 성명 (실명제)</label>
-              <input type="text" id="chk_inspector" placeholder="미입력 시 작업지휘자 자동기입" class="w-full border rounded p-2 text-xs">
-            </div>
-          </div>
+    <!-- STEP 5. [Sheet 5 & 6] 작업 전 안전점검 체크리스트 및 TBM 회의 (엑셀 양식 다운로드 후 출력·수기 작성 제출) -->
+    <section class="card p-6 border-2 border-blue-200 bg-blue-50/40">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between border-b border-blue-200 pb-3 mb-4 gap-2">
+        <div>
+          <h2 class="text-lg font-bold text-blue-900">
+            5. [Sheet 5 · 6] 작업 전 안전점검 체크리스트 및 TBM (현장 출력 · 수기 작성용 양식)
+          </h2>
+          <p class="text-xs text-slate-600 mt-0.5">
+            ※ 작업 전 안전점검 체크리스트와 TBM 회의록은 현장에서 직접 점검하고 참여 근로자 자필 서명을 받아 종이(페이퍼)로 제출합니다.
+          </p>
         </div>
+        <span class="inline-block bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1.5 rounded-full border border-amber-300">
+          🖨️ 출력 후 수기 작성 · 현장 비치 및 제출 필수
+        </span>
+      </div>
 
-        <div class="space-y-3">
-          <div class="font-bold text-slate-800">■ 작업 전 안전점검 회의 (TBM) 중점사항</div>
-          <div class="grid grid-cols-2 gap-2 text-xs">
-            <div>
-              <label class="block font-semibold mb-1">TBM 시간</label>
-              <input type="text" id="tbm_time" value="08:00 ~ 08:20" class="w-full border rounded p-2">
-            </div>
-            <div>
-              <label class="block font-semibold mb-1">TBM 리더 직책</label>
-              <input type="text" id="tbm_leader_role" value="현장소장(작업지휘자)" class="w-full border rounded p-2">
-            </div>
+      <div class="bg-white p-5 rounded-xl border border-slate-200 flex flex-col items-center text-center space-y-4">
+        <button type="button" onclick="downloadChecklistTbmTemplate()" class="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-3.5 rounded-xl shadow-md text-sm md:text-base transition flex items-center justify-center gap-2">
+          📥 [안전점검 체크리스트 & TBM 회의록] 엑셀 양식(.xlsx) 다운로드
+        </button>
+
+        <div class="w-full text-left bg-slate-50 p-4 rounded-lg border border-slate-200 text-xs text-slate-700 space-y-1.5">
+          <div class="font-bold text-red-600 text-sm mb-1">
+            📌 [필독] 출력 후 작성 및 제출 안내
           </div>
-          <div class="grid grid-cols-1 gap-2 text-xs">
-            <div>
-              <label class="block font-semibold mb-1">오늘의 중점위험요인 [선정]</label>
-              <input type="text" id="tbm_key_risk" value="작업 중 추락/전도 및 화기 불티에 의한 화재 위험" class="w-full border rounded p-2">
-            </div>
-            <div>
-              <label class="block font-semibold mb-1">오늘의 중점위험요인 [대책]</label>
-              <input type="text" id="tbm_key_measure" value="2인 1조 작업, 안전대 체결, 방화포 및 소화기 비치 후 착수" class="w-full border rounded p-2">
-            </div>
-            <div>
-              <label class="block font-semibold mb-1">TBM 참석 작업자 명단 (쉼표로 구분)</label>
-              <input type="text" id="tbm_attendees" placeholder="예: 홍길동, 김철수, 이영희" class="w-full border rounded p-2">
-            </div>
-          </div>
+          <p>• 위 버튼을 클릭하여 <strong>『작업 전 안전점검 체크리스트 및 TBM 회의록』 엑셀 파일을 다운로드한 뒤 종이(페이퍼)로 출력</strong>해 주시기 바랍니다. <em>(※ 하단 통합본 엑셀 다운로드 시에도 5·6번 시트에 빈 양식이 자동 포함됩니다.)</em></p>
+          <p>• 공사 기간 중 <strong>매일 작업 시작 전</strong> 현장소장(작업지휘자) 주관으로 사전 안전점검 및 TBM을 실시하고, <strong>출력된 양식에 수기로 점검결과 체크(√) 및 참석 근로자 전원 자필 서명</strong>을 작성합니다.</p>
+          <p>• 작성된 종이 원본은 공사 기간 동안 <strong>현장 현황판에 게시(비치)</strong>하고, <strong>공사 종료 후 회수하여 발주부서 담당자(또는 사업장 EHS그룹)에게 페이퍼로 제출</strong>해 주시기 바랍니다.</p>
         </div>
       </div>
     </section>
@@ -641,6 +615,89 @@
       tbody.appendChild(tr);
     }
 
+    // 현장 출력·수기 작성용 [안전점검 체크리스트 & TBM 회의록] 시트 생성 공통 함수
+    function buildChecklistAndTbmSheets(wb) {
+      const v5_comp = document.getElementById('f5_company').value.trim() || "(공사업체명 기입)";
+      const v7_proj = document.getElementById('f7_project').value.trim() || "(공사명 기입)";
+      const v9_loc  = document.getElementById('f9_location').value.trim() || "(작업장소 기입)";
+      const v10_tim = document.getElementById('f10_time').value.trim() || "08:00 ~ 17:00";
+
+      // Sheet 5: 작업 전 안전점검 체크리스트 (출력 후 수기 체크용 빈 양식)
+      const ws5 = XLSX.utils.aoa_to_sheet([
+        ["[삼성메디슨] 작업 전 안전점검 (Check List) - [출력 후 수기 작성·제출]", "", "", "", ""],
+        [],
+        ["업체명", "작업장소", "작업내용", "작업시간", ""],
+        [v5_comp, v9_loc, v7_proj, v10_tim, ""],
+        [],
+        ["항목", "점검사항 (현장 확인 후 해당 칸에 √ 수기 체크)", "양호", "불량", "N/A"],
+        ["일반 안전 사항", "1. 작업 전 안전교육 실시 여부", "□", "□", "□"],
+        ["일반 안전 사항", "2. 작업자 개인 보호구 지급/ 착용 및 건강 상태", "□", "□", "□"],
+        ["일반 안전 사항", "3. SOP 및 작업현황판, 안전수칙 비치 여부", "□", "□", "□"],
+        ["일반 안전 사항", "4. 위험물 작업 MSDS 비치 및 관리 상태", "□", "□", "□"],
+        ["일반 안전 사항", "5. 전동공구 사전 점검 확인 여부", "□", "□", "□"],
+        ["일반 안전 사항", "6. 공도구, 장비 점검 상태", "□", "□", "□"],
+        ["일반 안전 사항", "7. 안전시설물 설치 상태", "□", "□", "□"],
+        ["일반 안전 사항", "8. 자재보관 구획설정 상태", "□", "□", "□"],
+        ["일반 안전 사항", "9. 법적 교육 이수 상태 (특별안전보건교육 등)", "□", "□", "□"],
+        ["주요 공정 別 안전 사항", "1. 작업주변 통제 상태", "□", "□", "□"],
+        ["주요 공정 別 안전 사항", "2. 일일안전 점검표 게시 및 작성관리 상태", "□", "□", "□"],
+        ["주요 공정 別 안전 사항", "3. 관리감독자 및 안전담당자 안전관리 상태", "□", "□", "□"],
+        ["주요 공정 別 안전 사항", "4. 작업 전 주변 정리정돈 상태", "□", "□", "□"],
+        ["일일 위험요소 발굴∙제거 현황", "(현장의 불합리사항 발생 및 위험요소 발굴/개선사항 수기 기술)", "", "", ""],
+        ["", "", "", "", ""],
+        [],
+        ["점검 실명제", "점검시간 :       :      ", "점검자 성명 :                ", "서명 :          (인)", ""]
+      ]);
+      ws5['!cols'] = [{wch: 24}, {wch: 52}, {wch: 10}, {wch: 10}, {wch: 10}];
+      XLSX.utils.book_append_sheet(wb, ws5, "안전점검_체크리스트");
+
+      // Sheet 6: 작업 전 안전점검 회의(TBM) (출력 후 수기 작성·자필 서명용 빈 양식)
+      const ws6 = XLSX.utils.aoa_to_sheet([
+        ["[삼성메디슨] 작업 전 안전점검 회의(Tool Box Meeting) - [출력 후 수기 작성·제출]", "", "", ""],
+        [],
+        ["TBM 일시", "2026년     월     일      :     ~      :      (작업날짜와 동일함 : □ 예 , □ 아니오)", "", ""],
+        ["작업명", v7_proj, "작업내용", ""],
+        ["TBM 장소", v9_loc, "위험성평가 실시여부", "□ 예     □ 아니오"],
+        [],
+        ["잠재위험요인 (수기 작성)", "", "대책 (※ 제거 → 대체 → 통제 순서 고려)", ""],
+        ["1. ", "", "1. ", ""],
+        ["2. ", "", "2. ", ""],
+        ["3. ", "", "3. ", ""],
+        [],
+        ["중점 위험요인", "선정", "", ""],
+        ["중점 위험요인", "대책", "", ""],
+        ["TBM리더 확인", `소속 : ${v5_comp}`, "직책 :                ", "성명 :                (서명)"],
+        [],
+        ["■ 작업 전 안전조치 확인 (※ 위 잠재위험요인(중점위험 포함) 안전조치 여부 재확인)", "", "", ""],
+        ["잠재위험요소 (중점 위험요인 포함)", "조치 여부", "'아니오'인 경우 조치 계획", ""],
+        ["1. ", "□ 예   □ 아니오", "", ""],
+        ["2. ", "□ 예   □ 아니오", "", ""],
+        ["3. ", "□ 예   □ 아니오", "", ""],
+        [],
+        ["■ 작업 전 일일 안전점검 시행 결과 (※ 위험요인 중 조치가 되지 않은 사항, 작업자의 TBM내용 숙지 여부 중점체크)", "", "", ""],
+        ["", "", "", ""],
+        ["", "", "", ""],
+        [],
+        ["■ 참석자 명단 (※ TBM에 참여하지 않은 작업자를 확인하여 미팅 참석 유도 / 전원 자필 서명)", "", "", ""],
+        ["이름", "서명", "이름", "서명"],
+        ["", "(서명)", "", "(서명)"],
+        ["", "(서명)", "", "(서명)"],
+        ["", "(서명)", "", "(서명)"],
+        ["", "(서명)", "", "(서명)"]
+      ]);
+      ws6['!cols'] = [{wch: 26}, {wch: 34}, {wch: 34}, {wch: 24}];
+      XLSX.utils.book_append_sheet(wb, ws6, "작업_전_안전점검_회의(TBM)");
+    }
+
+    // [5번 섹션 전용 버튼] 안전점검 체크리스트 & TBM 양식만 단독 엑셀 다운로드
+    function downloadChecklistTbmTemplate() {
+      const wb = XLSX.utils.book_new();
+      buildChecklistAndTbmSheets(wb);
+      const comp = document.getElementById('f5_company').value.trim() || "공사업체";
+      const date = document.getElementById('f2_req_date').value || today;
+      XLSX.writeFile(wb, `[삼성메디슨_현장출력용]_안전점검체크리스트_및_TBM양식_${comp}_${date}.xlsx`);
+    }
+
     function downloadExcelIntegrated() {
       const v1_site = document.getElementById('f1_site').value;
       const v2_date = document.getElementById('f2_req_date').value;
@@ -674,7 +731,7 @@
       const [yyyy, mm, dd] = v2_date.split('-');
 
       // =========================================================
-      // 1~6. 기본 시트 6종 (통합본 v5 양식 그대로 유지)
+      // 1~4. 기본 시트 4종 (통합본 v5 양식 그대로 유지)
       // =========================================================
       const ws1 = XLSX.utils.aoa_to_sheet([
         ["[삼성메디슨] 공사작업 허가서", "", "", ""],
@@ -775,70 +832,8 @@
       ws4['!cols'] = [{wch: 22}, {wch: 24}, {wch: 22}, {wch: 22}];
       XLSX.utils.book_append_sheet(wb, ws4, "비상연락망");
 
-      const gMark = document.getElementById('chk_all_good').checked ? "√" : "";
-      const pMark = document.getElementById('chk_proc_good').checked ? "√" : "";
-      const inspName = document.getElementById('chk_inspector').value.trim() || leaderName;
-      const ws5 = XLSX.utils.aoa_to_sheet([
-        ["[삼성메디슨] 작업 전 안전점검 (Check List)", "", "", "", ""],
-        [],
-        ["업체명", "작업장소", "작업내용", "작업시간", ""],
-        [v5_comp, v9_loc, v7_proj, v10_tim, ""],
-        [],
-        ["항목", "점검사항", "양호", "불량", "N/A"],
-        ["일반 안전 사항", "1. 작업 전 안전교육 실시 여부", gMark, "", ""],
-        ["일반 안전 사항", "2. 작업자 개인 보호구 지급/착용 및 건강 상태", gMark, "", ""],
-        ["일반 안전 사항", "3. SOP 및 작업현황판, 안전수칙 비치 여부", gMark, "", ""],
-        ["일반 안전 사항", "4. 위험물 작업 MSDS 비치 및 관리 상태", gMark, "", ""],
-        ["일반 안전 사항", "5. 전동공구 사전 점검 확인 여부", gMark, "", ""],
-        ["일반 안전 사항", "6. 공도구, 장비 점검 상태", gMark, "", ""],
-        ["일반 안전 사항", "7. 안전시설물 설치 상태", gMark, "", ""],
-        ["일반 안전 사항", "8. 자재보관 구획설정 상태", gMark, "", ""],
-        ["일반 안전 사항", "9. 법적 교육 이수 상태 (특별안전보건교육 등)", gMark, "", ""],
-        ["주요 공정 別 안전 사항", "1. 작업주변 통제 상태", pMark, "", ""],
-        ["주요 공정 別 안전 사항", "2. 일일안전 점검표 게시 및 작성관리 상태", pMark, "", ""],
-        ["주요 공정 別 안전 사항", "3. 관리감독자 및 안전담당자 안전관리 상태", pMark, "", ""],
-        ["주요 공정 別 안전 사항", "4. 작업 전 주변 정리정돈 상태", pMark, "", ""],
-        ["일일 위험요소 발굴∙제거 현황", document.getElementById('chk_free_note').value, "", "", ""],
-        [],
-        ["점검 실명제", `점검시간 : ${document.getElementById('chk_time').value}`, `점검자 성명 : ${inspName}`, "서명 : (인)", ""]
-      ]);
-      ws5['!cols'] = [{wch: 24}, {wch: 48}, {wch: 10}, {wch: 10}, {wch: 10}];
-      XLSX.utils.book_append_sheet(wb, ws5, "안전점검_체크리스트");
-
-      const tbmTime = document.getElementById('tbm_time').value;
-      const tbmRole = document.getElementById('tbm_leader_role').value;
-      const tbmKeyRisk = document.getElementById('tbm_key_risk').value;
-      const tbmKeyMeas = document.getElementById('tbm_key_measure').value;
-      const attList = document.getElementById('tbm_attendees').value.split(',').map(s => s.trim()).filter(Boolean);
-      const ws6 = XLSX.utils.aoa_to_sheet([
-        ["[삼성메디슨] 작업 전 안전점검 회의(Tool Box Meeting)", "", "", ""],
-        [],
-        ["TBM 일시", `${yyyy}년 ${mm}월 ${dd}일  ${tbmTime}  (작업날짜와 동일함 : ■ 예, □ 아니오)`, "", ""],
-        ["작업명", v7_proj, "작업내용", sopRows[0] ? sopRows[0][1] : v7_proj],
-        ["TBM 장소", v9_loc, "위험성평가 실시여부", "■ 예   □ 아니오"],
-        [],
-        ["잠재위험요인", "", "대책 (※ 제거 → 대체 → 통제 순서 고려)", ""],
-        ...sopRows.map(r => [r[4], "", r[6], ""]),
-        [],
-        ["중점 위험요인", "선정", tbmKeyRisk, ""],
-        ["중점 위험요인", "대책", tbmKeyMeas, ""],
-        ["TBM리더 확인", `소속: ${v5_comp}`, `직책: ${tbmRole}`, `성명: ${leaderName} (서명)`],
-        [],
-        ["■ 작업 전 안전조치 확인 (※ 위 잠재위험요인 안전조치 여부 재확인)", "", "", ""],
-        ["잠재위험요소 (중점 위험요인 포함)", "조치 여부", "'아니오'인 경우 조치 계획", ""],
-        [tbmKeyRisk, "■ 예   □ 아니오", "작업 착수 전 현장 방호조치 완료", ""],
-        [sopRows[0] ? sopRows[0][4] : "공도구 및 보호구 상태 점검", "■ 예   □ 아니오", "-", ""],
-        [],
-        ["■ 작업 전 일일 안전점검 시행 결과 (※ 작업자의 TBM 내용 숙지 여부 중점체크)", "", "", ""],
-        ["전 작업자 안전보호구 착용 및 TBM 중점 위험요인·안전대책 숙지 상태 양호", "", "", ""],
-        [],
-        ["■ 참석자 명단", "", "", ""],
-        ["이름", "서명", "이름", "서명"],
-        [attList[0] || leaderName, "(서명)", attList[1] || "", attList[1] ? "(서명)" : ""],
-        [attList[2] || "", attList[2] ? "(서명)" : "", attList[3] || "", attList[3] ? "(서명)" : ""]
-      ]);
-      ws6['!cols'] = [{wch: 24}, {wch: 32}, {wch: 32}, {wch: 24}];
-      XLSX.utils.book_append_sheet(wb, ws6, "작업_전_안전점검_회의(TBM)");
+      // 5~6. 출력 후 수기 작성용 안전점검 체크리스트 & TBM 시트 추가
+      buildChecklistAndTbmSheets(wb);
 
       // =========================================================
       // 7. [v4 시트7] 작업계획서 - 화물자동차 중량물 취급
@@ -1020,7 +1015,6 @@
         const slingCnt = parseFloat(document.getElementById('cr_sling_cnt').value) || 1;
         const capTon   = parseFloat(document.getElementById('cr_cap_ton').value) || 0;
 
-        // 안전하중 계산 (안전율 6 기준) 및 장비 양중능력 85% 계산
         const safeSlingTon = ((brkTon * slingCnt) / 6).toFixed(2);
         const rated85Ton   = (capTon * 0.85).toFixed(2);
         const slingEval    = parseFloat(safeSlingTon) > cargoTon ? "적합 (안전하중 이내)" : "부적합 (줄걸이 보강 필요)";
@@ -1030,155 +1024,4 @@
           ["크레인 작업계획서 (산업안전보건기준에 관한 규칙 제38조)", "", "", ""],
           [],
           ["1. 작업 개요", "", "", ""],
-          ["현장명", v7_proj, "협력사명", v5_comp],
-          ["작성일자", v2_date, "작업지휘자", `${leaderName} (서명)`],
-          ["작업일정", v8_peri, "안전관리자", `${safeMgrName} (서명)`],
-          ["작업장소", v9_loc, "관리감독자", `${superName} (서명)`],
-          ["유도/신호수", signalName, "관리책임자", `${v6_cmgr} (서명)`],
-          [],
-          ["2. 작업 위치 및 도로 통제구역 표시 / 3. 건설기계의 제원", "", "", ""],
-          ["지형 종류 / 경사·요철", "콘크리트 평지 / 경사 없음 / 요철 없음", "첨부서류", "장비제원표, 보험증명서, 운전원 면허증 사본"],
-          ["건설기계명 / 규격", document.getElementById('cr_model').value, "등록번호 / 운전원", document.getElementById('cr_driver').value],
-          [],
-          ["4. 양중물의 제원 및 줄걸이 안전하중 검토", "", "", ""],
-          ["양중물 종류 및 규격", document.getElementById('cr_item').value, "적재물(양중물) 중량", `${cargoTon} Ton`],
-          ["줄걸이 종류 및 규격", document.getElementById('cr_sling_spec').value, "파단하중 × 줄걸이 수", `${brkTon} Ton × ${slingCnt} 줄`],
-          ["줄걸이 안전하중 (안전율 6 적용)", `${safeSlingTon} Ton`, "검토 (양중물 중량 < 안전하중)", slingEval],
-          [],
-          ["5. 안전대책 (추락/낙하/붕괴/전도/협착 등 예방대책)", "", "", ""],
-          ["공통/추락/낙하", "■안전모·안전화 착용 ■작업구역 통제 ■유도원·작업지휘자 배치 ■중량물 고정조치 ■과부하방지·권과방지·와이어로프 점검", "", ""],
-          ["붕괴/전도/협착", "■지반 상태 확인 ■아웃트리거 최대확장 및 수평도 확인 ■유도로프 설치 ■작업자 안전통로 확보 ■후방카메라·경보음 확인", "", ""],
-          [],
-          ["□ Crane Action Plan (양중 능력 평가)", "", "", ""],
-          ["① 장비제원 (양중거리 / 붐길이)", document.getElementById('cr_boom').value, "제원표상 정격하중", `${capTon} Ton`],
-          ["▶ 양중 능력 평가 (안전율 85% 적용)", `${capTon} Ton × 0.85 = ${rated85Ton} Ton > 양중물 ${cargoTon} Ton`, "최종 판정", craneEval],
-          [],
-          ["□ 크레인 일일 안전점검표 (하이드로 / 카고크레인 기준)", "", "", ""],
-          ["번호", "점검 항목", "점검 방법 (기준)", "점검 결과"],
-          ["1", "과부하방지장치", "작동 시 경보음과 함께 권상 및 하중이 증가하는 동작이 차단될 것", "○"],
-          ["2", "권과방지장치", "훅이 최상부에 도달하기 전에 경보음과 함께 작동이 정지될 것", "○"],
-          ["3", "훅 및 시브 (훅 해지장치)", "훅 해지장치는 탈락 등의 이상이 없고 훅, 시브(도르래)는 회전이 원활할 것", "○"],
-          ["4", "브레이크 및 클러치", "브레이크, 클러치 및 조정장치 등은 기능이 정상일 것", "○"],
-          ["5", "아웃트리거", "수평 유지하여 최대확장을 하고 받침은 2단 초과 사용을 금지할 것", "○"],
-          ["6", "아웃트리거 확장 핀", "완전히 인출한 위치에서 확실히 고정될 것", "○"],
-          ["7", "카운터 웨이트 / 선회장치", "임의개조가 없으며 제원표와 무게가 일치하고 선회장치 고정핀이 정상일 것", "○"],
-          ["8", "유압장치 및 실린더", "유압모터ㆍ실린더ㆍ배관 등에 누유 및 손상, 마모 등이 없을 것", "○"],
-          ["9", "등화류 / 비상정지장치", "전조ㆍ후미ㆍ경광등 및 적색 수동복귀형 비상정지장치 정상작동 될 것", "○"],
-          ["10", "와이어로프 상태", "와이어로프는 소선파단, 마모, 킹크 등의 이상이 없이 양호할 것", "○"],
-          ["11", "와이어로프 이탈방지", "드럼에서 단말까지 이탈의 우려 없이 제조사의 기준을 준수하여 설치될 것", "○"],
-          ["12", "소켓 및 단말처리", "웻지 소켓 규격 등 와이어로프 단말처리 방법은 기준에 맞을 것", "○"],
-          [`점검자 : (서명)`, `관리감독자 : ${superName} (서명)`, `안전관리자 : ${safeMgrName} (서명)`, ""]
-        ]);
-        wsCr['!cols'] = [{wch: 26}, {wch: 52}, {wch: 28}, {wch: 22}];
-        XLSX.utils.book_append_sheet(wb, wsCr, "작업계획서-크레인");
-      }
-
-      // =========================================================
-      // 12. [v4 시트12] 작업계획서 - 고소작업대
-      // =========================================================
-      if (checked.includes('awp')) {
-        const wsAwp = XLSX.utils.aoa_to_sheet([
-          ["[ 고소작업대 ] 작업계획서 (산업안전보건기준에 관한 규칙 제38조)", "", "", ""],
-          [],
-          ["□ 작업개요", "", "", ""],
-          ["현장명", v7_proj, "협력사명", v5_comp],
-          ["작성일자", v2_date, "작업지휘자", `${leaderName} (인)`],
-          ["작업일정", v8_peri, "관리감독자", `${superName} (인)`],
-          ["작업장소", v9_loc, "안전관리자", `${safeMgrName} (인)`],
-          ["유도자(신호수)", signalName, "사업장 구분", v1_site],
-          [],
-          ["□ 작업 위치 및 도로 통제구역 표시", "", "", ""],
-          ["지형 종류", "■콘크리트  □아스팔트  □흙  □잔디", "경사도 / 요철부", "경사도: ■없음  /  요철부: ■없음"],
-          [],
-          ["□ 건설기계의 제원", "", "", ""],
-          ["제조사/모델 및 인증유효기간", document.getElementById('awp_model').value, "종류", document.getElementById('awp_type').value],
-          ["사용기간", v8_peri, "운전원", leaderName],
-          [],
-          ["□ 탑승 및 적재 제원", "", "", ""],
-          ["탑승 인원 / 적재물 제원", document.getElementById('awp_load').value, "작업대 전면 난간대 해체", document.getElementById('awp_rail').value],
-          [],
-          ["□ 안전대책 (추락/낙하/붕괴/전도/협착 등 예방대책)", "", "", ""],
-          ["공통/기타", "■안전모 및 안전화 착용   ■작업구역 통제   ■안전담당자 배치   ■유도원/감시자 배치   ■작업지휘자 배치", "", ""],
-          ["추락/낙하", "■생명줄 걸이시설 설치   ■안전대 착용   ■안전난간대 설치   ■중량물 고정조치   ■장비 점검(트랙, 차륜, 타이어)", "", ""],
-          ["붕괴/전도", "■지반상태 확인   ■이동구간 바닥요철 제거   ■중량물 구름방지 조치   ■단부 인근 자재적재 금지", "", ""],
-          ["협착/충돌", "■협착/타격 방지장갑 착용   ■작업자 안전통로 확보   ■유도로프 설치   ■장비 점검(과상승방지장치, 비상정지장치, 비상하강장치, 풋스위치)", "", ""]
-        ]);
-        wsAwp['!cols'] = [{wch: 26}, {wch: 48}, {wch: 24}, {wch: 28}];
-        XLSX.utils.book_append_sheet(wb, wsAwp, "작업계획서-고소작업대");
-      }
-
-      // =========================================================
-      // 13. [v4 시트13] 작업계획서 - 천정, 사다리
-      // =========================================================
-      if (checked.includes('ladder')) {
-        const wsLd = XLSX.utils.aoa_to_sheet([
-          ["사다리 작업계획서 [산업안전보건기준에 관한 규칙 제24조 사다리식 통로 구조 준용]", "", "", ""],
-          ["※ 사내 건설공사용 사다리는 안전작업발판 사다리(말비계) 사용을 원칙으로 하나, 공간이 협소하여 안전작업발판사다리 및 B/T비계 등 사용이 불가한 장소의 작업인 경우 작업계획서를 작성 후 사용을 허가함", "", "", ""],
-          [],
-          ["1. 작업개요", "", "", ""],
-          ["공사명", v7_proj, "작성일자", v2_date],
-          ["작업일정", v8_peri, "작업지휘자", `${leaderName} (인)`],
-          ["작업장소", v9_loc, "관리감독자", `${superName} (인)`],
-          ["작업내용", `${v7_proj} (${document.getElementById('ld_type').value})`, "안전관리자", `${safeMgrName} (인)`],
-          [
-            "작업 계획",
-            `① 발디딤의 최고 작업 높이는 약 ( ${document.getElementById('ld_height').value} ) m\n` +
-            "② 발디딤 높이 1.2m 이상 시 2인 1조 작업 및 최상단과 그 하단 디딤대 사용금지 / 발디딤 높이 2m 이상 시 안전고리 체결 必\n" +
-            "③ 전도방지용 아웃트리거 상시 확장 후 작업\n" +
-            "④ 비계 등 가설작업발판 위, 경사부위 및 바닥요철, 미끄럼장소, 단부 등은 작업 불가 (EHS그룹 별도협의)",
-            "", ""
-          ],
-          [],
-          ["2. 위험성 검토 및 안전 조치", "", "", ""],
-          ["작업지형 및 장소", `■견고한 바닥에서 사용 (${document.getElementById('ld_place').value})`, "", ""],
-          ["개인 보호구 의무 착용", "■안전모   ■안전화   ■안전대   ■안전장갑   □보안경   □보호복   □활선경보기", "", ""],
-          ["추락방지조치", "■최상단 + 그 하단 디딤대 미사용   ■2인 1조 작업   ■안전고리 체결", "", ""],
-          ["전도방지조치", "■사다리 벌어짐 방지 조치   ■아웃트리거 확장 사용   □사다리 상단을 구조체에 고정", "", ""],
-          ["기타안전조치", "■작업반경 內 라바콘 구획 및 통제   ■최대사용하중 범위 내 사용", "", ""],
-          ["사다리 점검 공도구 승인", "A형 사다리 공도구 사용승인 필증 : ■ 有   □ 無 (현장확인발급)", "", ""]
-        ]);
-        wsLd['!cols'] = [{wch: 24}, {wch: 62}, {wch: 18}, {wch: 22}];
-        XLSX.utils.book_append_sheet(wb, wsLd, "작업계획서-천정,사다리");
-      }
-
-      // =========================================================
-      // 14. [표지분류] 밀폐공간 / 석면해체 시트 (선택 시 추가)
-      // =========================================================
-      if (checked.includes('confined')) {
-        const wsCf = XLSX.utils.aoa_to_sheet([
-          ["밀폐공간 보건작업 프로그램 및 산소·유해가스 농도 측정표 (규칙 제619조)", "", ""],
-          [],
-          ["공사명", v7_proj, `공사업체명: ${v5_comp}`],
-          ["밀폐공간 작업장소", document.getElementById('cf_place').value, `작업일시: ${v8_peri}`],
-          ["작업지휘자", `${leaderName} (서명)`, `외부 상주 감시인: ${document.getElementById('cf_watcher').value || safeMgrName}`],
-          [],
-          ["점검 구분", "세부 측정 및 안전조치 내용", "결과"],
-          ["작업 전 산소·유해가스 측정", `${document.getElementById('cf_gas').value} (적정기준: O2 18~23.5%, CO<30ppm, H2S<10ppm)`, "적합"],
-          ["환기설비 가동", "작업 전 및 작업 중 급·배기 환기팬 상시 가동", "양호"],
-          ["비상 구출기구 및 호흡보호구", "송기마스크(또는 공기호흡기), 삼각대, 구명줄, 무전기 현장 비치 및 출입인원 계수", "양호"]
-        ]);
-        wsCf['!cols'] = [{wch: 26}, {wch: 58}, {wch: 16}];
-        XLSX.utils.book_append_sheet(wb, wsCf, "작업계획서-밀폐공간");
-      }
-
-      if (checked.includes('asbestos')) {
-        const wsAs = XLSX.utils.aoa_to_sheet([
-          ["석면해체·건축물 해체 작업계획서 (규칙 제38조·제489조)", "", ""],
-          [],
-          ["공사명", v7_proj, `공사업체명: ${v5_comp}`],
-          ["작업장소", v9_loc, `작업지휘자: ${leaderName} (서명)`],
-          [],
-          ["구분", "사전조사 및 해체 작업계획 내용", "확인"],
-          ["해체 대상 및 석면 사전조사", document.getElementById('as_target').value, "확인완료"],
-          ["해체 방법·순서 및 분진방지", document.getElementById('as_method').value, "적합"]
-        ]);
-        wsAs['!cols'] = [{wch: 26}, {wch: 58}, {wch: 16}];
-        XLSX.utils.book_append_sheet(wb, wsAs, "작업계획서-석면,해체");
-      }
-
-      const fileName = `[삼성메디슨_작업계획서통합본]_${v5_comp}_${v7_proj}_${v2_date}.xlsx`;
-      XLSX.writeFile(wb, fileName);
-    }
-  </script>
-</body>
-</html>
+          ["현장명", v7_proj, "

@@ -11,6 +11,22 @@
     [hidden], .hidden { display: none !important; }
     .card { background: white; border-radius: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); border: 1px solid #cbd5e1; }
     .badge-num { display: inline-flex; align-items: center; justify-content: center; width: 1.35rem; height: 1.35rem; border-radius: 9999px; background-color: #1e3a8a; color: white; font-size: 0.75rem; font-weight: bold; margin-right: 0.35rem; }
+    .risk-guide { margin-bottom: 1.25rem; padding: 1.25rem; border: 1px solid #bfdbfe; border-radius: .75rem; background: #f8fafc; font-size: .875rem; line-height: 1.7; }
+    .risk-guide h3 { color: #1e3a8a; font-size: 1rem; font-weight: 700; }
+    .risk-guide h4 { margin-bottom: .5rem; font-weight: 700; }
+    .risk-guide ol { list-style: decimal; padding-left: 1.4rem; margin: .75rem 0 1rem; }
+    .risk-guide ul { list-style: disc; padding-left: 1.2rem; }
+    .risk-guide li + li { margin-top: .3rem; }
+    .risk-guide-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; margin: 1rem 0; }
+    .risk-guide-card { padding: 1rem; background: white; border: 1px solid #cbd5e1; border-top: 4px solid var(--risk-color); border-radius: .5rem; }
+    .risk-guide-card h4 { color: var(--risk-color); }
+    .risk-guide-card p { margin: .75rem 0 .25rem; font-weight: 700; }
+    .risk-guide-note { padding: .75rem 1rem; border-radius: .5rem; background: #eff6ff; color: #1e3a8a; }
+    .risk-guide-example { margin-top: 1rem; padding: 1rem; border: 1px dashed #94a3b8; border-radius: .5rem; background: white; }
+    .risk-guide-example dl { display: grid; grid-template-columns: 6rem minmax(0, 1fr); gap: .3rem .75rem; margin-top: .5rem; }
+    .risk-guide-example dt { font-weight: 700; }
+    .risk-guide-example dd { overflow-wrap: anywhere; }
+    @media (max-width: 767px) { .risk-guide-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body class="text-slate-800 pb-20">
@@ -155,7 +171,10 @@
           <h2 class="text-lg font-bold text-blue-900">3. [Sheet 2] 안전작업 절차(SOP) 및 위험성 평가</h2>
           <p class="text-xs text-slate-500">※ 아래 SOP는 작성 예시입니다. 실제 작업에 맞게 수정하고 위험등급(A/B/C)을 선택하세요.</p>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex flex-wrap items-center gap-2">
+          <button type="button" id="risk_guide_toggle" aria-expanded="false" aria-controls="risk_assessment_guide" onclick="toggleRiskGuide()" class="border border-blue-700 bg-white hover:bg-blue-50 text-blue-800 text-xs px-3 py-2 rounded-lg font-semibold">
+            위험성평가 작성방법
+          </button>
           <label class="text-xs font-bold text-slate-700">위험등급 선택:</label>
           <select id="sop_grade" class="border rounded-lg p-1.5 text-sm font-semibold bg-amber-50 border-amber-400">
             <option value="A등급">A등급 (고위험 - PTW 필수/전담자 상주/일 2회 점검)</option>
@@ -165,6 +184,84 @@
           <button type="button" onclick="addSopRow()" class="bg-slate-700 hover:bg-slate-800 text-white text-xs px-3 py-2 rounded-lg font-semibold">
             + 작업단계 추가
           </button>
+        </div>
+      </div>
+
+      <div id="risk_assessment_guide" class="risk-guide" role="region" aria-labelledby="risk_guide_title" hidden>
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <h3 id="risk_guide_title">위험성평가 작성방법</h3>
+            <p class="text-xs text-slate-500 mt-1">기준: 첨부 ‘작업계획서 통합본v5’ → ‘안전작업절차 (SOP)’ 시트 L12 메모</p>
+          </div>
+          <button type="button" onclick="toggleRiskGuide(false)" class="border rounded px-3 py-1 text-xs bg-white whitespace-nowrap" aria-label="위험성평가 작성방법 닫기">닫기</button>
+        </div>
+
+        <h4 class="mt-4">아래 순서로 작업단계마다 작성하세요</h4>
+        <ol>
+          <li><strong>작업단계·작업내용 작성:</strong> 사전준비, 본 작업, 정리정돈 등으로 나누고 각 단계의 인원과 시간을 입력합니다.</li>
+          <li><strong>예상 위험요소 확인:</strong> 실제 현장의 방호장치, 작업방법, 주변 혼재 작업을 살펴보고 어떤 사고가 발생할 수 있는지 구체적으로 적습니다.</li>
+          <li><strong>위험도 판단:</strong> 아래 기준에 따라 해당 작업단계의 ‘위험도’ 칸에 <strong>상 / 중 / 하</strong>를 입력합니다. 앞으로 시행할 대책을 이미 완료한 것으로 보고 위험도를 낮추지 않습니다.</li>
+          <li><strong>안전대책 작성:</strong> 선택한 위험도에 맞는 설비적·관리적 조치를 구체적으로 적습니다. ‘주의’, ‘조심’만 적지 말고 무엇을 설치하거나 누구를 배치할지 명시합니다.</li>
+          <li><strong>작업 전 확인·공유:</strong> 대책의 실제 이행 여부를 확인하고 TBM에서 위험요인과 작업방법을 공유합니다. 현장 조건이 바뀌면 내용을 다시 검토합니다.</li>
+        </ol>
+
+        <h4>상·중·하 판단 기준과 조치 원칙</h4>
+        <p class="text-xs text-slate-500">첨부 메모의 위험성 수준 3단계 판단 기준을 옮겼습니다.</p>
+        <div class="risk-guide-grid">
+          <article class="risk-guide-card" style="--risk-color: #b91c1c">
+            <h4>상 · 설비적 차단 대책 필요</h4>
+            <p>상황 및 상태 기준</p>
+            <ul>
+              <li>물리적 방호장치가 부재하거나 무력화된 상태</li>
+              <li>법적 안전기준 미달 상태</li>
+              <li>비정형 작업이거나 위험요인이 완전히 개방·노출된 상태</li>
+              <li>사고 발생 시 사망·중상으로 직결되는 상태</li>
+            </ul>
+            <p>관리 및 조치 원칙</p>
+            <ul>
+              <li>단순 ‘주의·조심’만으로는 불가</li>
+              <li>안전난간 설치, 렌탈 작업대 대체 등 설비적 차단 대책 필요</li>
+            </ul>
+          </article>
+          <article class="risk-guide-card" style="--risk-color: #92400e">
+            <h4>중 · 인원 배치와 구획 통제</h4>
+            <p>상황 및 상태 기준</p>
+            <ul>
+              <li>물리적 방호조치는 되어 있으나 작업자의 부주의·오조작 시 사고 위험이 있음</li>
+              <li>통제수단이 관리적 대책이나 개인보호구에 크게 의존</li>
+              <li>혼재 작업으로 주변 간섭 위험이 통제되지 않은 상태</li>
+            </ul>
+            <p>관리 및 조치 원칙</p>
+            <ul>
+              <li>전담 감시인·신호수·유도원 배치 계획</li>
+              <li>구획 통제 및 안전작업절차 준수 계획 명시</li>
+            </ul>
+          </article>
+          <article class="risk-guide-card" style="--risk-color: #166534">
+            <h4>하 · 표준작업절차 준수와 TBM</h4>
+            <p>상황 및 상태 기준</p>
+            <ul>
+              <li>위험요인이 공학적·물리적으로 완전히 차단</li>
+              <li>통상적인 표준작업절차 준수만으로 사고가 충분히 예방됨</li>
+              <li>사고 시 경미한 부상만 발생</li>
+            </ul>
+            <p>관리 및 조치 원칙</p>
+            <ul>
+              <li>작업 전 TBM 시 위험요인 전파</li>
+              <li>기본 개인보호구 착용</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="risk-guide-note"><strong>개별 작업의 위험도와 전체 관리등급을 구분하세요.</strong><br>표의 ‘상·중·하’는 각 작업단계의 위험도입니다. 위 ‘A/B/C 위험등급’은 현장 관리·점검 방식을 선택하는 항목이며, 이 메모에는 두 기준의 자동 대응 관계가 정해져 있지 않습니다.</div>
+        <div class="risk-guide-example">
+          <h4>작성 예시 · 현장 조건에 맞게 변경하세요</h4>
+          <dl>
+            <dt>작업단계</dt><dd>고소 위치의 배관 설치</dd>
+            <dt>예상 위험요소</dt><dd>안전난간이 없는 작업 위치에서 작업 중 추락</dd>
+            <dt>위험도</dt><dd>상 — 물리적 방호장치 부재, 사고 시 중상 위험</dd>
+            <dt>안전대책</dt><dd>작업 위치에 안전난간 설치 또는 렌탈 작업대로 작업방법 변경. 조치 이행 여부를 작업 전 확인하고 TBM에서 작업방법 공유.</dd>
+          </dl>
         </div>
       </div>
 
@@ -301,15 +398,15 @@
       </div>
 
       <div class="bg-white p-5 rounded-xl border border-slate-200 flex flex-col items-center text-center space-y-4">
-        <button type="button" onclick="downloadChecklistTbmTemplate()" class="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-3.5 rounded-xl shadow-md text-sm md:text-base transition flex items-center justify-center gap-2">
+        <a id="checklist_tbm_download" href="https://github.com/slayerwings666/safety/blob/main/TBM%EC%9D%BC%EC%A7%80%26%EC%95%88%EC%A0%84%EC%A0%90%EA%B2%80%20%EC%B2%B4%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%8A%B8.xlsx?raw=true" class="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-3.5 rounded-xl shadow-md text-sm md:text-base transition flex items-center justify-center gap-2">
           📥 [안전점검 체크리스트 & TBM 회의록] 엑셀 양식(.xlsx) 다운로드
-        </button>
+        </a>
 
         <div class="w-full text-left bg-slate-50 p-4 rounded-lg border border-slate-200 text-xs text-slate-700 space-y-1.5">
           <div class="font-bold text-red-600 text-sm mb-1">
             📌 [필독] 출력 후 작성 및 제출 안내
           </div>
-          <p>• 위 버튼을 클릭하여 <strong>『작업 전 안전점검 체크리스트 및 TBM 회의록』 엑셀 파일을 다운로드한 뒤 종이(페이퍼)로 출력</strong>해 주시기 바랍니다. <em>(※ 하단 통합본 엑셀 다운로드 시에도 5·6번 시트에 빈 양식이 자동 포함됩니다.)</em></p>
+          <p>• 위 버튼을 클릭하여 <strong>지정 양식 『TBM일지&amp;안전점검 체크리스트.xlsx』를 다운로드한 뒤 종이(페이퍼)로 출력</strong>해 주시기 바랍니다. 위에서 입력한 정보는 이 파일에 자동 반영되지 않으므로 양식에 직접 작성해 주세요.</p>
           <p>• 공사 기간 중 <strong>매일 작업 시작 전</strong> 현장소장(작업지휘자) 주관으로 사전 안전점검 및 TBM을 실시하고, <strong>출력된 양식에 수기로 점검결과 체크(√) 및 참석 근로자 전원 자필 서명</strong>을 작성합니다.</p>
           <p>• 작성된 종이 원본은 공사 기간 동안 <strong>현장 현황판에 게시(비치)</strong>하고, <strong>공사 종료 후 회수하여 발주부서 담당자(또는 사업장 EHS그룹)에게 페이퍼로 제출</strong>해 주시기 바랍니다.</p>
         </div>
@@ -673,6 +770,16 @@
       });
     }
 
+    function toggleRiskGuide(forceOpen) {
+      const guide = document.getElementById('risk_assessment_guide');
+      const button = document.getElementById('risk_guide_toggle');
+      const open = typeof forceOpen === 'boolean' ? forceOpen : guide.hidden;
+      const focusWasInside = guide.contains(document.activeElement);
+      guide.hidden = !open;
+      button.setAttribute('aria-expanded', String(open));
+      if (!open && focusWasInside) button.focus();
+    }
+
     function addSopRow() {
       const tbody = document.getElementById('sop_tbody');
       const idx = Math.max(0, ...Array.from(tbody.rows, row => Number.parseInt(row.querySelector('input').value, 10) || 0)) + 1;
@@ -771,12 +878,6 @@
       ]);
       ws6['!cols'] = [{wch: 26}, {wch: 34}, {wch: 34}, {wch: 24}];
       XLSX.utils.book_append_sheet(wb, ws6, "작업_전_안전점검_회의(TBM)");
-    }
-
-    function downloadChecklistTbmTemplate() {
-      const comp = getValue('f5_company') || '공사업체';
-      const date = getValue('f2_req_date') || today;
-      exportWorkbook(buildChecklistAndTbmSheets, `[삼성메디슨_현장출력용]_안전점검체크리스트_및_TBM양식_${comp}_${date}`);
     }
 
     function downloadExcelIntegrated() {

@@ -27,6 +27,55 @@
     .risk-guide-example dt { font-weight: 700; }
     .risk-guide-example dd { overflow-wrap: anywhere; }
     @media (max-width: 767px) { .risk-guide-grid { grid-template-columns: 1fr; } }
+
+    .fire-source { font-size: .8rem; line-height: 1.65; color: #475569; margin: .65rem 0; }
+    .fire-status { font-size: .85rem; line-height: 1.65; padding: .8rem 1rem; background: #f8fafc; border-left: 3px solid #94a3b8; }
+    .fire-status p { margin-top: .3rem; }
+    .fire-block { margin: 1rem 0; padding: .9rem; border: 1px solid #cbd5e1; border-radius: .5rem; }
+    .fire-block > summary { cursor: pointer; color: #7f1d1d; font-weight: 700; }
+    .fire-progress { float: right; font-size: .8rem; color: #475569; }
+    .fire-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .75rem; margin: .8rem 0; }
+    .fire-reviewer { grid-template-columns: repeat(3,minmax(0,1fr)); }
+    .fire-reviewer-card { display: grid; gap: .6rem; padding: .7rem; background: #f8fafc; border-radius: .4rem; font-size: .8rem; }
+    .fire-field { display: flex; flex-direction: column; min-width: 0; gap: .3rem; font-size: .8rem; }
+    .fire-field > span, .fire-row-extra > label { font-weight: 600; }
+    #sec_fire input:not([type=checkbox]), #sec_fire select, #sec_fire textarea { width: 100%; box-sizing: border-box; min-width: 0; padding: .5rem; border: 1px solid #94a3b8; border-radius: .35rem; color: #0f172a; background: white; font-size: .8rem; }
+    #sec_fire input:focus-visible, #sec_fire select:focus-visible, #sec_fire textarea:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }
+    .fire-check-label { display: flex; align-items: center; gap: .5rem; font-size: .8rem; margin: .85rem 0; }
+    #sec_fire input[type=checkbox] { width: 1rem; height: 1rem; flex: 0 0 auto; }
+    .fire-table, .fire-log { width: 100%; border-collapse: collapse; margin-top: .85rem; font-size: .85rem; }
+    .fire-table th, .fire-table td, .fire-log th, .fire-log td { border: 1px solid #cbd5e1; padding: .7rem; vertical-align: top; }
+    .fire-table th, .fire-log th { background: #f1f5f9; text-align: left; }
+    .fire-table th:first-child { width: 3.5rem; }
+    .fire-table { min-width: 840px; table-layout: fixed; }
+    .fire-table th:nth-child(n+3) { width: 7.3rem; }
+    .fire-table td:first-child { font-weight: 600; color: #475569; white-space: nowrap; }
+    .fire-table .fire-result-cell .fire-field > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    .fire-hint { display: block; margin-top: .3rem; font-size: .75rem; color: #64748b; line-height: 1.55; }
+    .fire-row-extra { margin-top: .65rem; padding-top: .6rem; border-top: 1px dashed #94a3b8; font-size: .8rem; }
+    .fire-row-extra textarea { margin-top: .3rem; }
+    .fire-add { border: 1px solid #94a3b8; border-radius: .35rem; padding: .4rem .65rem; font-size: .8rem; background: #f8fafc; margin-top: .6rem; }
+    .fire-table-wrap { overflow-x: auto; }
+    .fire-log { min-width: 650px; }
+    .fire-law { font-size: .8rem; line-height: 1.7; color: #475569; }
+    .fire-law p { margin-top: .7rem; }
+    .fire-law a { color: #1d4ed8; text-decoration: underline; }
+    @media(max-width: 650px) { .fire-grid { grid-template-columns: 1fr; } .fire-block { padding: .6rem; } .fire-table th,.fire-table td { padding: .45rem; } .fire-table th:first-child { width: 2.5rem; } }
+
+    .basic-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+    .basic-heading > div:first-child { flex: 1; min-width: 0; }
+    .document-number-panel { width: 390px; max-width: 100%; padding: .75rem 1rem; border: 1px solid #bfdbfe; border-radius: .5rem; background: #f8fafc; }
+    .document-number-panel > label { display: block; font-size: .75rem; font-weight: 700; color: #1e3a8a; }
+    #document_number { width: 100%; margin: .3rem 0; padding: .4rem 0; border: 0; background: transparent; font-weight: 700; font-size: 1rem; color: #1e3a8a; }
+    .document-number-actions { display: flex; gap: .5rem; margin: .25rem 0; }
+    .document-number-actions button { border: 1px solid #94a3b8; border-radius: .35rem; background: white; color: #1e3a8a; font-size: .75rem; padding: .35rem .6rem; }
+    .document-number-actions button:first-child { background: #1e40af; border-color: #1e40af; color: white; }
+    .document-number-actions button:disabled { opacity: .5; cursor: wait; }
+    #document_number_hint, .document-number-auth { font-size: .7rem; line-height: 1.5; color: #475569; margin-top: .5rem; }
+    .document-number-auth summary { cursor: pointer; }
+    .document-number-auth label { display: block; margin-top: .4rem; }
+    #document_access_key { width: 100%; margin-top: .3rem; border: 1px solid #94a3b8; border-radius: .3rem; padding: .4rem; }
+    @media(max-width: 900px) { .basic-heading { flex-direction: column; } .document-number-panel { width: 100%; } }
   </style>
 </head>
 <body class="text-slate-800 pb-20">
@@ -52,13 +101,24 @@
 
     <!-- STEP 1. 공사작업 허가서 기본정보 (1~11번 연동 항목) -->
     <section class="card p-6">
-      <div class="border-b pb-3 mb-4">
-        <h2 class="text-lg font-bold text-blue-900">
-          1. [Sheet 1] 공사작업 허가서 - 기본정보 입력 (공통정보 연동)
-        </h2>
-        <p class="text-xs text-slate-500 mt-0.5">
-          ※ 입력한 기본정보는 각 문서의 해당 항목에 반영됩니다. * 표시는 통합 엑셀 생성 시 필수입력입니다.
-        </p>
+      <div class="basic-heading border-b pb-3 mb-4">
+        <div>
+          <h2 class="text-lg font-bold text-blue-900">1. [Sheet 1] 공사작업 허가서 - 기본정보 입력 (공통정보 연동)</h2>
+          <p class="text-xs text-slate-500 mt-0.5">※ 입력한 기본정보는 각 문서의 해당 항목에 반영됩니다. * 표시는 통합 엑셀 생성 시 필수입력입니다.</p>
+        </div>
+        <div class="document-number-panel">
+          <label for="document_number">문서번호 · 사업장별 공용 접수</label>
+          <input id="document_number" type="text" readonly aria-describedby="document_number_hint" value="접수 후 발급">
+          <div class="document-number-actions">
+            <button type="button" id="document_number_issue" onclick="issueDocumentNumber()">접수·번호발급</button>
+            <button type="button" id="document_number_new" onclick="resetDocumentTicket()">새 접수</button>
+          </div>
+          <details class="document-number-auth"><summary>접수 인증키 입력</summary>
+            <label for="document_access_key">관리자에게 받은 접수 인증키</label>
+            <input id="document_access_key" type="password" autocomplete="off" maxlength="256" placeholder="공용 접수 인증키 (기기에 저장하지 않음)">
+          </details>
+          <p id="document_number_hint" role="status" aria-live="polite"></p>
+        </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
@@ -527,26 +587,57 @@
         </div>
       </div>
 
-      <!-- [v4 시트10] 화기/절단 작업 허가서 및 화재감시자 지정서 -->
+      <!-- DX 실제 체크시트에 맞춘 간단한 화기작업 점검 -->
       <div id="sec_fire" class="card p-6 border-l-4 border-l-red-600">
-        <h3 class="font-bold text-red-700 mb-3">🔥 [v4 시트10] 화기/절단 작업 허가서 및 화재감시자 지정서 (시행령 제43조 / 규칙 제241조의2)</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-          <div>
-            <label class="block font-semibold mb-1">화기/절단작업 감독자 성명</label>
-            <input type="text" id="fr_supervisor" placeholder="미입력 시 작업지휘자 자동기입" class="w-full border rounded p-2">
-          </div>
-          <div>
-            <label class="block font-semibold mb-1">화재 감시자 지정 (직책 / 성명) *</label>
-            <input type="text" id="fr_watcher" data-required aria-required="true" placeholder="예: 안전담당 / 이감시" class="w-full border rounded p-2">
-          </div>
-          <div>
-            <label class="block font-semibold mb-1">소화기 비치 수량 / 이격거리</label>
-            <input type="text" id="fr_ext" placeholder="예: 소화기 3개 비치 / 가연물 10m 이상 이격" class="w-full border rounded p-2">
-          </div>
+        <h3 class="font-bold text-red-700 mb-2">🔥 화기작업 허가서 · 일일안전점검</h3>
+        <p class="fire-source">DX 실제 양식처럼 <strong>작업 전 9개 · 중 4개 · 종료 후 4개</strong>를 점검합니다. 각 항목을 <strong>시공사 → 의뢰부서 → 발주부서</strong>가 각각 점검합니다. 현장 허가·서명은 출력 후 확인하세요.</p>
+        <div class="fire-grid">
+          <label class="fire-field" for="fr_supervisor"><span>화기작업 감독자</span><input id="fr_supervisor" placeholder="미입력 시 작업지휘자"></label>
+          <label class="fire-field" for="fr_watcher"><span>전담 화재감시자</span><input id="fr_watcher" placeholder="성명"></label>
+          <label class="fire-field" for="fr_types"><span>작업 종류</span><input id="fr_types" placeholder="예: 전기용접 / 가스용접 / 절단"></label>
+          <label class="fire-field" for="fr_place"><span>세부 작업장소</span><input id="fr_place" placeholder="미입력 시 기본정보의 작업장소"></label>
+          <label class="fire-field" for="fr_emergency"><span>사업장 비상 연락처</span><input id="fr_emergency" type="tel" placeholder="사업장별 방재 연락처"></label>
         </div>
-        <div class="mt-2 p-2.5 bg-red-50 rounded border border-red-200 text-xs space-y-1">
-          <label class="flex items-center gap-2"><input type="checkbox" id="fr_all_ok"> <strong>[v4 15개 점검항목 일괄 양호 확인]</strong> 공통(가연물 10m 이격, 불티비산방지포 비치, 소화기 3개, 전선피복, 문어발 금지) + 절단(보안경·방진마스크, 그라인더 날/안전커버) + 용접(자동전격방지기, 역화방지기, 가스호스, 보안면) 및 작업 후 30분 잔불 확인 서약</label>
+        <div id="fire_status" class="fire-status" role="status" aria-live="polite"></div>
+        <div id="fire_checks"></div>
+        <div class="fire-grid fire-reviewer">
+          <label class="fire-field" for="fr_end"><span>실제 화기작업 종료일시</span><input id="fr_end" type="datetime-local"></label>
+          <label class="fire-field" for="fr_watch_end"><span>잔불 최종 확인일시 (종료 후 30분 이상)</span><input id="fr_watch_end" type="datetime-local"></label>
         </div>
+        <label class="fire-field" for="fr_notes"><span>기타 개선·특이사항 (있는 경우만)</span><textarea id="fr_notes" rows="2" placeholder="특이사항이 있을 때만 작성"></textarea></label>
+        <details class="fire-block"><summary>해당 작업만 추가 확인</summary>
+          <label class="fire-check-label"><input id="fr_gas_needed" type="checkbox">밀폐공간·가스 체류 위험이 있어 가스 측정이 필요한 작업</label>
+          <p id="fr_gas_auto_hint" class="fire-source" hidden>위에서 밀폐공간 작업을 선택하여 가스 측정란을 표시했습니다.</p>
+          <div id="fr_gas_fields" hidden>
+            <p class="fire-source">산소·유해가스는 아래 기준으로 확인하고, 가연성가스는 현장 작업 허용기준을 확인하세요. 밀폐공간은 별도 작업계획·출입·환기·구조 절차도 이행합니다.</p>
+            <div class="fire-grid">
+              <label class="fire-field" for="fr_o2"><span>산소 O₂ (%) · 18 이상 23.5 미만</span><input id="fr_o2" type="number" min="0" step="any"></label>
+              <label class="fire-field" for="fr_co2"><span>이산화탄소 CO₂ (%) · 1.5 미만</span><input id="fr_co2" type="number" min="0" step="any"></label>
+              <label class="fire-field" for="fr_co"><span>일산화탄소 CO (ppm) · 30 미만</span><input id="fr_co" type="number" min="0" step="any"></label>
+              <label class="fire-field" for="fr_h2s"><span>황화수소 H₂S (ppm) · 10 미만</span><input id="fr_h2s" type="number" min="0" step="any"></label>
+              <label class="fire-field" for="fr_lel"><span>가연성가스 (%LEL)</span><input id="fr_lel" type="number" min="0" max="100" step="any"></label>
+              <label class="fire-field" for="fr_gas_time"><span>가스 측정일시</span><input id="fr_gas_time" type="datetime-local"></label>
+              <label class="fire-field" for="fr_gas_person"><span>측정자 성명</span><input id="fr_gas_person"></label>
+            </div>
+            <label class="fire-check-label"><input id="fr_lel_confirm" type="checkbox">가연성가스가 현장 작업 허용기준을 충족함을 확인했습니다.</label>
+          </div>
+          <label class="fire-check-label"><input id="fr_isolation" type="checkbox">감지기 등 소방설비를 임시 차단하는 작업</label>
+          <div id="fr_isolation_fields" class="fire-grid" hidden>
+            <label class="fire-field" for="fr_isolation_approval"><span>차단 구역·방재 승인자 또는 승인번호</span><input id="fr_isolation_approval"></label>
+            <label class="fire-check-label"><input id="fr_restored" type="checkbox">작업 종료 후 정상 복구를 확인했습니다.</label>
+          </div>
+        </details>
+        <details class="fire-block"><summary>화재감시자 시간대별 기록 (선택 입력 · 출력 후 수기 가능)</summary>
+          <p class="fire-source">별도 화재감시 기록 시트를 엑셀에 함께 만듭니다. 현장에서 직접 기록하거나 아래에 실제 기록을 입력하세요.</p>
+          <div class="fire-table-wrap"><table class="fire-log"><thead><tr><th>점검일시</th><th>상태·조치</th><th>감시자</th><th>관리</th></tr></thead><tbody id="fire_watch_rows"></tbody></table></div>
+          <button type="button" class="fire-add" onclick="addFireWatchRow()">+ 기록 추가</button>
+        </details>
+        <details class="fire-block fire-law"><summary>적용 기준 안내</summary>
+          <p>제공된 DX 양식의 구성과 30분 잔불감시·주변 15m 확인 기준을 반영했습니다. 사업장별 비상 연락처와 현장 승인 절차는 해당 사업장 기준을 따릅니다.</p>
+          <p>현행 기준에 맞춰 성능인증 용접방화포, 화재감시자 장비, 산소·유해가스 기준을 반영했습니다. 화재감시자 배치의 11m 조건은 11m 밖이면 안전하다는 뜻이 아니며, 하부와 반대편의 불티·열전도 위험도 확인합니다.</p>
+          <p>해당 건설현장은 NFTC 606에 따른 소화기 종류·능력단위·추가 배치를 확인합니다. 본 체크시트가 별도 위험작업 허가·밀폐공간 절차 등을 대신하지는 않습니다.</p>
+          <p><a href="https://law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&amp;lsJoLnkSeq=1016870875" target="_blank" rel="noopener noreferrer">화재감시자·장비</a> · <a href="https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&amp;lsJoLnkSeq=1033350811" target="_blank" rel="noopener noreferrer">적정공기</a> · <a href="https://moel.go.kr/news/notice/noticeView.do?bbs_seq=20260101036" target="_blank" rel="noopener noreferrer">성능인증 용접방화포</a> · <a href="https://www.law.go.kr/LSW/admRulInfoP.do?admRulSeq=2100000225440&amp;chrClsCd=010202&amp;lsId=83651" target="_blank" rel="noopener noreferrer">NFTC 606</a></p>
+        </details>
       </div>
 
       <!-- [v4 시트11] 크레인 작업계획서 -->
@@ -731,6 +822,7 @@
       const workers = Number(getValue('f11_workers'));
       if (!Number.isSafeInteger(workers) || workers < 1) return showFieldError('f11_workers', '작업인원은 1 이상의 정수로 입력해 주세요.');
       for (const risk of getSelectedRisks()) {
+        if (risk === 'fire') continue;
         for (const field of document.querySelectorAll('#sec_' + risk + ' input[type="number"]')) {
           const number = Number(field.value);
           if (!field.value || !Number.isFinite(number) || number <= 0 || (field.id === 'cr_sling_cnt' && !Number.isSafeInteger(number))) {
@@ -738,6 +830,7 @@
           }
         }
       }
+      if (getSelectedRisks().includes('fire') && !validateFireNumbers()) return false;
       return true;
     }
 
@@ -745,7 +838,7 @@
       return name.replace(/[<>:"/\\|?*\u0000-\u001f]/g, '_').replace(/[. ]+$/g, '').slice(0, 180) + '.xlsx';
     }
 
-    function exportWorkbook(buildWorkbook, filename) {
+    function exportWorkbook(buildWorkbook, filename, documentNumber = '') {
       if (typeof XLSX === 'undefined') {
         alert('엑셀 생성 도구를 불러오지 못했습니다. 인터넷 연결을 확인한 뒤 페이지를 새로고침해 주세요.');
         return;
@@ -753,11 +846,220 @@
       try {
         const wb = XLSX.utils.book_new();
         buildWorkbook(wb);
+        if (documentNumber) stampWorkbookDocumentNumber(wb, documentNumber);
         XLSX.writeFile(wb, safeFileName(filename));
       } catch (error) {
         console.error('엑셀 생성 실패:', error);
         alert('엑셀 파일 생성에 실패했습니다. 입력 내용을 확인하고 다시 시도해 주세요.');
       }
+    }
+
+    // 관리자가 중앙 발급기를 배포한 뒤 /exec URL을 한 번 설정합니다.
+    // 접수 인증키는 이 파일에 넣지 않습니다.
+    const DOCUMENT_NUMBER_API_URL = '';
+    const DOCUMENT_SITE_CODES = Object.freeze({'홍천사업장':'HC', '구미사업장':'GM', '강동사업장':'GD'});
+    const DOCUMENT_TICKET_KEY = 'sm.document.ticket.v1';
+    const DOCUMENT_PENDING_KEY = 'sm.document.pending.v1';
+    let currentDocumentTicket = null;
+    let documentNumberRequest = null;
+    let integratedDownloadBusy = false;
+
+    function documentScope() {
+      const siteCode = DOCUMENT_SITE_CODES[getValue('f1_site')];
+      const requestDate = getValue('f2_req_date');
+      if (!siteCode || !parseDate(requestDate)) return null;
+      return {siteCode, requestDate, compactDate: requestDate.replaceAll('-', '')};
+    }
+
+    function documentNumberMatches(ticket, scope) {
+      if (!ticket || !scope || ticket.siteCode !== scope.siteCode || ticket.requestDate !== scope.requestDate) return false;
+      const pattern = new RegExp(`^SM${scope.siteCode}-${scope.compactDate}-([0-9]{3,})$`);
+      const match = String(ticket.documentNumber || '').match(pattern);
+      return Boolean(match && Number.isSafeInteger(Number(match[1])) && Number(match[1]) > 0 && String(Number(match[1])).padStart(3, '0') === match[1]);
+    }
+
+    function readDocumentSession(key) {
+      try { return JSON.parse(sessionStorage.getItem(key) || 'null'); } catch { return null; }
+    }
+
+    function saveDocumentSession(key, value) {
+      try {
+        if (value === null) sessionStorage.removeItem(key);
+        else sessionStorage.setItem(key, JSON.stringify(value));
+        return true;
+      } catch {
+        // 화면의 확정 번호는 유지하되, 복원 실패 사실을 사용자에게 알립니다.
+        document.getElementById('document_number_hint').textContent = '이 브라우저에서 번호 복원이 제한됩니다. 현재 번호를 기록하고 창을 닫지 마세요.';
+        return false;
+      }
+    }
+
+    function refreshDocumentNumber() {
+      const scope = documentScope();
+      const field = document.getElementById('document_number');
+      const hint = document.getElementById('document_number_hint');
+      if (!scope) {
+        field.value = DOCUMENT_SITE_CODES[getValue('f1_site')] ? '신청일을 입력하세요' : '사업장 코드를 확인하세요';
+        hint.textContent = '홍천 HC · 구미 GM · 강동 GD. 기타 사업장은 코드 지정 후 접수할 수 있습니다.';
+        return;
+      }
+      if (documentNumberMatches(currentDocumentTicket, scope)) {
+        field.value = currentDocumentTicket.documentNumber;
+        hint.textContent = '공용 발급번호 확정 · 재다운로드에는 같은 번호를 사용합니다. 다른 공사는 ‘새 접수’를 선택하세요.';
+      } else {
+        field.value = `SM${scope.siteCode}-${scope.compactDate}-접수 후 발급`;
+        hint.textContent = DOCUMENT_NUMBER_API_URL ? '사업장·신청일별 공용 접수 순서로 발급됩니다. 새로고침만으로 순번이 증가하지 않습니다.' : '공용 번호 연결 전입니다. 엑셀은 ‘미발급 초안’으로 저장할 수 있습니다.';
+      }
+    }
+
+    function resetDocumentTicket() {
+      if (documentNumberRequest) return;
+      if (readDocumentSession(DOCUMENT_PENDING_KEY)) {
+        alert('이전 접수의 발급 결과가 확인되지 않았습니다. 먼저 접수 버튼으로 같은 요청을 재확인해 주세요.');
+        return;
+      }
+      if (currentDocumentTicket && !confirm(`현재 접수번호는 ${currentDocumentTicket.documentNumber}입니다. 다른 공사를 새로 접수하시겠습니까? 기존 번호는 재사용되지 않습니다.`)) return;
+      currentDocumentTicket = null;
+      saveDocumentSession(DOCUMENT_TICKET_KEY, null);
+      refreshDocumentNumber();
+    }
+
+    function documentRequestId() {
+      if (!globalThis.crypto || !crypto.getRandomValues) throw new Error('안전한 요청 식별자를 만들 수 없습니다. HTTPS 웹페이지에서 이용해 주세요.');
+      if (crypto.randomUUID) return crypto.randomUUID();
+      const bytes = crypto.getRandomValues(new Uint8Array(16));
+      return Array.from(bytes, value => value.toString(16).padStart(2,'0')).join('');
+    }
+
+    function postDocumentNumberRequest(endpoint, payload) {
+      return new Promise((resolve, reject) => {
+        const frame = document.createElement('iframe');
+        frame.name = `sm_number_${payload.requestId.replaceAll('-', '')}`;
+        frame.hidden = true;
+        frame.title = '문서번호 접수 응답';
+        const form = document.createElement('form');
+        form.method = 'POST'; form.action = endpoint; form.target = frame.name; form.hidden = true;
+        for (const [name, value] of Object.entries(payload)) {
+          const field = document.createElement('input');
+          field.type = 'hidden'; field.name = name; field.value = value;
+          form.appendChild(field);
+        }
+        const cleanup = () => {
+          clearTimeout(timer); window.removeEventListener('message', receive); form.remove(); frame.remove();
+        };
+        const receive = event => {
+          let origin;
+          try { origin = new URL(event.origin); } catch { return; }
+          if (origin.protocol !== 'https:' || !(origin.hostname === 'script.google.com' || origin.hostname.endsWith('.googleusercontent.com'))) return;
+          const data = event.data;
+          if (!data || data.type !== 'SM_DOCUMENT_NUMBER_V1' || data.requestId !== payload.requestId) return;
+          if (data.ok !== true) {
+            cleanup(); reject(new Error(data.message || '중앙 발급 요청이 거절되었습니다.')); return;
+          }
+          const scope = {siteCode:payload.siteCode, requestDate:payload.requestDate, compactDate:payload.requestDate.replaceAll('-','')};
+          if (!documentNumberMatches(data, scope)) {
+            cleanup(); reject(new Error('중앙 발급 응답의 사업장·신청일·번호가 일치하지 않습니다. 같은 접수를 재확인해 주세요.')); return;
+          }
+          cleanup(); resolve(data);
+        };
+        const timer = setTimeout(() => {
+          cleanup(); reject(new Error('발급 응답을 확인하지 못했습니다. 접수 인증키와 연결을 확인하고 같은 접수 버튼을 다시 누르세요. 서버에서 이미 발급했다면 같은 번호를 돌려받습니다.'));
+        }, 45000);
+        window.addEventListener('message', receive);
+        document.body.append(frame, form);
+        try { form.submit(); } catch (error) { cleanup(); reject(error); }
+      });
+    }
+
+    async function ensureDocumentNumber() {
+      const scope = documentScope();
+      if (!scope) throw new Error('사업장(홍천·구미·강동)과 올바른 신청일을 선택해 주세요.');
+      if (documentNumberMatches(currentDocumentTicket, scope)) return currentDocumentTicket;
+      if (documentNumberRequest) return documentNumberRequest;
+      if (!/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(DOCUMENT_NUMBER_API_URL)) throw new Error('공용 문서번호 중앙 발급기가 아직 연결되지 않았습니다. 관리자가 배포한 발급기 URL을 연결해야 합니다.');
+      if (location.origin === 'null') throw new Error('공용 접수는 배포된 HTTPS 웹페이지에서 이용하세요. 로컬 HTML에서는 미리보기만 가능합니다.');
+      const accessKey = getValue('document_access_key');
+      if (!accessKey) { document.querySelector('.document-number-auth').open = true; document.getElementById('document_access_key').focus(); throw new Error('관리자에게 받은 접수 인증키를 입력해 주세요.'); }
+      const previous = readDocumentSession(DOCUMENT_PENDING_KEY);
+      if (previous && (previous.siteCode !== scope.siteCode || previous.requestDate !== scope.requestDate)) throw new Error(`이전 ${previous.siteCode} / ${previous.requestDate} 접수 결과를 먼저 확인해 주세요. 해당 사업장·신청일로 되돌린 뒤 재시도할 수 있습니다.`);
+      const pending = previous || {requestId:documentRequestId(), siteCode:scope.siteCode, requestDate:scope.requestDate};
+      // 네트워크 실패 후에도 재시도 식별자를 유지해야 같은 접수가 중복 발급되지 않습니다.
+      try { sessionStorage.setItem(DOCUMENT_PENDING_KEY, JSON.stringify(pending)); }
+      catch { throw new Error('접수 복원 정보를 보관할 수 없습니다. 브라우저의 사이트 저장소 사용을 허용한 뒤 재시도해 주세요.'); }
+      const buttons = ['document_number_issue','document_number_new'].map(id => document.getElementById(id));
+      const selectors = ['f1_site','f2_req_date'].map(id => document.getElementById(id));
+      buttons.forEach(button => button.disabled = true); selectors.forEach(field => field.disabled = true);
+      document.getElementById('document_number_hint').textContent = '중앙에서 접수 순번을 확인하고 있습니다…';
+      documentNumberRequest = (async () => {
+        try {
+          const result = await postDocumentNumberRequest(DOCUMENT_NUMBER_API_URL, {...pending, accessKey, returnOrigin:location.origin});
+          currentDocumentTicket = {requestId:pending.requestId, siteCode:result.siteCode, requestDate:result.requestDate, documentNumber:result.documentNumber, issuedAt:result.issuedAt};
+          // 성공 응답을 먼저 보관한 뒤 대기 요청을 지워 새로고침 시에도 같은 번호를 복원합니다.
+          if (saveDocumentSession(DOCUMENT_TICKET_KEY, currentDocumentTicket)) saveDocumentSession(DOCUMENT_PENDING_KEY, null);
+          refreshDocumentNumber();
+          return currentDocumentTicket;
+        } finally {
+          documentNumberRequest = null;
+          buttons.forEach(button => button.disabled = false); selectors.forEach(field => field.disabled = false);
+        }
+      })();
+      return documentNumberRequest;
+    }
+
+    async function issueDocumentNumber() {
+      if (!validateIntegrated()) return;
+      try { await ensureDocumentNumber(); }
+      catch (error) { document.getElementById('document_number_hint').textContent = error.message; alert(error.message); }
+    }
+
+    async function downloadExcelIntegrated() {
+      if (integratedDownloadBusy || !validateIntegrated()) return;
+      if (typeof XLSX === 'undefined') { alert('엑셀 생성 도구를 불러오지 못했습니다. 연결을 확인하고 새로고침해 주세요.'); return; }
+      integratedDownloadBusy = true;
+      try {
+        if (!DOCUMENT_NUMBER_API_URL && !documentNumberMatches(currentDocumentTicket, documentScope())) {
+          buildIntegratedWorkbook('미발급-초안');
+          document.getElementById('document_number_hint').textContent = '공용 문서번호는 미발급 상태입니다. 현재 엑셀은 미발급 초안으로 저장했습니다.';
+          return;
+        }
+        const ticket = await ensureDocumentNumber();
+        // 응답을 기다리는 사이의 변경사항도 확인합니다.
+        if (!documentNumberMatches(ticket, documentScope()) || !validateIntegrated()) return;
+        buildIntegratedWorkbook(ticket.documentNumber);
+      } catch (error) { document.getElementById('document_number_hint').textContent = error.message; alert(error.message); }
+      finally { integratedDownloadBusy = false; }
+    }
+
+    function stampWorkbookDocumentNumber(wb, number) {
+      for (const name of wb.SheetNames) {
+        const sheet = wb.Sheets[name];
+        const range = XLSX.utils.decode_range(sheet['!ref']);
+        // 제목 다음에 한 행을 삽입하여 기존 데이터와 서식을 덮어쓰지 않습니다.
+        for (let row = range.e.r; row >= 1; row--) {
+          for (let col = range.s.c; col <= range.e.c; col++) {
+            const from = XLSX.utils.encode_cell({r:row,c:col});
+            const to = XLSX.utils.encode_cell({r:row+1,c:col});
+            if (sheet[from]) { sheet[to] = sheet[from]; delete sheet[from]; }
+          }
+        }
+        if (sheet['!rows']) sheet['!rows'].splice(1,0,{});
+        for (const merge of sheet['!merges'] || []) {
+          if (merge.s.r >= 1) merge.s.r++;
+          if (merge.e.r >= 1) merge.e.r++;
+        }
+        range.e.r++; range.e.c = Math.max(range.e.c,1);
+        sheet['!ref'] = XLSX.utils.encode_range(range);
+        XLSX.utils.sheet_add_aoa(sheet,[['문서번호',number]],{origin:'A2'});
+      }
+    }
+
+    function initializeDocumentNumbers() {
+      currentDocumentTicket = readDocumentSession(DOCUMENT_TICKET_KEY);
+      for (const id of ['f1_site','f2_req_date']) {
+        document.getElementById(id).addEventListener('input',refreshDocumentNumber);
+        document.getElementById(id).addEventListener('change',refreshDocumentNumber);
+      }
+      refreshDocumentNumber();
     }
 
     function toggleSections() {
@@ -768,6 +1070,241 @@
           sec.classList.toggle('hidden', !chk.checked);
         }
       });
+      if (document.getElementById('fire_pre_progress')) updateFireStatus();
+    }
+
+    // 업로드된 DX 실제 점검표의 작업 전 9 / 중 4 / 후 4 구성을 사용합니다.
+    const FIRE_STAGES = [['pre','작업 전'],['during','작업 중'],['post','작업 종료 후']];
+    const FIRE_ROLES = [['site','시공사'],['request','의뢰부서'],['owner','발주부서']];
+    const FIRE_ITEMS = [
+      ['pre01','pre','P01','허가서·SOP·위험성평가표·필요한 MSDS를 현장에 비치했는가?',''],
+      ['pre02','pre','P02','작업구역을 구획하고 주변·하부·반대편의 가연물과 가스 위험을 제거했는가?','불티 이동·열전도 위험과 다른 작업의 간섭도 확인'],
+      ['pre03','pre','P03','작업에 맞는 안전모·보안면·용접장갑·안전화·호흡보호구를 착용했는가?','용접·절단 방식과 유해요인에 맞는 보호구 사용'],
+      ['pre04','pre','P04','적합한 소화기 2개 이상을 비치하고 주변 소화전을 즉시 사용할 수 있는가?','해당 건설현장은 작업지점 5m 이내 3단위 이상 소화기 2개와 대형소화기 1개 추가 배치도 확인'],
+      ['pre05','pre','P05','성능인증 용접방화포로 불티를 막고 바닥·벽·덕트의 틈새를 막았는가?','KFI 성능인증 확인 · 발판과 하부까지 보양'],
+      ['pre06','pre','P06','화재감시자를 전담 배치하고 필수 장비를 지급했는가?','확성기·휴대용 조명·기준에 적합한 화재 대피용 마스크 / DX 복장: 안전모·조끼'],
+      ['pre07','pre','P07','사용 장비의 안전장치·전선·접지·가스 누출 상태를 점검했는가?','전기: 누전·감전방지장치, 절연·접지 / 가스: 역화방지기, 압력조정기, 호스 / 손상 케이블 사용 금지'],
+      ['pre08','pre','P08','용접기·절단기 등 사용 장비의 작업 전 점검을 완료했는가?','용접기는 일일점검표 작성 · 절단기는 날·고정·안전커버·허용회전수 확인'],
+      ['pre09','pre','P09','실내 작업의 집진·환기설비가 가동되고 연기·흄 유입이 통제되는가?','환기에 산소 사용 금지 · 감지기 임시 차단은 아래 추가 확인'],
+      ['during01','during','M01','작업 시작 때의 안전조치가 유지되고 조건 변경·혼재작업 위험이 통제되는가?','조건 변화나 미조치 불량 발견 시 중지·조치, 필요 시 가스 재측정'],
+      ['during02','during','M02','발판·비계·고소작업대가 안정적이고 난간·추락방지조치가 유지되는가?','적합한 작업발판 사용 · 사다리는 별도 허용조건 확인'],
+      ['during03','during','M03','화재감시자가 이탈·겸직 없이 감시하고 시간대별 점검을 기록하는가?','가연물·불티·가스 검지/경보장치·대피경로 확인'],
+      ['during04','during','M04','작업자가 작업에 전념하며 다른 작업과의 간섭·이상 징후가 없는가?','불합리 사항은 해당 행의 조치란에 기록'],
+      ['post01','post','A01','불티·고열로 인한 인화·그을림과 주변·하부의 이상이 없는가?','벽체 반대편·덕트 등 열과 불티가 전달되는 구역도 확인'],
+      ['post02','post','A02','가스 밸브를 잠그고 정해진 절차로 잔류가스를 처리한 뒤 정리했는가?','가연성 가스를 실내에 임의 방출하지 않음'],
+      ['post03','post','A03','용접기·공구·분전함 전원을 차단·시건하고 임시 차단 소방설비를 복구했는가?','감지기 등 차단한 설비는 정상 복구 확인'],
+      ['post04','post','A04','작업 종료 후 30분 이상 상주하여 주변 15m와 불티·열 전달 구역의 잔불을 확인했는가?','30분·15m는 제공된 DX 체크시트 기준 · 아래 실제 종료/확인시각 기록']
+    ];
+    let fireWatchSequence = 0;
+
+    function fireElement(tag, attrs = {}, text = '') {
+      const node = document.createElement(tag);
+      for (const [key,value] of Object.entries(attrs)) node.setAttribute(key,value);
+      node.textContent = text;
+      return node;
+    }
+
+    function fireControl(parent,id,label,type='text',choices=null) {
+      const wrap=fireElement('label',{class:'fire-field',for:id});
+      wrap.appendChild(fireElement('span',{},label));
+      const control=fireElement(choices?'select':'input',{id});
+      if(choices) choices.forEach(([value,text])=>control.appendChild(fireElement('option',{value},text)));
+      else control.type=type;
+      wrap.appendChild(control); parent.appendChild(wrap); return control;
+    }
+
+    function initializeFirePermit() {
+      const container=document.getElementById('fire_checks');
+      for(const [stage,title] of FIRE_STAGES) {
+        const block=fireElement('details',{class:'fire-block'}); block.open=stage==='pre';
+        const summary=fireElement('summary');
+        summary.append(fireElement('span',{},title),fireElement('span',{id:`fire_${stage}_progress`,class:'fire-progress'}));
+        block.appendChild(summary);
+        const table=fireElement('table',{class:'fire-table'});
+        const header=table.createTHead().insertRow();
+        ['번호','확인할 내용',...FIRE_ROLES.map(([,name])=>name)].forEach(text=>header.appendChild(fireElement('th',{scope:'col'},text)));
+        const body=table.createTBody();
+        for(const [id,itemStage,number,question,hint] of FIRE_ITEMS.filter(x=>x[1]===stage)) {
+          const row=body.insertRow();row.insertCell().textContent=number;
+          const detail=row.insertCell(); detail.appendChild(fireElement('p',{},question));
+          if(hint) detail.appendChild(fireElement('small',{class:'fire-hint'},hint));
+          for(const [role,name] of FIRE_ROLES) {
+            const prefix=`fc_${id}_${role}`;
+            const extra=fireElement('div',{id:`${prefix}_extra`,class:'fire-row-extra',hidden:''});
+            const label=fireElement('label',{for:`${prefix}_note`,id:`${prefix}_note_label`},`${name} · 사유·조치내용`);
+            const note=fireElement('textarea',{id:`${prefix}_note`,rows:'2'});
+            extra.append(label,note);
+            const correction=fireElement('div',{id:`${prefix}_correction`,hidden:''});
+            const fixedLabel=fireElement('label',{class:'fire-check-label'});
+            const fixed=fireElement('input',{id:`${prefix}_fixed`,type:'checkbox'});
+            fixedLabel.append(fixed,document.createTextNode(`${name} 조치 후 재확인 완료`));
+            correction.appendChild(fixedLabel);
+            fireControl(correction,`${prefix}_rechecker`,`${name} 재확인자 성명`);
+            extra.appendChild(correction);detail.appendChild(extra);
+            const resultCell=row.insertCell(); resultCell.className='fire-result-cell';
+            fireControl(resultCell,`${prefix}_result`,`${number} ${name} 결과`,'text',[['','미점검'],['good','양호'],['bad','불량'],['na','해당 없음']]);
+          }
+        }
+        const scroll=fireElement('div',{class:'fire-table-wrap',role:'region','aria-label':`${title} 시공사·의뢰부서·발주부서 점검표`,tabindex:'0'});
+        scroll.appendChild(table); block.appendChild(scroll);
+        const reviewer=fireElement('div',{class:'fire-grid fire-reviewer'});
+        for(const [role,name] of FIRE_ROLES) {
+          const group=fireElement('div',{class:'fire-reviewer-card'});
+          group.appendChild(fireElement('strong',{},name));
+          fireControl(group,`fc_${stage}_${role}_checker`,`${title} ${name} 점검자 성명`);
+          fireControl(group,`fc_${stage}_${role}_time`,`${title} ${name} 점검일시`,'datetime-local');
+          reviewer.appendChild(group);
+        }
+        block.appendChild(reviewer);container.appendChild(block);
+      }
+      document.getElementById('sec_fire').addEventListener('input',updateFireStatus);
+      document.getElementById('sec_fire').addEventListener('change',updateFireStatus);
+      updateFireStatus();
+    }
+
+    function fireGasNeeded() {
+      return document.getElementById('fr_gas_needed').checked || getSelectedRisks().includes('confined');
+    }
+
+    function syncSimpleFireExtras() {
+      const needed=fireGasNeeded();
+      document.getElementById('fr_gas_fields').hidden=!needed;
+      document.getElementById('fr_gas_auto_hint').hidden=!getSelectedRisks().includes('confined');
+      document.getElementById('fr_isolation_fields').hidden=!document.getElementById('fr_isolation').checked;
+    }
+
+    function fireRoleIssues(id,role) {
+      const prefix=`fc_${id}_${role}`, status=getValue(`${prefix}_result`);
+      if(!status) return ['미점검'];
+      if(status==='na'&&!getValue(`${prefix}_note`)) return ['해당 없음 사유 필요'];
+      if(status==='bad'&&(!getValue(`${prefix}_note`)||!document.getElementById(`${prefix}_fixed`).checked||!getValue(`${prefix}_rechecker`))) return ['불량 조치·재확인 필요'];
+      return [];
+    }
+
+    function fireRowIssues(id) {
+      return FIRE_ROLES.flatMap(([role,name])=>fireRoleIssues(id,role).map(issue=>`${name} ${issue}`));
+    }
+
+    function fireStageIssues(stage) {
+      const issues=[];
+      for(const [id,itemStage,number] of FIRE_ITEMS.filter(x=>x[1]===stage)) fireRowIssues(id).forEach(issue=>issues.push(`${number} ${issue}`));
+      for(const [role,name] of FIRE_ROLES) if(!getValue(`fc_${stage}_${role}_checker`)||!getValue(`fc_${stage}_${role}_time`)) issues.push(`${name} 점검자·점검일시 기입 필요`);
+      if(stage==='pre') {
+        if(!getValue('fr_watcher')) issues.push('전담 화재감시자 기입 필요');
+        if(fireGasNeeded()) {
+          for(const [id,label,pass] of [['fr_o2','산소',n=>n>=18&&n<23.5],['fr_co2','이산화탄소',n=>n>=0&&n<1.5],['fr_co','일산화탄소',n=>n>=0&&n<30],['fr_h2s','황화수소',n=>n>=0&&n<10]]) {
+            if(getValue(id)===''||!pass(Number(getValue(id)))) issues.push(`${label} 미측정 또는 기준 이탈`);
+          }
+          if(getValue('fr_lel')===''||Number(getValue('fr_lel'))<0||Number(getValue('fr_lel'))>100||!document.getElementById('fr_lel_confirm').checked) issues.push('가연성가스 측정·현장 허용기준 확인 필요');
+          if(!getValue('fr_gas_time')||!getValue('fr_gas_person')) issues.push('가스 측정일시·측정자 기입 필요');
+          for(const [role,name] of FIRE_ROLES) if(getValue('fr_gas_time')&&getValue(`fc_pre_${role}_time`)&&Date.parse(getValue('fr_gas_time'))>Date.parse(getValue(`fc_pre_${role}_time`))) issues.push(`최초 가스 측정일시가 ${name} 작업 전 점검 이후임`);
+        }
+        if(document.getElementById('fr_isolation').checked&&!getValue('fr_isolation_approval')) issues.push('소방설비 차단 승인 기록 필요');
+      }
+      if(stage==='post') {
+        const end=Date.parse(getValue('fr_end')),watch=Date.parse(getValue('fr_watch_end'));
+        if(!Number.isFinite(end)||!Number.isFinite(watch)) issues.push('실제 작업 종료·잔불 확인시각 기입 필요');
+        else if(watch-end<30*60000) issues.push('DX 기준 잔불감시 30분 미충족');
+        for(const [role,name] of FIRE_ROLES) if(Number.isFinite(watch)&&getValue(`fc_post_${role}_time`)&&Date.parse(getValue(`fc_post_${role}_time`))<watch) issues.push(`${name} 종료 후 점검일시는 잔불 확인 이후에 기입`);
+        if(document.getElementById('fr_isolation').checked&&!document.getElementById('fr_restored').checked) issues.push('임시 차단 소방설비 정상 복구 필요');
+      }
+      return issues;
+    }
+
+    function fireState() {
+      const pre=fireStageIssues('pre'),during=fireStageIssues('during'),post=fireStageIssues('post');
+      const issues=[...pre,...during,...post];
+      for(const [role,name] of FIRE_ROLES) {
+        const preTime=Date.parse(getValue(`fc_pre_${role}_time`)),duringTime=Date.parse(getValue(`fc_during_${role}_time`)),postTime=Date.parse(getValue(`fc_post_${role}_time`)),end=Date.parse(getValue('fr_end'));
+        if(duringTime<preTime||postTime<duringTime||(Number.isFinite(end)&&end<duringTime)) issues.push(`${name} 작업 전·중·종료 점검일시 순서를 확인하세요.`);
+      }
+      for(const row of document.querySelectorAll('#fire_watch_rows tr')) {
+        const values=['time','note','person'].map(key=>getValue(`${row.dataset.watchId}_${key}`));
+        if(values.some(Boolean)&&values.some(value=>!value)) issues.push('입력한 화재감시 기록의 빈칸을 작성하세요.');
+      }
+      return {pre,during,post,issues,complete:!issues.length};
+    }
+
+    function updateFireStatus() {
+      syncSimpleFireExtras();
+      for(const [id] of FIRE_ITEMS) for(const [role,name] of FIRE_ROLES) {
+        const prefix=`fc_${id}_${role}`,result=getValue(`${prefix}_result`);
+        document.getElementById(`${prefix}_extra`).hidden=!['bad','na'].includes(result);
+        document.getElementById(`${prefix}_correction`).hidden=result!=='bad';
+        document.getElementById(`${prefix}_note_label`).textContent=`${name} · ${result==='na'?'해당 없음 사유':'불량 내용·조치내용'}`;
+      }
+      const state=fireState();
+      for(const [stage] of FIRE_STAGES) {
+        const group=FIRE_ITEMS.filter(x=>x[1]===stage);
+        const done=group.filter(([id])=>!fireRowIssues(id).length).length;
+        const roleDone=group.reduce((count,[id])=>count+FIRE_ROLES.filter(([role])=>!fireRoleIssues(id,role).length).length,0);
+        document.getElementById(`fire_${stage}_progress`).textContent=`${done}/${group.length}항목 · ${roleDone}/${group.length*3}판정`;
+      }
+      const status=document.getElementById('fire_status');
+      status.replaceChildren(fireElement('strong',{},state.complete?'점검 기록 입력 완료 · 허가·서명은 현장에서 별도 확인':'필요한 항목을 점검한 뒤 결과를 선택하세요.'));
+      const openDefect=FIRE_ITEMS.some(([id])=>FIRE_ROLES.some(([role])=>getValue(`fc_${id}_${role}_result`)==='bad'&&fireRoleIssues(id,role).length));
+      if(openDefect) status.appendChild(fireElement('p',{},'미조치 불량이 있습니다. 해당 작업을 중지하고 조치·재확인하세요.'));
+      const special=state.issues.filter(issue=>!issue.includes('미점검')&&!issue.includes('점검자·점검일시'));
+      if(special.length) status.appendChild(fireElement('p',{class:'fire-hint'},special.slice(0,3).join(' / ')));
+    }
+
+    function addFireWatchRow() {
+      const id=`fw_${++fireWatchSequence}`;
+      const row=document.getElementById('fire_watch_rows').insertRow();row.dataset.watchId=id;
+      fireControl(row.insertCell(),`${id}_time`,'점검일시','datetime-local');
+      fireControl(row.insertCell(),`${id}_note`,'불티·가연물·설비 상태 / 조치');
+      fireControl(row.insertCell(),`${id}_person`,'감시자');
+      const remove=fireElement('button',{type:'button',class:'fire-add','aria-label':'이 감시 기록 삭제'},'삭제');
+      remove.addEventListener('click',()=>{row.remove();updateFireStatus();});row.insertCell().appendChild(remove);
+    }
+
+    function validateFireNumbers() {
+      if(!fireGasNeeded()) return true;
+      for(const id of ['fr_o2','fr_co2','fr_co','fr_h2s','fr_lel']) {
+        const value=getValue(id);
+        if(value!==''&&(!Number.isFinite(Number(value))||Number(value)<0)) return showFieldError(id,'측정값은 0 이상의 숫자로 입력하세요.');
+      }
+      return true;
+    }
+
+    function fireResult(value) {return ({good:'양호',bad:'불량',na:'해당 없음'})[value]||'미점검';}
+    function fireNumber(id) {return getValue(id)===''?'미측정':Number(getValue(id));}
+
+    function appendFirePermitSheets(wb,common) {
+      const state=fireState();
+      const data=[['공사작업 허가서(화기) 일일안전점검표'],['작성 기준','제공된 DX 실제 점검표: 전9 / 중4 / 후4'],['공사명',common.project,'사업장',common.site],['업체명',common.company,'의뢰·발주부서',common.dept],['작업장소',getValue('fr_place')||common.location,'작업종류',getValue('fr_types')],['작업기간',common.period,'계획 작업시간',common.time],['작업인원',common.workers+'명','신청일',common.date],['화기작업 감독자',getValue('fr_supervisor')||common.leader,'전담 화재감시자',getValue('fr_watcher')],['비상 연락처',getValue('fr_emergency')],['기록 상태',state.complete?'점검 기록 입력 완료':'미완료 항목 있음 (초안)'],['허가·서명','입력 완료는 작업허가 승인이 아님. 현장 확인 후 자필·전자서명 별도.']];
+      for(const [stage,title] of FIRE_STAGES) {
+        data.push([],[title],['번호','점검 내용',...FIRE_ROLES.map(([,name])=>name),'사유·조치내용','재확인자·상태']);
+        for(const [id,itemStage,number,question,hint] of FIRE_ITEMS.filter(x=>x[1]===stage)) {
+          const notes=[],rechecks=[];
+          for(const [role,name] of FIRE_ROLES) {
+            const prefix=`fc_${id}_${role}`,result=getValue(`${prefix}_result`),note=getValue(`${prefix}_note`);
+            if(note) notes.push(`[${name}] ${note}`);
+            if(result==='bad'||getValue(`${prefix}_rechecker`)) rechecks.push(`[${name}] ${getValue(`${prefix}_rechecker`)} / ${document.getElementById(`${prefix}_fixed`).checked?'조치 후 재확인 완료':'미완료'}`);
+          }
+          data.push([number,question+(hint?'\n'+hint:''),...FIRE_ROLES.map(([role])=>fireResult(getValue(`fc_${id}_${role}_result`))),notes.join('\n'),rechecks.join('\n')]);
+        }
+        for(const [role,name] of FIRE_ROLES) data.push([title+' '+name+' 점검자',getValue(`fc_${stage}_${role}_checker`),'점검일시',getValue(`fc_${stage}_${role}_time`),'서명: __________']);
+      }
+      data.push([],['작업종료·잔불 확인'],['실제 작업종료',getValue('fr_end'),'잔불 최종 확인',getValue('fr_watch_end')],['감시 기준','종료 후 30분 이상 상주, 주변 15m 및 불티·열 전달 구역 확인 (제공된 DX 양식 기준)']);
+      if(fireGasNeeded()) {
+        data.push([],['가스 위험 작업 추가 확인'],['측정 항목','기준','실측값'],['산소','18% 이상 23.5% 미만',fireNumber('fr_o2')],['이산화탄소','1.5% 미만',fireNumber('fr_co2')],['일산화탄소','30ppm 미만',fireNumber('fr_co')],['황화수소','10ppm 미만',fireNumber('fr_h2s')],['가연성가스','현장 작업 허용기준 충족 여부 확인',fireNumber('fr_lel')+' %LEL'],['가연성가스 기준 확인',document.getElementById('fr_lel_confirm').checked?'현장 기준 확인함':'미확인'],['측정일시',getValue('fr_gas_time'),'측정자',getValue('fr_gas_person')]);
+      }
+      if(document.getElementById('fr_isolation').checked) data.push([],['소방설비 임시 차단 승인·구역',getValue('fr_isolation_approval')],['정상 복구 확인',document.getElementById('fr_restored').checked?'복구 확인함':'미확인']);
+      data.push([],['개선·특이사항',getValue('fr_notes')],[],['단계별 현장 확인·허가 서명 (출력 후)'],['확인 구분','작업 전','작업 중','작업 종료 후'],['시공사 관리감독자','성명/시간/서명: __________','성명/시간/서명: __________','성명/시간/서명: __________'],['의뢰부서 담당자','성명/시간/서명: __________','성명/시간/서명: __________','성명/시간/서명: __________'],['발주부서 담당자','성명/시간/서명: __________','성명/시간/서명: __________','성명/시간/서명: __________'],['EHS·방재 확인','성명/시간/서명: __________','성명/시간/서명: __________','성명/시간/서명: __________'],['최초 작업허가 (작업 전)','허가자: __________','허가일시: __________','서명: __________'],['DX 점검·서명 횟수','제공 양식: 시공사 현장 상주 / 의뢰부서·건설사 A3·B2·C1회/일 이상 / 발주부서 A2·B1·C1회/일 이상. 실제 부서별 적용기준 확인.'],['미완료 사항',state.issues.join('\n')]);
+      const sheet=XLSX.utils.aoa_to_sheet(data);sheet['!cols']=[{wch:25},{wch:85},{wch:16},{wch:16},{wch:16},{wch:42},{wch:36}];
+      XLSX.utils.book_append_sheet(wb,sheet,'작업계획서-화기,절단작업');
+      const logs=[['화재감시자 지정 및 시간대별 일일점검표'],['공사명',common.project,'업체',common.company],['배치 장소',getValue('fr_place')||common.location,'감시자',getValue('fr_watcher')],['지정권자',getValue('fr_supervisor')||common.leader,'서명','지정권자: __________ / 감시자: __________'],['필수 장비','확성기·휴대용 조명·기준에 적합한 화재 대피용 마스크 (제241조의2 제3항)'],['주요 업무','가연물·불티 감시, 가스 검지/경보장치 확인, 화재 시 대피 유도. 감시를 방해하는 업무 겸하지 않음.'],['비상 연락처',getValue('fr_emergency')],[],['실제 점검일시','불티·가연물·설비 상태 / 조치','감시자','서명']];
+      const rows=Array.from(document.querySelectorAll('#fire_watch_rows tr'));
+      let logged=0;
+      for(const row of rows) {
+        const id=row.dataset.watchId,record=['time','note','person'].map(key=>getValue(`${id}_${key}`));
+        if(record.some(Boolean)){logs.push([...record,'서명: __________']);logged++;}
+      }
+      if(!logged) for(let i=0;i<5;i++) logs.push(['','','','서명: __________']);
+      logs.push([],['작업 종료시각',getValue('fr_end'),'잔불 최종 확인',getValue('fr_watch_end')],['DX 감시 기준','작업 종료 후 30분 이상 / 주변 15m 및 불티·열 전달 구역'],['최종 확인자',FIRE_ROLES.map(([role,name])=>`${name}: ${getValue(`fc_post_${role}_checker`)}`).join(' / '),'서명','__________']);
+      const logSheet=XLSX.utils.aoa_to_sheet(logs);logSheet['!cols']=[{wch:27},{wch:75},{wch:27},{wch:32}];
+      XLSX.utils.book_append_sheet(wb,logSheet,'화재감시자-지정,감시기록');
     }
 
     function toggleRiskGuide(forceOpen) {
@@ -880,7 +1417,7 @@
       XLSX.utils.book_append_sheet(wb, ws6, "작업_전_안전점검_회의(TBM)");
     }
 
-    function downloadExcelIntegrated() {
+    function buildIntegratedWorkbook(documentNumber) {
       if (!validateIntegrated()) return;
       const v1_site = getValue('f1_site');
       const v2_date = getValue('f2_req_date');
@@ -1121,48 +1658,9 @@
         }
 
         if (checked.includes('fire')) {
-          const frSup = getValue('fr_supervisor') || leaderName;
-          const frWat = getValue('fr_watcher');
-          const fOk = document.getElementById('fr_all_ok').checked ? "○ (양호)" : "미점검";
-
-          const wsFire = XLSX.utils.aoa_to_sheet([
-            ["화기/절단 작업 허가서 (산업안전보건법 시행령 제43조)", "", "", ""],
-            [],
-            ["1. 작업 개요", "", "", ""],
-            ["작업명", v7_proj, "작업부서(업체)", `${v3_dept} (${v5_comp})`],
-            ["작업장소 ①", v9_loc, "작업시간 ①", `${v8_peri} (${v10_tim})`],
-            ["작업자", `${v11_wrk}명`, "관리 책임자", `${frSup} (서명)`],
-            [],
-            ["2. 점검 항목 및 결과", "", "주관부서 점검", "EHS 확인"],
-            ["공통 1", `가연물이나 인화물질이 ( 10 )m 이상 이격 되어 있는가? (${getValue('fr_ext')})`, fOk, ""],
-            ["공통 2", "불티 비산 방지 조치는 되어 있는가? (불연재 및 불티비산방지포/방화포 비치)", fOk, ""],
-            ["공통 3", "소화기( 3 개)는 작업장소 주변에 비치되어 있는가?", fOk, ""],
-            ["공통 4", "기기 전선 및 리드선의 피복이 노후 및 벗겨진 곳은 없는가?", fOk, ""],
-            ["공통 5", "잔디밭/외부 화기 작업 시 주변 물 분무 조치는 되어 있는가?", fOk, ""],
-            ["공통 6", "멀티탭이나 리드선은 문어발식 사용을 금지하고 있는가?", fOk, ""],
-            ["절단작업 1", "보안경, 안전화, 방진마스크는 착용하였는가?", fOk, ""],
-            ["절단작업 2", "그라인더 날은 견고히 고정되어 있는가?", fOk, ""],
-            ["절단작업 3", "그라인더 날은 균열이나 이빠짐이 없는가?", fOk, ""],
-            ["절단작업 4", "안전커버 및 벨트 덮개가 견고하게 부착되었는가?", fOk, ""],
-            ["용접작업 1", "전기용접기에 자동전격방지기는 부착되어 있는가?", fOk, ""],
-            ["용접작업 2", "접지, 홀더, 1차 전원선의 피복이 노후되거나 파손된 곳은 없는가?", fOk, ""],
-            ["용접작업 3", "아세틸렌/가스 용기에 역화 방지기 및 감압기는 부착되어 있는가?", fOk, ""],
-            ["용접작업 4", "가스 호스 노후상태 및 연결부 체결상태는 확인하였는가?", fOk, ""],
-            ["용접작업 5", "보안면 및 용접용 장갑은 착용하고 작업을 하는가?", fOk, ""],
-            [],
-            ["3. 준수사항", "", "", ""],
-            ["준수사항", "1) 화기작업 시간은 원칙적으로 08:00 ~ 17:00까지 (근무시간 내) 가능함\n2) 반드시 작업자 외 1명 이상 화기/절단작업 감독자를 지정하여 작업 및 공사를 감독하도록 함\n3) 작업장소 이동 및 작업시간 연장 시 EHS그룹 및 발주부서 담당자에게 반드시 변경 허가를 맡을 것\n4) 화기/절단작업 감독자는 작업 중 자리를 이탈하지 말고 작업 종료 후 불씨가 남아있는지 확인할 것\n5) 감독자는 작업 종료 후 정리정돈을 실시하고 EHS그룹으로 연락하여 작업종료를 알린다.", "", ""],
-            ["서약 및 허가", `화기/절단작업 감독자 : ${frSup} (서명)`, "EHS그룹 허가자 : (서명)", `${v2_date}`],
-            [],
-            ["======================================================================", "", "", ""],
-            ["화재 감시자 지정서 (산업안전보건기준에 관한 규칙 제241조의2)", "", "", ""],
-            ["공사업체", v5_comp, "직책 / 성명", frWat],
-            ["지정 문구", "위 사람을 산업안전보건기준에 관한 규칙 제241조의2(화재감시자)에 의거 화재 예방 업무를 수행하기 위하여 화재 감시자로 지정합니다.", "", ""],
-            ["□ 화재 감시자 업무", "1. 화재위험장소의 화재 위험을 감시하고, 화재 발생시 사업장 내 근로자의 대피 유도\n2. 즉시 사용 가능 소화 설비를 갖추고 그 사용법 숙지와 초기 화재 진압 능력 구비\n3. 화재발생시 근로자 대피를 위한 비상구 확보\n4. 인근의 소화설비 위치 확인\n5. 비상경보설비를 작동할 수 있도록 상시 유지 및 점검 (소화전 발신기 등)\n6. 용접 ∙ 용단작업 등 화기취급 작업 후에도 30분 이상 현장 잔불 여부 확인", "", ""],
-            [`지정일자 : ${yyyy}년 ${mm}월 ${dd}일`, `공사업체 : ${v5_comp}`, `현장소장 : ${v6_cmgr} (서명)`, ""]
-          ]);
-          wsFire['!cols'] = [{wch: 20}, {wch: 62}, {wch: 22}, {wch: 18}];
-          XLSX.utils.book_append_sheet(wb, wsFire, "작업계획서-화기,절단작업");
+          appendFirePermitSheets(wb, {site: v1_site, date: v2_date, dept: v3_dept, company: v5_comp,
+            project: v7_proj, period: v8_peri, location: v9_loc, time: v10_tim,
+            workers: v11_wrk, leader: leaderName});
         }
 
         if (checked.includes('crane')) {
@@ -1318,11 +1816,13 @@
           XLSX.utils.book_append_sheet(wb, wsAs, "작업계획서-석면,해체");
         }
 
-      }, `[삼성메디슨_작업계획서통합본]_${v5_comp}_${v7_proj}_${v2_date}`);
+      }, `${documentNumber}_[삼성메디슨_작업계획서통합본]_${v5_comp}_${v7_proj}_${v2_date}`, documentNumber);
     }
     document.addEventListener('input', event => {
       if (event.target.setCustomValidity) event.target.setCustomValidity('');
     });
+    initializeDocumentNumbers();
+    initializeFirePermit();
     document.querySelectorAll('#sop_tbody tr').forEach(addSopDeleteButton);
     document.querySelectorAll('label').forEach(label => {
       if (label.querySelector('input, select')) return;
